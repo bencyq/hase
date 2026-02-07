@@ -1,0 +1,6594 @@
+{
+  "model_name": "resnet18",
+  "total_kernels": 24,
+  "kernel_types": [
+    "Conv",
+    "Conv_Add_Relu",
+    "Conv_Relu",
+    "Flatten",
+    "Gemm",
+    "GlobalAveragePool",
+    "MaxPool"
+  ],
+  "kernels": [
+    {
+      "kernel_type": "Conv_Relu",
+      "node_name": "/conv1/Conv",
+      "fusion_desc": "Conv + Bias + Relu",
+      "attributes": {
+        "kernel_shape": [
+          7,
+          7
+        ],
+        "strides": [
+          2,
+          2
+        ],
+        "pads": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "activation": "Relu"
+      },
+      "shapes": [
+        {
+          "source_model": "resnet18_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            3,
+            224,
+            224
+          ],
+          "output_shape": [
+            128,
+            64,
+            112,
+            112
+          ],
+          "flops": 30417092608,
+          "weight_shape": [
+            64,
+            3,
+            7,
+            7
+          ],
+          "bias_shape": [
+            64
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_320x320",
+          "batch_size": 128,
+          "input_size": 320,
+          "activation_input_shape": [
+            128,
+            3,
+            320,
+            320
+          ],
+          "output_shape": [
+            128,
+            64,
+            160,
+            160
+          ],
+          "flops": 62075699200,
+          "weight_shape": [
+            64,
+            3,
+            7,
+            7
+          ],
+          "bias_shape": [
+            64
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_512x512",
+          "batch_size": 128,
+          "input_size": 512,
+          "activation_input_shape": [
+            128,
+            3,
+            512,
+            512
+          ],
+          "output_shape": [
+            128,
+            64,
+            256,
+            256
+          ],
+          "flops": 158913789952,
+          "weight_shape": [
+            64,
+            3,
+            7,
+            7
+          ],
+          "bias_shape": [
+            64
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            3,
+            224,
+            224
+          ],
+          "output_shape": [
+            16,
+            64,
+            112,
+            112
+          ],
+          "flops": 3802136576,
+          "weight_shape": [
+            64,
+            3,
+            7,
+            7
+          ],
+          "bias_shape": [
+            64
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_320x320",
+          "batch_size": 16,
+          "input_size": 320,
+          "activation_input_shape": [
+            16,
+            3,
+            320,
+            320
+          ],
+          "output_shape": [
+            16,
+            64,
+            160,
+            160
+          ],
+          "flops": 7759462400,
+          "weight_shape": [
+            64,
+            3,
+            7,
+            7
+          ],
+          "bias_shape": [
+            64
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_512x512",
+          "batch_size": 16,
+          "input_size": 512,
+          "activation_input_shape": [
+            16,
+            3,
+            512,
+            512
+          ],
+          "output_shape": [
+            16,
+            64,
+            256,
+            256
+          ],
+          "flops": 19864223744,
+          "weight_shape": [
+            64,
+            3,
+            7,
+            7
+          ],
+          "bias_shape": [
+            64
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            3,
+            224,
+            224
+          ],
+          "output_shape": [
+            64,
+            64,
+            112,
+            112
+          ],
+          "flops": 15208546304,
+          "weight_shape": [
+            64,
+            3,
+            7,
+            7
+          ],
+          "bias_shape": [
+            64
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_320x320",
+          "batch_size": 64,
+          "input_size": 320,
+          "activation_input_shape": [
+            64,
+            3,
+            320,
+            320
+          ],
+          "output_shape": [
+            64,
+            64,
+            160,
+            160
+          ],
+          "flops": 31037849600,
+          "weight_shape": [
+            64,
+            3,
+            7,
+            7
+          ],
+          "bias_shape": [
+            64
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_512x512",
+          "batch_size": 64,
+          "input_size": 512,
+          "activation_input_shape": [
+            64,
+            3,
+            512,
+            512
+          ],
+          "output_shape": [
+            64,
+            64,
+            256,
+            256
+          ],
+          "flops": 79456894976,
+          "weight_shape": [
+            64,
+            3,
+            7,
+            7
+          ],
+          "bias_shape": [
+            64
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "MaxPool",
+      "node_name": "/maxpool/MaxPool",
+      "fusion_desc": "MaxPool",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          2,
+          2
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "ceil_mode": 0
+      },
+      "shapes": [
+        {
+          "source_model": "resnet18_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            64,
+            112,
+            112
+          ],
+          "output_shape": [
+            128,
+            64,
+            56,
+            56
+          ],
+          "flops": 231211008
+        },
+        {
+          "source_model": "resnet18_bs128_320x320",
+          "batch_size": 128,
+          "input_size": 320,
+          "activation_input_shape": [
+            128,
+            64,
+            160,
+            160
+          ],
+          "output_shape": [
+            128,
+            64,
+            80,
+            80
+          ],
+          "flops": 471859200
+        },
+        {
+          "source_model": "resnet18_bs128_512x512",
+          "batch_size": 128,
+          "input_size": 512,
+          "activation_input_shape": [
+            128,
+            64,
+            256,
+            256
+          ],
+          "output_shape": [
+            128,
+            64,
+            128,
+            128
+          ],
+          "flops": 1207959552
+        },
+        {
+          "source_model": "resnet18_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            64,
+            112,
+            112
+          ],
+          "output_shape": [
+            16,
+            64,
+            56,
+            56
+          ],
+          "flops": 28901376
+        },
+        {
+          "source_model": "resnet18_bs16_320x320",
+          "batch_size": 16,
+          "input_size": 320,
+          "activation_input_shape": [
+            16,
+            64,
+            160,
+            160
+          ],
+          "output_shape": [
+            16,
+            64,
+            80,
+            80
+          ],
+          "flops": 58982400
+        },
+        {
+          "source_model": "resnet18_bs16_512x512",
+          "batch_size": 16,
+          "input_size": 512,
+          "activation_input_shape": [
+            16,
+            64,
+            256,
+            256
+          ],
+          "output_shape": [
+            16,
+            64,
+            128,
+            128
+          ],
+          "flops": 150994944
+        },
+        {
+          "source_model": "resnet18_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            64,
+            112,
+            112
+          ],
+          "output_shape": [
+            64,
+            64,
+            56,
+            56
+          ],
+          "flops": 115605504
+        },
+        {
+          "source_model": "resnet18_bs64_320x320",
+          "batch_size": 64,
+          "input_size": 320,
+          "activation_input_shape": [
+            64,
+            64,
+            160,
+            160
+          ],
+          "output_shape": [
+            64,
+            64,
+            80,
+            80
+          ],
+          "flops": 235929600
+        },
+        {
+          "source_model": "resnet18_bs64_512x512",
+          "batch_size": 64,
+          "input_size": 512,
+          "activation_input_shape": [
+            64,
+            64,
+            256,
+            256
+          ],
+          "output_shape": [
+            64,
+            64,
+            128,
+            128
+          ],
+          "flops": 603979776
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv_Relu",
+      "node_name": "/layer1/layer1.0/conv1/Conv",
+      "fusion_desc": "Conv + Bias + Relu",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "activation": "Relu"
+      },
+      "shapes": [
+        {
+          "source_model": "resnet18_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            64,
+            56,
+            56
+          ],
+          "output_shape": [
+            128,
+            64,
+            56,
+            56
+          ],
+          "flops": 29646389248,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_320x320",
+          "batch_size": 128,
+          "input_size": 320,
+          "activation_input_shape": [
+            128,
+            64,
+            80,
+            80
+          ],
+          "output_shape": [
+            128,
+            64,
+            80,
+            80
+          ],
+          "flops": 60502835200,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_512x512",
+          "batch_size": 128,
+          "input_size": 512,
+          "activation_input_shape": [
+            128,
+            64,
+            128,
+            128
+          ],
+          "output_shape": [
+            128,
+            64,
+            128,
+            128
+          ],
+          "flops": 154887258112,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            64,
+            56,
+            56
+          ],
+          "output_shape": [
+            16,
+            64,
+            56,
+            56
+          ],
+          "flops": 3705798656,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_320x320",
+          "batch_size": 16,
+          "input_size": 320,
+          "activation_input_shape": [
+            16,
+            64,
+            80,
+            80
+          ],
+          "output_shape": [
+            16,
+            64,
+            80,
+            80
+          ],
+          "flops": 7562854400,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_512x512",
+          "batch_size": 16,
+          "input_size": 512,
+          "activation_input_shape": [
+            16,
+            64,
+            128,
+            128
+          ],
+          "output_shape": [
+            16,
+            64,
+            128,
+            128
+          ],
+          "flops": 19360907264,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            64,
+            56,
+            56
+          ],
+          "output_shape": [
+            64,
+            64,
+            56,
+            56
+          ],
+          "flops": 14823194624,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_320x320",
+          "batch_size": 64,
+          "input_size": 320,
+          "activation_input_shape": [
+            64,
+            64,
+            80,
+            80
+          ],
+          "output_shape": [
+            64,
+            64,
+            80,
+            80
+          ],
+          "flops": 30251417600,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_512x512",
+          "batch_size": 64,
+          "input_size": 512,
+          "activation_input_shape": [
+            64,
+            64,
+            128,
+            128
+          ],
+          "output_shape": [
+            64,
+            64,
+            128,
+            128
+          ],
+          "flops": 77443629056,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv_Add_Relu",
+      "node_name": "/layer1/layer1.0/conv2/Conv",
+      "fusion_desc": "Conv + Bias + Add(residual) + Relu",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "activation": "Relu"
+      },
+      "shapes": [
+        {
+          "source_model": "resnet18_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            64,
+            56,
+            56
+          ],
+          "output_shape": [
+            128,
+            64,
+            56,
+            56
+          ],
+          "flops": 29672079360,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ],
+          "residual_shape": [
+            128,
+            64,
+            56,
+            56
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_320x320",
+          "batch_size": 128,
+          "input_size": 320,
+          "activation_input_shape": [
+            128,
+            64,
+            80,
+            80
+          ],
+          "output_shape": [
+            128,
+            64,
+            80,
+            80
+          ],
+          "flops": 60555264000,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ],
+          "residual_shape": [
+            128,
+            64,
+            80,
+            80
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_512x512",
+          "batch_size": 128,
+          "input_size": 512,
+          "activation_input_shape": [
+            128,
+            64,
+            128,
+            128
+          ],
+          "output_shape": [
+            128,
+            64,
+            128,
+            128
+          ],
+          "flops": 155021475840,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ],
+          "residual_shape": [
+            128,
+            64,
+            128,
+            128
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            64,
+            56,
+            56
+          ],
+          "output_shape": [
+            16,
+            64,
+            56,
+            56
+          ],
+          "flops": 3709009920,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ],
+          "residual_shape": [
+            16,
+            64,
+            56,
+            56
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_320x320",
+          "batch_size": 16,
+          "input_size": 320,
+          "activation_input_shape": [
+            16,
+            64,
+            80,
+            80
+          ],
+          "output_shape": [
+            16,
+            64,
+            80,
+            80
+          ],
+          "flops": 7569408000,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ],
+          "residual_shape": [
+            16,
+            64,
+            80,
+            80
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_512x512",
+          "batch_size": 16,
+          "input_size": 512,
+          "activation_input_shape": [
+            16,
+            64,
+            128,
+            128
+          ],
+          "output_shape": [
+            16,
+            64,
+            128,
+            128
+          ],
+          "flops": 19377684480,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ],
+          "residual_shape": [
+            16,
+            64,
+            128,
+            128
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            64,
+            56,
+            56
+          ],
+          "output_shape": [
+            64,
+            64,
+            56,
+            56
+          ],
+          "flops": 14836039680,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ],
+          "residual_shape": [
+            64,
+            64,
+            56,
+            56
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_320x320",
+          "batch_size": 64,
+          "input_size": 320,
+          "activation_input_shape": [
+            64,
+            64,
+            80,
+            80
+          ],
+          "output_shape": [
+            64,
+            64,
+            80,
+            80
+          ],
+          "flops": 30277632000,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ],
+          "residual_shape": [
+            64,
+            64,
+            80,
+            80
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_512x512",
+          "batch_size": 64,
+          "input_size": 512,
+          "activation_input_shape": [
+            64,
+            64,
+            128,
+            128
+          ],
+          "output_shape": [
+            64,
+            64,
+            128,
+            128
+          ],
+          "flops": 77510737920,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ],
+          "residual_shape": [
+            64,
+            64,
+            128,
+            128
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv_Relu",
+      "node_name": "/layer1/layer1.1/conv1/Conv",
+      "fusion_desc": "Conv + Bias + Relu",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "activation": "Relu"
+      },
+      "shapes": [
+        {
+          "source_model": "resnet18_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            64,
+            56,
+            56
+          ],
+          "output_shape": [
+            128,
+            64,
+            56,
+            56
+          ],
+          "flops": 29646389248,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_320x320",
+          "batch_size": 128,
+          "input_size": 320,
+          "activation_input_shape": [
+            128,
+            64,
+            80,
+            80
+          ],
+          "output_shape": [
+            128,
+            64,
+            80,
+            80
+          ],
+          "flops": 60502835200,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_512x512",
+          "batch_size": 128,
+          "input_size": 512,
+          "activation_input_shape": [
+            128,
+            64,
+            128,
+            128
+          ],
+          "output_shape": [
+            128,
+            64,
+            128,
+            128
+          ],
+          "flops": 154887258112,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            64,
+            56,
+            56
+          ],
+          "output_shape": [
+            16,
+            64,
+            56,
+            56
+          ],
+          "flops": 3705798656,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_320x320",
+          "batch_size": 16,
+          "input_size": 320,
+          "activation_input_shape": [
+            16,
+            64,
+            80,
+            80
+          ],
+          "output_shape": [
+            16,
+            64,
+            80,
+            80
+          ],
+          "flops": 7562854400,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_512x512",
+          "batch_size": 16,
+          "input_size": 512,
+          "activation_input_shape": [
+            16,
+            64,
+            128,
+            128
+          ],
+          "output_shape": [
+            16,
+            64,
+            128,
+            128
+          ],
+          "flops": 19360907264,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            64,
+            56,
+            56
+          ],
+          "output_shape": [
+            64,
+            64,
+            56,
+            56
+          ],
+          "flops": 14823194624,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_320x320",
+          "batch_size": 64,
+          "input_size": 320,
+          "activation_input_shape": [
+            64,
+            64,
+            80,
+            80
+          ],
+          "output_shape": [
+            64,
+            64,
+            80,
+            80
+          ],
+          "flops": 30251417600,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_512x512",
+          "batch_size": 64,
+          "input_size": 512,
+          "activation_input_shape": [
+            64,
+            64,
+            128,
+            128
+          ],
+          "output_shape": [
+            64,
+            64,
+            128,
+            128
+          ],
+          "flops": 77443629056,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv_Add_Relu",
+      "node_name": "/layer1/layer1.1/conv2/Conv",
+      "fusion_desc": "Conv + Bias + Add(residual) + Relu",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "activation": "Relu"
+      },
+      "shapes": [
+        {
+          "source_model": "resnet18_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            64,
+            56,
+            56
+          ],
+          "output_shape": [
+            128,
+            64,
+            56,
+            56
+          ],
+          "flops": 29672079360,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ],
+          "residual_shape": [
+            128,
+            64,
+            56,
+            56
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_320x320",
+          "batch_size": 128,
+          "input_size": 320,
+          "activation_input_shape": [
+            128,
+            64,
+            80,
+            80
+          ],
+          "output_shape": [
+            128,
+            64,
+            80,
+            80
+          ],
+          "flops": 60555264000,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ],
+          "residual_shape": [
+            128,
+            64,
+            80,
+            80
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_512x512",
+          "batch_size": 128,
+          "input_size": 512,
+          "activation_input_shape": [
+            128,
+            64,
+            128,
+            128
+          ],
+          "output_shape": [
+            128,
+            64,
+            128,
+            128
+          ],
+          "flops": 155021475840,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ],
+          "residual_shape": [
+            128,
+            64,
+            128,
+            128
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            64,
+            56,
+            56
+          ],
+          "output_shape": [
+            16,
+            64,
+            56,
+            56
+          ],
+          "flops": 3709009920,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ],
+          "residual_shape": [
+            16,
+            64,
+            56,
+            56
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_320x320",
+          "batch_size": 16,
+          "input_size": 320,
+          "activation_input_shape": [
+            16,
+            64,
+            80,
+            80
+          ],
+          "output_shape": [
+            16,
+            64,
+            80,
+            80
+          ],
+          "flops": 7569408000,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ],
+          "residual_shape": [
+            16,
+            64,
+            80,
+            80
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_512x512",
+          "batch_size": 16,
+          "input_size": 512,
+          "activation_input_shape": [
+            16,
+            64,
+            128,
+            128
+          ],
+          "output_shape": [
+            16,
+            64,
+            128,
+            128
+          ],
+          "flops": 19377684480,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ],
+          "residual_shape": [
+            16,
+            64,
+            128,
+            128
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            64,
+            56,
+            56
+          ],
+          "output_shape": [
+            64,
+            64,
+            56,
+            56
+          ],
+          "flops": 14836039680,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ],
+          "residual_shape": [
+            64,
+            64,
+            56,
+            56
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_320x320",
+          "batch_size": 64,
+          "input_size": 320,
+          "activation_input_shape": [
+            64,
+            64,
+            80,
+            80
+          ],
+          "output_shape": [
+            64,
+            64,
+            80,
+            80
+          ],
+          "flops": 30277632000,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ],
+          "residual_shape": [
+            64,
+            64,
+            80,
+            80
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_512x512",
+          "batch_size": 64,
+          "input_size": 512,
+          "activation_input_shape": [
+            64,
+            64,
+            128,
+            128
+          ],
+          "output_shape": [
+            64,
+            64,
+            128,
+            128
+          ],
+          "flops": 77510737920,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ],
+          "residual_shape": [
+            64,
+            64,
+            128,
+            128
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv_Relu",
+      "node_name": "/layer2/layer2.0/conv1/Conv",
+      "fusion_desc": "Conv + Bias + Relu",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          2,
+          2
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "activation": "Relu"
+      },
+      "shapes": [
+        {
+          "source_model": "resnet18_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            64,
+            56,
+            56
+          ],
+          "output_shape": [
+            128,
+            128,
+            28,
+            28
+          ],
+          "flops": 14823194624,
+          "weight_shape": [
+            128,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_320x320",
+          "batch_size": 128,
+          "input_size": 320,
+          "activation_input_shape": [
+            128,
+            64,
+            80,
+            80
+          ],
+          "output_shape": [
+            128,
+            128,
+            40,
+            40
+          ],
+          "flops": 30251417600,
+          "weight_shape": [
+            128,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_512x512",
+          "batch_size": 128,
+          "input_size": 512,
+          "activation_input_shape": [
+            128,
+            64,
+            128,
+            128
+          ],
+          "output_shape": [
+            128,
+            128,
+            64,
+            64
+          ],
+          "flops": 77443629056,
+          "weight_shape": [
+            128,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            64,
+            56,
+            56
+          ],
+          "output_shape": [
+            16,
+            128,
+            28,
+            28
+          ],
+          "flops": 1852899328,
+          "weight_shape": [
+            128,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_320x320",
+          "batch_size": 16,
+          "input_size": 320,
+          "activation_input_shape": [
+            16,
+            64,
+            80,
+            80
+          ],
+          "output_shape": [
+            16,
+            128,
+            40,
+            40
+          ],
+          "flops": 3781427200,
+          "weight_shape": [
+            128,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_512x512",
+          "batch_size": 16,
+          "input_size": 512,
+          "activation_input_shape": [
+            16,
+            64,
+            128,
+            128
+          ],
+          "output_shape": [
+            16,
+            128,
+            64,
+            64
+          ],
+          "flops": 9680453632,
+          "weight_shape": [
+            128,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            64,
+            56,
+            56
+          ],
+          "output_shape": [
+            64,
+            128,
+            28,
+            28
+          ],
+          "flops": 7411597312,
+          "weight_shape": [
+            128,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_320x320",
+          "batch_size": 64,
+          "input_size": 320,
+          "activation_input_shape": [
+            64,
+            64,
+            80,
+            80
+          ],
+          "output_shape": [
+            64,
+            128,
+            40,
+            40
+          ],
+          "flops": 15125708800,
+          "weight_shape": [
+            128,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_512x512",
+          "batch_size": 64,
+          "input_size": 512,
+          "activation_input_shape": [
+            64,
+            64,
+            128,
+            128
+          ],
+          "output_shape": [
+            64,
+            128,
+            64,
+            64
+          ],
+          "flops": 38721814528,
+          "weight_shape": [
+            128,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/layer2/layer2.0/conv2/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "resnet18_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            128,
+            28,
+            28
+          ],
+          "output_shape": [
+            128,
+            128,
+            28,
+            28
+          ],
+          "flops": 29607854080,
+          "weight_shape": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_320x320",
+          "batch_size": 128,
+          "input_size": 320,
+          "activation_input_shape": [
+            128,
+            128,
+            40,
+            40
+          ],
+          "output_shape": [
+            128,
+            128,
+            40,
+            40
+          ],
+          "flops": 60424192000,
+          "weight_shape": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_512x512",
+          "batch_size": 128,
+          "input_size": 512,
+          "activation_input_shape": [
+            128,
+            128,
+            64,
+            64
+          ],
+          "output_shape": [
+            128,
+            128,
+            64,
+            64
+          ],
+          "flops": 154685931520,
+          "weight_shape": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            128,
+            28,
+            28
+          ],
+          "output_shape": [
+            16,
+            128,
+            28,
+            28
+          ],
+          "flops": 3700981760,
+          "weight_shape": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_320x320",
+          "batch_size": 16,
+          "input_size": 320,
+          "activation_input_shape": [
+            16,
+            128,
+            40,
+            40
+          ],
+          "output_shape": [
+            16,
+            128,
+            40,
+            40
+          ],
+          "flops": 7553024000,
+          "weight_shape": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_512x512",
+          "batch_size": 16,
+          "input_size": 512,
+          "activation_input_shape": [
+            16,
+            128,
+            64,
+            64
+          ],
+          "output_shape": [
+            16,
+            128,
+            64,
+            64
+          ],
+          "flops": 19335741440,
+          "weight_shape": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            128,
+            28,
+            28
+          ],
+          "output_shape": [
+            64,
+            128,
+            28,
+            28
+          ],
+          "flops": 14803927040,
+          "weight_shape": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_320x320",
+          "batch_size": 64,
+          "input_size": 320,
+          "activation_input_shape": [
+            64,
+            128,
+            40,
+            40
+          ],
+          "output_shape": [
+            64,
+            128,
+            40,
+            40
+          ],
+          "flops": 30212096000,
+          "weight_shape": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_512x512",
+          "batch_size": 64,
+          "input_size": 512,
+          "activation_input_shape": [
+            64,
+            128,
+            64,
+            64
+          ],
+          "output_shape": [
+            64,
+            128,
+            64,
+            64
+          ],
+          "flops": 77342965760,
+          "weight_shape": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv_Add_Relu",
+      "node_name": "/layer2/layer2.0/downsample/downsample.0/Conv",
+      "fusion_desc": "Conv + Bias + Add(residual) + Relu",
+      "attributes": {
+        "kernel_shape": [
+          1,
+          1
+        ],
+        "strides": [
+          2,
+          2
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "activation": "Relu"
+      },
+      "shapes": [
+        {
+          "source_model": "resnet18_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            64,
+            56,
+            56
+          ],
+          "output_shape": [
+            128,
+            128,
+            28,
+            28
+          ],
+          "flops": 1682702336,
+          "weight_shape": [
+            128,
+            64,
+            1,
+            1
+          ],
+          "bias_shape": [
+            128
+          ],
+          "residual_shape": [
+            128,
+            128,
+            28,
+            28
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_320x320",
+          "batch_size": 128,
+          "input_size": 320,
+          "activation_input_shape": [
+            128,
+            64,
+            80,
+            80
+          ],
+          "output_shape": [
+            128,
+            128,
+            40,
+            40
+          ],
+          "flops": 3434086400,
+          "weight_shape": [
+            128,
+            64,
+            1,
+            1
+          ],
+          "bias_shape": [
+            128
+          ],
+          "residual_shape": [
+            128,
+            128,
+            40,
+            40
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_512x512",
+          "batch_size": 128,
+          "input_size": 512,
+          "activation_input_shape": [
+            128,
+            64,
+            128,
+            128
+          ],
+          "output_shape": [
+            128,
+            128,
+            64,
+            64
+          ],
+          "flops": 8791261184,
+          "weight_shape": [
+            128,
+            64,
+            1,
+            1
+          ],
+          "bias_shape": [
+            128
+          ],
+          "residual_shape": [
+            128,
+            128,
+            64,
+            64
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            64,
+            56,
+            56
+          ],
+          "output_shape": [
+            16,
+            128,
+            28,
+            28
+          ],
+          "flops": 210337792,
+          "weight_shape": [
+            128,
+            64,
+            1,
+            1
+          ],
+          "bias_shape": [
+            128
+          ],
+          "residual_shape": [
+            16,
+            128,
+            28,
+            28
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_320x320",
+          "batch_size": 16,
+          "input_size": 320,
+          "activation_input_shape": [
+            16,
+            64,
+            80,
+            80
+          ],
+          "output_shape": [
+            16,
+            128,
+            40,
+            40
+          ],
+          "flops": 429260800,
+          "weight_shape": [
+            128,
+            64,
+            1,
+            1
+          ],
+          "bias_shape": [
+            128
+          ],
+          "residual_shape": [
+            16,
+            128,
+            40,
+            40
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_512x512",
+          "batch_size": 16,
+          "input_size": 512,
+          "activation_input_shape": [
+            16,
+            64,
+            128,
+            128
+          ],
+          "output_shape": [
+            16,
+            128,
+            64,
+            64
+          ],
+          "flops": 1098907648,
+          "weight_shape": [
+            128,
+            64,
+            1,
+            1
+          ],
+          "bias_shape": [
+            128
+          ],
+          "residual_shape": [
+            16,
+            128,
+            64,
+            64
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            64,
+            56,
+            56
+          ],
+          "output_shape": [
+            64,
+            128,
+            28,
+            28
+          ],
+          "flops": 841351168,
+          "weight_shape": [
+            128,
+            64,
+            1,
+            1
+          ],
+          "bias_shape": [
+            128
+          ],
+          "residual_shape": [
+            64,
+            128,
+            28,
+            28
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_320x320",
+          "batch_size": 64,
+          "input_size": 320,
+          "activation_input_shape": [
+            64,
+            64,
+            80,
+            80
+          ],
+          "output_shape": [
+            64,
+            128,
+            40,
+            40
+          ],
+          "flops": 1717043200,
+          "weight_shape": [
+            128,
+            64,
+            1,
+            1
+          ],
+          "bias_shape": [
+            128
+          ],
+          "residual_shape": [
+            64,
+            128,
+            40,
+            40
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_512x512",
+          "batch_size": 64,
+          "input_size": 512,
+          "activation_input_shape": [
+            64,
+            64,
+            128,
+            128
+          ],
+          "output_shape": [
+            64,
+            128,
+            64,
+            64
+          ],
+          "flops": 4395630592,
+          "weight_shape": [
+            128,
+            64,
+            1,
+            1
+          ],
+          "bias_shape": [
+            128
+          ],
+          "residual_shape": [
+            64,
+            128,
+            64,
+            64
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv_Relu",
+      "node_name": "/layer2/layer2.1/conv1/Conv",
+      "fusion_desc": "Conv + Bias + Relu",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "activation": "Relu"
+      },
+      "shapes": [
+        {
+          "source_model": "resnet18_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            128,
+            28,
+            28
+          ],
+          "output_shape": [
+            128,
+            128,
+            28,
+            28
+          ],
+          "flops": 29620699136,
+          "weight_shape": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_320x320",
+          "batch_size": 128,
+          "input_size": 320,
+          "activation_input_shape": [
+            128,
+            128,
+            40,
+            40
+          ],
+          "output_shape": [
+            128,
+            128,
+            40,
+            40
+          ],
+          "flops": 60450406400,
+          "weight_shape": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_512x512",
+          "batch_size": 128,
+          "input_size": 512,
+          "activation_input_shape": [
+            128,
+            128,
+            64,
+            64
+          ],
+          "output_shape": [
+            128,
+            128,
+            64,
+            64
+          ],
+          "flops": 154753040384,
+          "weight_shape": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            128,
+            28,
+            28
+          ],
+          "output_shape": [
+            16,
+            128,
+            28,
+            28
+          ],
+          "flops": 3702587392,
+          "weight_shape": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_320x320",
+          "batch_size": 16,
+          "input_size": 320,
+          "activation_input_shape": [
+            16,
+            128,
+            40,
+            40
+          ],
+          "output_shape": [
+            16,
+            128,
+            40,
+            40
+          ],
+          "flops": 7556300800,
+          "weight_shape": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_512x512",
+          "batch_size": 16,
+          "input_size": 512,
+          "activation_input_shape": [
+            16,
+            128,
+            64,
+            64
+          ],
+          "output_shape": [
+            16,
+            128,
+            64,
+            64
+          ],
+          "flops": 19344130048,
+          "weight_shape": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            128,
+            28,
+            28
+          ],
+          "output_shape": [
+            64,
+            128,
+            28,
+            28
+          ],
+          "flops": 14810349568,
+          "weight_shape": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_320x320",
+          "batch_size": 64,
+          "input_size": 320,
+          "activation_input_shape": [
+            64,
+            128,
+            40,
+            40
+          ],
+          "output_shape": [
+            64,
+            128,
+            40,
+            40
+          ],
+          "flops": 30225203200,
+          "weight_shape": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_512x512",
+          "batch_size": 64,
+          "input_size": 512,
+          "activation_input_shape": [
+            64,
+            128,
+            64,
+            64
+          ],
+          "output_shape": [
+            64,
+            128,
+            64,
+            64
+          ],
+          "flops": 77376520192,
+          "weight_shape": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv_Add_Relu",
+      "node_name": "/layer2/layer2.1/conv2/Conv",
+      "fusion_desc": "Conv + Bias + Add(residual) + Relu",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "activation": "Relu"
+      },
+      "shapes": [
+        {
+          "source_model": "resnet18_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            128,
+            28,
+            28
+          ],
+          "output_shape": [
+            128,
+            128,
+            28,
+            28
+          ],
+          "flops": 29633544192,
+          "weight_shape": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ],
+          "residual_shape": [
+            128,
+            128,
+            28,
+            28
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_320x320",
+          "batch_size": 128,
+          "input_size": 320,
+          "activation_input_shape": [
+            128,
+            128,
+            40,
+            40
+          ],
+          "output_shape": [
+            128,
+            128,
+            40,
+            40
+          ],
+          "flops": 60476620800,
+          "weight_shape": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ],
+          "residual_shape": [
+            128,
+            128,
+            40,
+            40
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_512x512",
+          "batch_size": 128,
+          "input_size": 512,
+          "activation_input_shape": [
+            128,
+            128,
+            64,
+            64
+          ],
+          "output_shape": [
+            128,
+            128,
+            64,
+            64
+          ],
+          "flops": 154820149248,
+          "weight_shape": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ],
+          "residual_shape": [
+            128,
+            128,
+            64,
+            64
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            128,
+            28,
+            28
+          ],
+          "output_shape": [
+            16,
+            128,
+            28,
+            28
+          ],
+          "flops": 3704193024,
+          "weight_shape": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ],
+          "residual_shape": [
+            16,
+            128,
+            28,
+            28
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_320x320",
+          "batch_size": 16,
+          "input_size": 320,
+          "activation_input_shape": [
+            16,
+            128,
+            40,
+            40
+          ],
+          "output_shape": [
+            16,
+            128,
+            40,
+            40
+          ],
+          "flops": 7559577600,
+          "weight_shape": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ],
+          "residual_shape": [
+            16,
+            128,
+            40,
+            40
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_512x512",
+          "batch_size": 16,
+          "input_size": 512,
+          "activation_input_shape": [
+            16,
+            128,
+            64,
+            64
+          ],
+          "output_shape": [
+            16,
+            128,
+            64,
+            64
+          ],
+          "flops": 19352518656,
+          "weight_shape": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ],
+          "residual_shape": [
+            16,
+            128,
+            64,
+            64
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            128,
+            28,
+            28
+          ],
+          "output_shape": [
+            64,
+            128,
+            28,
+            28
+          ],
+          "flops": 14816772096,
+          "weight_shape": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ],
+          "residual_shape": [
+            64,
+            128,
+            28,
+            28
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_320x320",
+          "batch_size": 64,
+          "input_size": 320,
+          "activation_input_shape": [
+            64,
+            128,
+            40,
+            40
+          ],
+          "output_shape": [
+            64,
+            128,
+            40,
+            40
+          ],
+          "flops": 30238310400,
+          "weight_shape": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ],
+          "residual_shape": [
+            64,
+            128,
+            40,
+            40
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_512x512",
+          "batch_size": 64,
+          "input_size": 512,
+          "activation_input_shape": [
+            64,
+            128,
+            64,
+            64
+          ],
+          "output_shape": [
+            64,
+            128,
+            64,
+            64
+          ],
+          "flops": 77410074624,
+          "weight_shape": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ],
+          "residual_shape": [
+            64,
+            128,
+            64,
+            64
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv_Relu",
+      "node_name": "/layer3/layer3.0/conv1/Conv",
+      "fusion_desc": "Conv + Bias + Relu",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          2,
+          2
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "activation": "Relu"
+      },
+      "shapes": [
+        {
+          "source_model": "resnet18_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            128,
+            28,
+            28
+          ],
+          "output_shape": [
+            128,
+            256,
+            14,
+            14
+          ],
+          "flops": 14810349568,
+          "weight_shape": [
+            256,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_320x320",
+          "batch_size": 128,
+          "input_size": 320,
+          "activation_input_shape": [
+            128,
+            128,
+            40,
+            40
+          ],
+          "output_shape": [
+            128,
+            256,
+            20,
+            20
+          ],
+          "flops": 30225203200,
+          "weight_shape": [
+            256,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_512x512",
+          "batch_size": 128,
+          "input_size": 512,
+          "activation_input_shape": [
+            128,
+            128,
+            64,
+            64
+          ],
+          "output_shape": [
+            128,
+            256,
+            32,
+            32
+          ],
+          "flops": 77376520192,
+          "weight_shape": [
+            256,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            128,
+            28,
+            28
+          ],
+          "output_shape": [
+            16,
+            256,
+            14,
+            14
+          ],
+          "flops": 1851293696,
+          "weight_shape": [
+            256,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_320x320",
+          "batch_size": 16,
+          "input_size": 320,
+          "activation_input_shape": [
+            16,
+            128,
+            40,
+            40
+          ],
+          "output_shape": [
+            16,
+            256,
+            20,
+            20
+          ],
+          "flops": 3778150400,
+          "weight_shape": [
+            256,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_512x512",
+          "batch_size": 16,
+          "input_size": 512,
+          "activation_input_shape": [
+            16,
+            128,
+            64,
+            64
+          ],
+          "output_shape": [
+            16,
+            256,
+            32,
+            32
+          ],
+          "flops": 9672065024,
+          "weight_shape": [
+            256,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            128,
+            28,
+            28
+          ],
+          "output_shape": [
+            64,
+            256,
+            14,
+            14
+          ],
+          "flops": 7405174784,
+          "weight_shape": [
+            256,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_320x320",
+          "batch_size": 64,
+          "input_size": 320,
+          "activation_input_shape": [
+            64,
+            128,
+            40,
+            40
+          ],
+          "output_shape": [
+            64,
+            256,
+            20,
+            20
+          ],
+          "flops": 15112601600,
+          "weight_shape": [
+            256,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_512x512",
+          "batch_size": 64,
+          "input_size": 512,
+          "activation_input_shape": [
+            64,
+            128,
+            64,
+            64
+          ],
+          "output_shape": [
+            64,
+            256,
+            32,
+            32
+          ],
+          "flops": 38688260096,
+          "weight_shape": [
+            256,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/layer3/layer3.0/conv2/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "resnet18_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            256,
+            14,
+            14
+          ],
+          "output_shape": [
+            128,
+            256,
+            14,
+            14
+          ],
+          "flops": 29601431552,
+          "weight_shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_320x320",
+          "batch_size": 128,
+          "input_size": 320,
+          "activation_input_shape": [
+            128,
+            256,
+            20,
+            20
+          ],
+          "output_shape": [
+            128,
+            256,
+            20,
+            20
+          ],
+          "flops": 60411084800,
+          "weight_shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_512x512",
+          "batch_size": 128,
+          "input_size": 512,
+          "activation_input_shape": [
+            128,
+            256,
+            32,
+            32
+          ],
+          "output_shape": [
+            128,
+            256,
+            32,
+            32
+          ],
+          "flops": 154652377088,
+          "weight_shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            256,
+            14,
+            14
+          ],
+          "output_shape": [
+            16,
+            256,
+            14,
+            14
+          ],
+          "flops": 3700178944,
+          "weight_shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_320x320",
+          "batch_size": 16,
+          "input_size": 320,
+          "activation_input_shape": [
+            16,
+            256,
+            20,
+            20
+          ],
+          "output_shape": [
+            16,
+            256,
+            20,
+            20
+          ],
+          "flops": 7551385600,
+          "weight_shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_512x512",
+          "batch_size": 16,
+          "input_size": 512,
+          "activation_input_shape": [
+            16,
+            256,
+            32,
+            32
+          ],
+          "output_shape": [
+            16,
+            256,
+            32,
+            32
+          ],
+          "flops": 19331547136,
+          "weight_shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            256,
+            14,
+            14
+          ],
+          "output_shape": [
+            64,
+            256,
+            14,
+            14
+          ],
+          "flops": 14800715776,
+          "weight_shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_320x320",
+          "batch_size": 64,
+          "input_size": 320,
+          "activation_input_shape": [
+            64,
+            256,
+            20,
+            20
+          ],
+          "output_shape": [
+            64,
+            256,
+            20,
+            20
+          ],
+          "flops": 30205542400,
+          "weight_shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_512x512",
+          "batch_size": 64,
+          "input_size": 512,
+          "activation_input_shape": [
+            64,
+            256,
+            32,
+            32
+          ],
+          "output_shape": [
+            64,
+            256,
+            32,
+            32
+          ],
+          "flops": 77326188544,
+          "weight_shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv_Add_Relu",
+      "node_name": "/layer3/layer3.0/downsample/downsample.0/Conv",
+      "fusion_desc": "Conv + Bias + Add(residual) + Relu",
+      "attributes": {
+        "kernel_shape": [
+          1,
+          1
+        ],
+        "strides": [
+          2,
+          2
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "activation": "Relu"
+      },
+      "shapes": [
+        {
+          "source_model": "resnet18_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            128,
+            28,
+            28
+          ],
+          "output_shape": [
+            128,
+            256,
+            14,
+            14
+          ],
+          "flops": 1663434752,
+          "weight_shape": [
+            256,
+            128,
+            1,
+            1
+          ],
+          "bias_shape": [
+            256
+          ],
+          "residual_shape": [
+            128,
+            256,
+            14,
+            14
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_320x320",
+          "batch_size": 128,
+          "input_size": 320,
+          "activation_input_shape": [
+            128,
+            128,
+            40,
+            40
+          ],
+          "output_shape": [
+            128,
+            256,
+            20,
+            20
+          ],
+          "flops": 3394764800,
+          "weight_shape": [
+            256,
+            128,
+            1,
+            1
+          ],
+          "bias_shape": [
+            256
+          ],
+          "residual_shape": [
+            128,
+            256,
+            20,
+            20
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_512x512",
+          "batch_size": 128,
+          "input_size": 512,
+          "activation_input_shape": [
+            128,
+            128,
+            64,
+            64
+          ],
+          "output_shape": [
+            128,
+            256,
+            32,
+            32
+          ],
+          "flops": 8690597888,
+          "weight_shape": [
+            256,
+            128,
+            1,
+            1
+          ],
+          "bias_shape": [
+            256
+          ],
+          "residual_shape": [
+            128,
+            256,
+            32,
+            32
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            128,
+            28,
+            28
+          ],
+          "output_shape": [
+            16,
+            256,
+            14,
+            14
+          ],
+          "flops": 207929344,
+          "weight_shape": [
+            256,
+            128,
+            1,
+            1
+          ],
+          "bias_shape": [
+            256
+          ],
+          "residual_shape": [
+            16,
+            256,
+            14,
+            14
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_320x320",
+          "batch_size": 16,
+          "input_size": 320,
+          "activation_input_shape": [
+            16,
+            128,
+            40,
+            40
+          ],
+          "output_shape": [
+            16,
+            256,
+            20,
+            20
+          ],
+          "flops": 424345600,
+          "weight_shape": [
+            256,
+            128,
+            1,
+            1
+          ],
+          "bias_shape": [
+            256
+          ],
+          "residual_shape": [
+            16,
+            256,
+            20,
+            20
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_512x512",
+          "batch_size": 16,
+          "input_size": 512,
+          "activation_input_shape": [
+            16,
+            128,
+            64,
+            64
+          ],
+          "output_shape": [
+            16,
+            256,
+            32,
+            32
+          ],
+          "flops": 1086324736,
+          "weight_shape": [
+            256,
+            128,
+            1,
+            1
+          ],
+          "bias_shape": [
+            256
+          ],
+          "residual_shape": [
+            16,
+            256,
+            32,
+            32
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            128,
+            28,
+            28
+          ],
+          "output_shape": [
+            64,
+            256,
+            14,
+            14
+          ],
+          "flops": 831717376,
+          "weight_shape": [
+            256,
+            128,
+            1,
+            1
+          ],
+          "bias_shape": [
+            256
+          ],
+          "residual_shape": [
+            64,
+            256,
+            14,
+            14
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_320x320",
+          "batch_size": 64,
+          "input_size": 320,
+          "activation_input_shape": [
+            64,
+            128,
+            40,
+            40
+          ],
+          "output_shape": [
+            64,
+            256,
+            20,
+            20
+          ],
+          "flops": 1697382400,
+          "weight_shape": [
+            256,
+            128,
+            1,
+            1
+          ],
+          "bias_shape": [
+            256
+          ],
+          "residual_shape": [
+            64,
+            256,
+            20,
+            20
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_512x512",
+          "batch_size": 64,
+          "input_size": 512,
+          "activation_input_shape": [
+            64,
+            128,
+            64,
+            64
+          ],
+          "output_shape": [
+            64,
+            256,
+            32,
+            32
+          ],
+          "flops": 4345298944,
+          "weight_shape": [
+            256,
+            128,
+            1,
+            1
+          ],
+          "bias_shape": [
+            256
+          ],
+          "residual_shape": [
+            64,
+            256,
+            32,
+            32
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv_Relu",
+      "node_name": "/layer3/layer3.1/conv1/Conv",
+      "fusion_desc": "Conv + Bias + Relu",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "activation": "Relu"
+      },
+      "shapes": [
+        {
+          "source_model": "resnet18_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            256,
+            14,
+            14
+          ],
+          "output_shape": [
+            128,
+            256,
+            14,
+            14
+          ],
+          "flops": 29607854080,
+          "weight_shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_320x320",
+          "batch_size": 128,
+          "input_size": 320,
+          "activation_input_shape": [
+            128,
+            256,
+            20,
+            20
+          ],
+          "output_shape": [
+            128,
+            256,
+            20,
+            20
+          ],
+          "flops": 60424192000,
+          "weight_shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_512x512",
+          "batch_size": 128,
+          "input_size": 512,
+          "activation_input_shape": [
+            128,
+            256,
+            32,
+            32
+          ],
+          "output_shape": [
+            128,
+            256,
+            32,
+            32
+          ],
+          "flops": 154685931520,
+          "weight_shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            256,
+            14,
+            14
+          ],
+          "output_shape": [
+            16,
+            256,
+            14,
+            14
+          ],
+          "flops": 3700981760,
+          "weight_shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_320x320",
+          "batch_size": 16,
+          "input_size": 320,
+          "activation_input_shape": [
+            16,
+            256,
+            20,
+            20
+          ],
+          "output_shape": [
+            16,
+            256,
+            20,
+            20
+          ],
+          "flops": 7553024000,
+          "weight_shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_512x512",
+          "batch_size": 16,
+          "input_size": 512,
+          "activation_input_shape": [
+            16,
+            256,
+            32,
+            32
+          ],
+          "output_shape": [
+            16,
+            256,
+            32,
+            32
+          ],
+          "flops": 19335741440,
+          "weight_shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            256,
+            14,
+            14
+          ],
+          "output_shape": [
+            64,
+            256,
+            14,
+            14
+          ],
+          "flops": 14803927040,
+          "weight_shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_320x320",
+          "batch_size": 64,
+          "input_size": 320,
+          "activation_input_shape": [
+            64,
+            256,
+            20,
+            20
+          ],
+          "output_shape": [
+            64,
+            256,
+            20,
+            20
+          ],
+          "flops": 30212096000,
+          "weight_shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_512x512",
+          "batch_size": 64,
+          "input_size": 512,
+          "activation_input_shape": [
+            64,
+            256,
+            32,
+            32
+          ],
+          "output_shape": [
+            64,
+            256,
+            32,
+            32
+          ],
+          "flops": 77342965760,
+          "weight_shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv_Add_Relu",
+      "node_name": "/layer3/layer3.1/conv2/Conv",
+      "fusion_desc": "Conv + Bias + Add(residual) + Relu",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "activation": "Relu"
+      },
+      "shapes": [
+        {
+          "source_model": "resnet18_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            256,
+            14,
+            14
+          ],
+          "output_shape": [
+            128,
+            256,
+            14,
+            14
+          ],
+          "flops": 29614276608,
+          "weight_shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ],
+          "residual_shape": [
+            128,
+            256,
+            14,
+            14
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_320x320",
+          "batch_size": 128,
+          "input_size": 320,
+          "activation_input_shape": [
+            128,
+            256,
+            20,
+            20
+          ],
+          "output_shape": [
+            128,
+            256,
+            20,
+            20
+          ],
+          "flops": 60437299200,
+          "weight_shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ],
+          "residual_shape": [
+            128,
+            256,
+            20,
+            20
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_512x512",
+          "batch_size": 128,
+          "input_size": 512,
+          "activation_input_shape": [
+            128,
+            256,
+            32,
+            32
+          ],
+          "output_shape": [
+            128,
+            256,
+            32,
+            32
+          ],
+          "flops": 154719485952,
+          "weight_shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ],
+          "residual_shape": [
+            128,
+            256,
+            32,
+            32
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            256,
+            14,
+            14
+          ],
+          "output_shape": [
+            16,
+            256,
+            14,
+            14
+          ],
+          "flops": 3701784576,
+          "weight_shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ],
+          "residual_shape": [
+            16,
+            256,
+            14,
+            14
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_320x320",
+          "batch_size": 16,
+          "input_size": 320,
+          "activation_input_shape": [
+            16,
+            256,
+            20,
+            20
+          ],
+          "output_shape": [
+            16,
+            256,
+            20,
+            20
+          ],
+          "flops": 7554662400,
+          "weight_shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ],
+          "residual_shape": [
+            16,
+            256,
+            20,
+            20
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_512x512",
+          "batch_size": 16,
+          "input_size": 512,
+          "activation_input_shape": [
+            16,
+            256,
+            32,
+            32
+          ],
+          "output_shape": [
+            16,
+            256,
+            32,
+            32
+          ],
+          "flops": 19339935744,
+          "weight_shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ],
+          "residual_shape": [
+            16,
+            256,
+            32,
+            32
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            256,
+            14,
+            14
+          ],
+          "output_shape": [
+            64,
+            256,
+            14,
+            14
+          ],
+          "flops": 14807138304,
+          "weight_shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ],
+          "residual_shape": [
+            64,
+            256,
+            14,
+            14
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_320x320",
+          "batch_size": 64,
+          "input_size": 320,
+          "activation_input_shape": [
+            64,
+            256,
+            20,
+            20
+          ],
+          "output_shape": [
+            64,
+            256,
+            20,
+            20
+          ],
+          "flops": 30218649600,
+          "weight_shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ],
+          "residual_shape": [
+            64,
+            256,
+            20,
+            20
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_512x512",
+          "batch_size": 64,
+          "input_size": 512,
+          "activation_input_shape": [
+            64,
+            256,
+            32,
+            32
+          ],
+          "output_shape": [
+            64,
+            256,
+            32,
+            32
+          ],
+          "flops": 77359742976,
+          "weight_shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ],
+          "residual_shape": [
+            64,
+            256,
+            32,
+            32
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv_Relu",
+      "node_name": "/layer4/layer4.0/conv1/Conv",
+      "fusion_desc": "Conv + Bias + Relu",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          2,
+          2
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "activation": "Relu"
+      },
+      "shapes": [
+        {
+          "source_model": "resnet18_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            256,
+            14,
+            14
+          ],
+          "output_shape": [
+            128,
+            512,
+            7,
+            7
+          ],
+          "flops": 14803927040,
+          "weight_shape": [
+            512,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_320x320",
+          "batch_size": 128,
+          "input_size": 320,
+          "activation_input_shape": [
+            128,
+            256,
+            20,
+            20
+          ],
+          "output_shape": [
+            128,
+            512,
+            10,
+            10
+          ],
+          "flops": 30212096000,
+          "weight_shape": [
+            512,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_512x512",
+          "batch_size": 128,
+          "input_size": 512,
+          "activation_input_shape": [
+            128,
+            256,
+            32,
+            32
+          ],
+          "output_shape": [
+            128,
+            512,
+            16,
+            16
+          ],
+          "flops": 77342965760,
+          "weight_shape": [
+            512,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            256,
+            14,
+            14
+          ],
+          "output_shape": [
+            16,
+            512,
+            7,
+            7
+          ],
+          "flops": 1850490880,
+          "weight_shape": [
+            512,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_320x320",
+          "batch_size": 16,
+          "input_size": 320,
+          "activation_input_shape": [
+            16,
+            256,
+            20,
+            20
+          ],
+          "output_shape": [
+            16,
+            512,
+            10,
+            10
+          ],
+          "flops": 3776512000,
+          "weight_shape": [
+            512,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_512x512",
+          "batch_size": 16,
+          "input_size": 512,
+          "activation_input_shape": [
+            16,
+            256,
+            32,
+            32
+          ],
+          "output_shape": [
+            16,
+            512,
+            16,
+            16
+          ],
+          "flops": 9667870720,
+          "weight_shape": [
+            512,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            256,
+            14,
+            14
+          ],
+          "output_shape": [
+            64,
+            512,
+            7,
+            7
+          ],
+          "flops": 7401963520,
+          "weight_shape": [
+            512,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_320x320",
+          "batch_size": 64,
+          "input_size": 320,
+          "activation_input_shape": [
+            64,
+            256,
+            20,
+            20
+          ],
+          "output_shape": [
+            64,
+            512,
+            10,
+            10
+          ],
+          "flops": 15106048000,
+          "weight_shape": [
+            512,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_512x512",
+          "batch_size": 64,
+          "input_size": 512,
+          "activation_input_shape": [
+            64,
+            256,
+            32,
+            32
+          ],
+          "output_shape": [
+            64,
+            512,
+            16,
+            16
+          ],
+          "flops": 38671482880,
+          "weight_shape": [
+            512,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/layer4/layer4.0/conv2/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "resnet18_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            512,
+            7,
+            7
+          ],
+          "output_shape": [
+            128,
+            512,
+            7,
+            7
+          ],
+          "flops": 29598220288,
+          "weight_shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_320x320",
+          "batch_size": 128,
+          "input_size": 320,
+          "activation_input_shape": [
+            128,
+            512,
+            10,
+            10
+          ],
+          "output_shape": [
+            128,
+            512,
+            10,
+            10
+          ],
+          "flops": 60404531200,
+          "weight_shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_512x512",
+          "batch_size": 128,
+          "input_size": 512,
+          "activation_input_shape": [
+            128,
+            512,
+            16,
+            16
+          ],
+          "output_shape": [
+            128,
+            512,
+            16,
+            16
+          ],
+          "flops": 154635599872,
+          "weight_shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            512,
+            7,
+            7
+          ],
+          "output_shape": [
+            16,
+            512,
+            7,
+            7
+          ],
+          "flops": 3699777536,
+          "weight_shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_320x320",
+          "batch_size": 16,
+          "input_size": 320,
+          "activation_input_shape": [
+            16,
+            512,
+            10,
+            10
+          ],
+          "output_shape": [
+            16,
+            512,
+            10,
+            10
+          ],
+          "flops": 7550566400,
+          "weight_shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_512x512",
+          "batch_size": 16,
+          "input_size": 512,
+          "activation_input_shape": [
+            16,
+            512,
+            16,
+            16
+          ],
+          "output_shape": [
+            16,
+            512,
+            16,
+            16
+          ],
+          "flops": 19329449984,
+          "weight_shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            512,
+            7,
+            7
+          ],
+          "output_shape": [
+            64,
+            512,
+            7,
+            7
+          ],
+          "flops": 14799110144,
+          "weight_shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_320x320",
+          "batch_size": 64,
+          "input_size": 320,
+          "activation_input_shape": [
+            64,
+            512,
+            10,
+            10
+          ],
+          "output_shape": [
+            64,
+            512,
+            10,
+            10
+          ],
+          "flops": 30202265600,
+          "weight_shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_512x512",
+          "batch_size": 64,
+          "input_size": 512,
+          "activation_input_shape": [
+            64,
+            512,
+            16,
+            16
+          ],
+          "output_shape": [
+            64,
+            512,
+            16,
+            16
+          ],
+          "flops": 77317799936,
+          "weight_shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv_Add_Relu",
+      "node_name": "/layer4/layer4.0/downsample/downsample.0/Conv",
+      "fusion_desc": "Conv + Bias + Add(residual) + Relu",
+      "attributes": {
+        "kernel_shape": [
+          1,
+          1
+        ],
+        "strides": [
+          2,
+          2
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "activation": "Relu"
+      },
+      "shapes": [
+        {
+          "source_model": "resnet18_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            256,
+            14,
+            14
+          ],
+          "output_shape": [
+            128,
+            512,
+            7,
+            7
+          ],
+          "flops": 1653800960,
+          "weight_shape": [
+            512,
+            256,
+            1,
+            1
+          ],
+          "bias_shape": [
+            512
+          ],
+          "residual_shape": [
+            128,
+            512,
+            7,
+            7
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_320x320",
+          "batch_size": 128,
+          "input_size": 320,
+          "activation_input_shape": [
+            128,
+            256,
+            20,
+            20
+          ],
+          "output_shape": [
+            128,
+            512,
+            10,
+            10
+          ],
+          "flops": 3375104000,
+          "weight_shape": [
+            512,
+            256,
+            1,
+            1
+          ],
+          "bias_shape": [
+            512
+          ],
+          "residual_shape": [
+            128,
+            512,
+            10,
+            10
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_512x512",
+          "batch_size": 128,
+          "input_size": 512,
+          "activation_input_shape": [
+            128,
+            256,
+            32,
+            32
+          ],
+          "output_shape": [
+            128,
+            512,
+            16,
+            16
+          ],
+          "flops": 8640266240,
+          "weight_shape": [
+            512,
+            256,
+            1,
+            1
+          ],
+          "bias_shape": [
+            512
+          ],
+          "residual_shape": [
+            128,
+            512,
+            16,
+            16
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            256,
+            14,
+            14
+          ],
+          "output_shape": [
+            16,
+            512,
+            7,
+            7
+          ],
+          "flops": 206725120,
+          "weight_shape": [
+            512,
+            256,
+            1,
+            1
+          ],
+          "bias_shape": [
+            512
+          ],
+          "residual_shape": [
+            16,
+            512,
+            7,
+            7
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_320x320",
+          "batch_size": 16,
+          "input_size": 320,
+          "activation_input_shape": [
+            16,
+            256,
+            20,
+            20
+          ],
+          "output_shape": [
+            16,
+            512,
+            10,
+            10
+          ],
+          "flops": 421888000,
+          "weight_shape": [
+            512,
+            256,
+            1,
+            1
+          ],
+          "bias_shape": [
+            512
+          ],
+          "residual_shape": [
+            16,
+            512,
+            10,
+            10
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_512x512",
+          "batch_size": 16,
+          "input_size": 512,
+          "activation_input_shape": [
+            16,
+            256,
+            32,
+            32
+          ],
+          "output_shape": [
+            16,
+            512,
+            16,
+            16
+          ],
+          "flops": 1080033280,
+          "weight_shape": [
+            512,
+            256,
+            1,
+            1
+          ],
+          "bias_shape": [
+            512
+          ],
+          "residual_shape": [
+            16,
+            512,
+            16,
+            16
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            256,
+            14,
+            14
+          ],
+          "output_shape": [
+            64,
+            512,
+            7,
+            7
+          ],
+          "flops": 826900480,
+          "weight_shape": [
+            512,
+            256,
+            1,
+            1
+          ],
+          "bias_shape": [
+            512
+          ],
+          "residual_shape": [
+            64,
+            512,
+            7,
+            7
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_320x320",
+          "batch_size": 64,
+          "input_size": 320,
+          "activation_input_shape": [
+            64,
+            256,
+            20,
+            20
+          ],
+          "output_shape": [
+            64,
+            512,
+            10,
+            10
+          ],
+          "flops": 1687552000,
+          "weight_shape": [
+            512,
+            256,
+            1,
+            1
+          ],
+          "bias_shape": [
+            512
+          ],
+          "residual_shape": [
+            64,
+            512,
+            10,
+            10
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_512x512",
+          "batch_size": 64,
+          "input_size": 512,
+          "activation_input_shape": [
+            64,
+            256,
+            32,
+            32
+          ],
+          "output_shape": [
+            64,
+            512,
+            16,
+            16
+          ],
+          "flops": 4320133120,
+          "weight_shape": [
+            512,
+            256,
+            1,
+            1
+          ],
+          "bias_shape": [
+            512
+          ],
+          "residual_shape": [
+            64,
+            512,
+            16,
+            16
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv_Relu",
+      "node_name": "/layer4/layer4.1/conv1/Conv",
+      "fusion_desc": "Conv + Bias + Relu",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "activation": "Relu"
+      },
+      "shapes": [
+        {
+          "source_model": "resnet18_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            512,
+            7,
+            7
+          ],
+          "output_shape": [
+            128,
+            512,
+            7,
+            7
+          ],
+          "flops": 29601431552,
+          "weight_shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_320x320",
+          "batch_size": 128,
+          "input_size": 320,
+          "activation_input_shape": [
+            128,
+            512,
+            10,
+            10
+          ],
+          "output_shape": [
+            128,
+            512,
+            10,
+            10
+          ],
+          "flops": 60411084800,
+          "weight_shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_512x512",
+          "batch_size": 128,
+          "input_size": 512,
+          "activation_input_shape": [
+            128,
+            512,
+            16,
+            16
+          ],
+          "output_shape": [
+            128,
+            512,
+            16,
+            16
+          ],
+          "flops": 154652377088,
+          "weight_shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            512,
+            7,
+            7
+          ],
+          "output_shape": [
+            16,
+            512,
+            7,
+            7
+          ],
+          "flops": 3700178944,
+          "weight_shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_320x320",
+          "batch_size": 16,
+          "input_size": 320,
+          "activation_input_shape": [
+            16,
+            512,
+            10,
+            10
+          ],
+          "output_shape": [
+            16,
+            512,
+            10,
+            10
+          ],
+          "flops": 7551385600,
+          "weight_shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_512x512",
+          "batch_size": 16,
+          "input_size": 512,
+          "activation_input_shape": [
+            16,
+            512,
+            16,
+            16
+          ],
+          "output_shape": [
+            16,
+            512,
+            16,
+            16
+          ],
+          "flops": 19331547136,
+          "weight_shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            512,
+            7,
+            7
+          ],
+          "output_shape": [
+            64,
+            512,
+            7,
+            7
+          ],
+          "flops": 14800715776,
+          "weight_shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_320x320",
+          "batch_size": 64,
+          "input_size": 320,
+          "activation_input_shape": [
+            64,
+            512,
+            10,
+            10
+          ],
+          "output_shape": [
+            64,
+            512,
+            10,
+            10
+          ],
+          "flops": 30205542400,
+          "weight_shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_512x512",
+          "batch_size": 64,
+          "input_size": 512,
+          "activation_input_shape": [
+            64,
+            512,
+            16,
+            16
+          ],
+          "output_shape": [
+            64,
+            512,
+            16,
+            16
+          ],
+          "flops": 77326188544,
+          "weight_shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv_Add_Relu",
+      "node_name": "/layer4/layer4.1/conv2/Conv",
+      "fusion_desc": "Conv + Bias + Add(residual) + Relu",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "activation": "Relu"
+      },
+      "shapes": [
+        {
+          "source_model": "resnet18_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            512,
+            7,
+            7
+          ],
+          "output_shape": [
+            128,
+            512,
+            7,
+            7
+          ],
+          "flops": 29604642816,
+          "weight_shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ],
+          "residual_shape": [
+            128,
+            512,
+            7,
+            7
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_320x320",
+          "batch_size": 128,
+          "input_size": 320,
+          "activation_input_shape": [
+            128,
+            512,
+            10,
+            10
+          ],
+          "output_shape": [
+            128,
+            512,
+            10,
+            10
+          ],
+          "flops": 60417638400,
+          "weight_shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ],
+          "residual_shape": [
+            128,
+            512,
+            10,
+            10
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_512x512",
+          "batch_size": 128,
+          "input_size": 512,
+          "activation_input_shape": [
+            128,
+            512,
+            16,
+            16
+          ],
+          "output_shape": [
+            128,
+            512,
+            16,
+            16
+          ],
+          "flops": 154669154304,
+          "weight_shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ],
+          "residual_shape": [
+            128,
+            512,
+            16,
+            16
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            512,
+            7,
+            7
+          ],
+          "output_shape": [
+            16,
+            512,
+            7,
+            7
+          ],
+          "flops": 3700580352,
+          "weight_shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ],
+          "residual_shape": [
+            16,
+            512,
+            7,
+            7
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_320x320",
+          "batch_size": 16,
+          "input_size": 320,
+          "activation_input_shape": [
+            16,
+            512,
+            10,
+            10
+          ],
+          "output_shape": [
+            16,
+            512,
+            10,
+            10
+          ],
+          "flops": 7552204800,
+          "weight_shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ],
+          "residual_shape": [
+            16,
+            512,
+            10,
+            10
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_512x512",
+          "batch_size": 16,
+          "input_size": 512,
+          "activation_input_shape": [
+            16,
+            512,
+            16,
+            16
+          ],
+          "output_shape": [
+            16,
+            512,
+            16,
+            16
+          ],
+          "flops": 19333644288,
+          "weight_shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ],
+          "residual_shape": [
+            16,
+            512,
+            16,
+            16
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            512,
+            7,
+            7
+          ],
+          "output_shape": [
+            64,
+            512,
+            7,
+            7
+          ],
+          "flops": 14802321408,
+          "weight_shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ],
+          "residual_shape": [
+            64,
+            512,
+            7,
+            7
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_320x320",
+          "batch_size": 64,
+          "input_size": 320,
+          "activation_input_shape": [
+            64,
+            512,
+            10,
+            10
+          ],
+          "output_shape": [
+            64,
+            512,
+            10,
+            10
+          ],
+          "flops": 30208819200,
+          "weight_shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ],
+          "residual_shape": [
+            64,
+            512,
+            10,
+            10
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_512x512",
+          "batch_size": 64,
+          "input_size": 512,
+          "activation_input_shape": [
+            64,
+            512,
+            16,
+            16
+          ],
+          "output_shape": [
+            64,
+            512,
+            16,
+            16
+          ],
+          "flops": 77334577152,
+          "weight_shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ],
+          "residual_shape": [
+            64,
+            512,
+            16,
+            16
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "GlobalAveragePool",
+      "node_name": "/avgpool/GlobalAveragePool",
+      "fusion_desc": "GlobalAveragePool",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "resnet18_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            512,
+            7,
+            7
+          ],
+          "output_shape": [
+            128,
+            512,
+            1,
+            1
+          ],
+          "flops": 3211264
+        },
+        {
+          "source_model": "resnet18_bs128_320x320",
+          "batch_size": 128,
+          "input_size": 320,
+          "activation_input_shape": [
+            128,
+            512,
+            10,
+            10
+          ],
+          "output_shape": [
+            128,
+            512,
+            1,
+            1
+          ],
+          "flops": 6553600
+        },
+        {
+          "source_model": "resnet18_bs128_512x512",
+          "batch_size": 128,
+          "input_size": 512,
+          "activation_input_shape": [
+            128,
+            512,
+            16,
+            16
+          ],
+          "output_shape": [
+            128,
+            512,
+            1,
+            1
+          ],
+          "flops": 16777216
+        },
+        {
+          "source_model": "resnet18_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            512,
+            7,
+            7
+          ],
+          "output_shape": [
+            16,
+            512,
+            1,
+            1
+          ],
+          "flops": 401408
+        },
+        {
+          "source_model": "resnet18_bs16_320x320",
+          "batch_size": 16,
+          "input_size": 320,
+          "activation_input_shape": [
+            16,
+            512,
+            10,
+            10
+          ],
+          "output_shape": [
+            16,
+            512,
+            1,
+            1
+          ],
+          "flops": 819200
+        },
+        {
+          "source_model": "resnet18_bs16_512x512",
+          "batch_size": 16,
+          "input_size": 512,
+          "activation_input_shape": [
+            16,
+            512,
+            16,
+            16
+          ],
+          "output_shape": [
+            16,
+            512,
+            1,
+            1
+          ],
+          "flops": 2097152
+        },
+        {
+          "source_model": "resnet18_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            512,
+            7,
+            7
+          ],
+          "output_shape": [
+            64,
+            512,
+            1,
+            1
+          ],
+          "flops": 1605632
+        },
+        {
+          "source_model": "resnet18_bs64_320x320",
+          "batch_size": 64,
+          "input_size": 320,
+          "activation_input_shape": [
+            64,
+            512,
+            10,
+            10
+          ],
+          "output_shape": [
+            64,
+            512,
+            1,
+            1
+          ],
+          "flops": 3276800
+        },
+        {
+          "source_model": "resnet18_bs64_512x512",
+          "batch_size": 64,
+          "input_size": 512,
+          "activation_input_shape": [
+            64,
+            512,
+            16,
+            16
+          ],
+          "output_shape": [
+            64,
+            512,
+            1,
+            1
+          ],
+          "flops": 8388608
+        }
+      ]
+    },
+    {
+      "kernel_type": "Flatten",
+      "node_name": "/Flatten",
+      "fusion_desc": "Flatten",
+      "attributes": {
+        "axis": 1
+      },
+      "shapes": [
+        {
+          "source_model": "resnet18_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            512,
+            1,
+            1
+          ],
+          "output_shape": [
+            128,
+            512
+          ],
+          "flops": 0
+        },
+        {
+          "source_model": "resnet18_bs128_320x320",
+          "batch_size": 128,
+          "input_size": 320,
+          "activation_input_shape": [
+            128,
+            512,
+            1,
+            1
+          ],
+          "output_shape": [
+            128,
+            512
+          ],
+          "flops": 0
+        },
+        {
+          "source_model": "resnet18_bs128_512x512",
+          "batch_size": 128,
+          "input_size": 512,
+          "activation_input_shape": [
+            128,
+            512,
+            1,
+            1
+          ],
+          "output_shape": [
+            128,
+            512
+          ],
+          "flops": 0
+        },
+        {
+          "source_model": "resnet18_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            512,
+            1,
+            1
+          ],
+          "output_shape": [
+            16,
+            512
+          ],
+          "flops": 0
+        },
+        {
+          "source_model": "resnet18_bs16_320x320",
+          "batch_size": 16,
+          "input_size": 320,
+          "activation_input_shape": [
+            16,
+            512,
+            1,
+            1
+          ],
+          "output_shape": [
+            16,
+            512
+          ],
+          "flops": 0
+        },
+        {
+          "source_model": "resnet18_bs16_512x512",
+          "batch_size": 16,
+          "input_size": 512,
+          "activation_input_shape": [
+            16,
+            512,
+            1,
+            1
+          ],
+          "output_shape": [
+            16,
+            512
+          ],
+          "flops": 0
+        },
+        {
+          "source_model": "resnet18_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            512,
+            1,
+            1
+          ],
+          "output_shape": [
+            64,
+            512
+          ],
+          "flops": 0
+        },
+        {
+          "source_model": "resnet18_bs64_320x320",
+          "batch_size": 64,
+          "input_size": 320,
+          "activation_input_shape": [
+            64,
+            512,
+            1,
+            1
+          ],
+          "output_shape": [
+            64,
+            512
+          ],
+          "flops": 0
+        },
+        {
+          "source_model": "resnet18_bs64_512x512",
+          "batch_size": 64,
+          "input_size": 512,
+          "activation_input_shape": [
+            64,
+            512,
+            1,
+            1
+          ],
+          "output_shape": [
+            64,
+            512
+          ],
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Gemm",
+      "node_name": "/fc/Gemm",
+      "fusion_desc": "Gemm (fully connected)",
+      "attributes": {
+        "transA": 0,
+        "transB": 1
+      },
+      "shapes": [
+        {
+          "source_model": "resnet18_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            512
+          ],
+          "output_shape": [
+            128,
+            1000
+          ],
+          "flops": 131072000,
+          "weight_shape": [
+            1000,
+            512
+          ],
+          "bias_shape": [
+            1000
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_320x320",
+          "batch_size": 128,
+          "input_size": 320,
+          "activation_input_shape": [
+            128,
+            512
+          ],
+          "output_shape": [
+            128,
+            1000
+          ],
+          "flops": 131072000,
+          "weight_shape": [
+            1000,
+            512
+          ],
+          "bias_shape": [
+            1000
+          ]
+        },
+        {
+          "source_model": "resnet18_bs128_512x512",
+          "batch_size": 128,
+          "input_size": 512,
+          "activation_input_shape": [
+            128,
+            512
+          ],
+          "output_shape": [
+            128,
+            1000
+          ],
+          "flops": 131072000,
+          "weight_shape": [
+            1000,
+            512
+          ],
+          "bias_shape": [
+            1000
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            512
+          ],
+          "output_shape": [
+            16,
+            1000
+          ],
+          "flops": 16384000,
+          "weight_shape": [
+            1000,
+            512
+          ],
+          "bias_shape": [
+            1000
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_320x320",
+          "batch_size": 16,
+          "input_size": 320,
+          "activation_input_shape": [
+            16,
+            512
+          ],
+          "output_shape": [
+            16,
+            1000
+          ],
+          "flops": 16384000,
+          "weight_shape": [
+            1000,
+            512
+          ],
+          "bias_shape": [
+            1000
+          ]
+        },
+        {
+          "source_model": "resnet18_bs16_512x512",
+          "batch_size": 16,
+          "input_size": 512,
+          "activation_input_shape": [
+            16,
+            512
+          ],
+          "output_shape": [
+            16,
+            1000
+          ],
+          "flops": 16384000,
+          "weight_shape": [
+            1000,
+            512
+          ],
+          "bias_shape": [
+            1000
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            512
+          ],
+          "output_shape": [
+            64,
+            1000
+          ],
+          "flops": 65536000,
+          "weight_shape": [
+            1000,
+            512
+          ],
+          "bias_shape": [
+            1000
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_320x320",
+          "batch_size": 64,
+          "input_size": 320,
+          "activation_input_shape": [
+            64,
+            512
+          ],
+          "output_shape": [
+            64,
+            1000
+          ],
+          "flops": 65536000,
+          "weight_shape": [
+            1000,
+            512
+          ],
+          "bias_shape": [
+            1000
+          ]
+        },
+        {
+          "source_model": "resnet18_bs64_512x512",
+          "batch_size": 64,
+          "input_size": 512,
+          "activation_input_shape": [
+            64,
+            512
+          ],
+          "output_shape": [
+            64,
+            1000
+          ],
+          "flops": 65536000,
+          "weight_shape": [
+            1000,
+            512
+          ],
+          "bias_shape": [
+            1000
+          ]
+        }
+      ]
+    }
+  ]
+}

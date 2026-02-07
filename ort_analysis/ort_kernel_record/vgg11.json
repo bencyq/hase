@@ -1,0 +1,1606 @@
+{
+  "model_name": "vgg11",
+  "total_kernels": 20,
+  "kernel_types": [
+    "AveragePool",
+    "Conv_Relu",
+    "Flatten",
+    "Gemm",
+    "MaxPool",
+    "Relu"
+  ],
+  "kernels": [
+    {
+      "kernel_type": "Conv_Relu",
+      "node_name": "/features/features.0/Conv",
+      "fusion_desc": "Conv + Bias + Relu",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "activation": "Relu"
+      },
+      "shapes": [
+        {
+          "source_model": "vgg11_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            3,
+            224,
+            224
+          ],
+          "output_shape": [
+            128,
+            64,
+            224,
+            224
+          ],
+          "flops": 23018340352,
+          "weight_shape": [
+            64,
+            3,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ]
+        },
+        {
+          "source_model": "vgg11_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            3,
+            224,
+            224
+          ],
+          "output_shape": [
+            16,
+            64,
+            224,
+            224
+          ],
+          "flops": 2877292544,
+          "weight_shape": [
+            64,
+            3,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ]
+        },
+        {
+          "source_model": "vgg11_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            3,
+            224,
+            224
+          ],
+          "output_shape": [
+            64,
+            64,
+            224,
+            224
+          ],
+          "flops": 11509170176,
+          "weight_shape": [
+            64,
+            3,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "MaxPool",
+      "node_name": "/features/features.2/MaxPool",
+      "fusion_desc": "MaxPool",
+      "attributes": {
+        "kernel_shape": [
+          2,
+          2
+        ],
+        "strides": [
+          2,
+          2
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "ceil_mode": 0
+      },
+      "shapes": [
+        {
+          "source_model": "vgg11_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            64,
+            224,
+            224
+          ],
+          "output_shape": [
+            128,
+            64,
+            112,
+            112
+          ],
+          "flops": 411041792
+        },
+        {
+          "source_model": "vgg11_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            64,
+            224,
+            224
+          ],
+          "output_shape": [
+            16,
+            64,
+            112,
+            112
+          ],
+          "flops": 51380224
+        },
+        {
+          "source_model": "vgg11_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            64,
+            224,
+            224
+          ],
+          "output_shape": [
+            64,
+            64,
+            112,
+            112
+          ],
+          "flops": 205520896
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv_Relu",
+      "node_name": "/features/features.3/Conv",
+      "fusion_desc": "Conv + Bias + Relu",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "activation": "Relu"
+      },
+      "shapes": [
+        {
+          "source_model": "vgg11_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            64,
+            112,
+            112
+          ],
+          "output_shape": [
+            128,
+            128,
+            112,
+            112
+          ],
+          "flops": 237171113984,
+          "weight_shape": [
+            128,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ]
+        },
+        {
+          "source_model": "vgg11_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            64,
+            112,
+            112
+          ],
+          "output_shape": [
+            16,
+            128,
+            112,
+            112
+          ],
+          "flops": 29646389248,
+          "weight_shape": [
+            128,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ]
+        },
+        {
+          "source_model": "vgg11_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            64,
+            112,
+            112
+          ],
+          "output_shape": [
+            64,
+            128,
+            112,
+            112
+          ],
+          "flops": 118585556992,
+          "weight_shape": [
+            128,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            128
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "MaxPool",
+      "node_name": "/features/features.5/MaxPool",
+      "fusion_desc": "MaxPool",
+      "attributes": {
+        "kernel_shape": [
+          2,
+          2
+        ],
+        "strides": [
+          2,
+          2
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "ceil_mode": 0
+      },
+      "shapes": [
+        {
+          "source_model": "vgg11_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            128,
+            112,
+            112
+          ],
+          "output_shape": [
+            128,
+            128,
+            56,
+            56
+          ],
+          "flops": 205520896
+        },
+        {
+          "source_model": "vgg11_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            128,
+            112,
+            112
+          ],
+          "output_shape": [
+            16,
+            128,
+            56,
+            56
+          ],
+          "flops": 25690112
+        },
+        {
+          "source_model": "vgg11_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            128,
+            112,
+            112
+          ],
+          "output_shape": [
+            64,
+            128,
+            56,
+            56
+          ],
+          "flops": 102760448
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv_Relu",
+      "node_name": "/features/features.6/Conv",
+      "fusion_desc": "Conv + Bias + Relu",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "activation": "Relu"
+      },
+      "shapes": [
+        {
+          "source_model": "vgg11_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            128,
+            56,
+            56
+          ],
+          "output_shape": [
+            128,
+            256,
+            56,
+            56
+          ],
+          "flops": 236965593088,
+          "weight_shape": [
+            256,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        },
+        {
+          "source_model": "vgg11_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            128,
+            56,
+            56
+          ],
+          "output_shape": [
+            16,
+            256,
+            56,
+            56
+          ],
+          "flops": 29620699136,
+          "weight_shape": [
+            256,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        },
+        {
+          "source_model": "vgg11_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            128,
+            56,
+            56
+          ],
+          "output_shape": [
+            64,
+            256,
+            56,
+            56
+          ],
+          "flops": 118482796544,
+          "weight_shape": [
+            256,
+            128,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv_Relu",
+      "node_name": "/features/features.8/Conv",
+      "fusion_desc": "Conv + Bias + Relu",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "activation": "Relu"
+      },
+      "shapes": [
+        {
+          "source_model": "vgg11_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            256,
+            56,
+            56
+          ],
+          "output_shape": [
+            128,
+            256,
+            56,
+            56
+          ],
+          "flops": 473725665280,
+          "weight_shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        },
+        {
+          "source_model": "vgg11_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            256,
+            56,
+            56
+          ],
+          "output_shape": [
+            16,
+            256,
+            56,
+            56
+          ],
+          "flops": 59215708160,
+          "weight_shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        },
+        {
+          "source_model": "vgg11_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            256,
+            56,
+            56
+          ],
+          "output_shape": [
+            64,
+            256,
+            56,
+            56
+          ],
+          "flops": 236862832640,
+          "weight_shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "MaxPool",
+      "node_name": "/features/features.10/MaxPool",
+      "fusion_desc": "MaxPool",
+      "attributes": {
+        "kernel_shape": [
+          2,
+          2
+        ],
+        "strides": [
+          2,
+          2
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "ceil_mode": 0
+      },
+      "shapes": [
+        {
+          "source_model": "vgg11_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            256,
+            56,
+            56
+          ],
+          "output_shape": [
+            128,
+            256,
+            28,
+            28
+          ],
+          "flops": 102760448
+        },
+        {
+          "source_model": "vgg11_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            256,
+            56,
+            56
+          ],
+          "output_shape": [
+            16,
+            256,
+            28,
+            28
+          ],
+          "flops": 12845056
+        },
+        {
+          "source_model": "vgg11_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            256,
+            56,
+            56
+          ],
+          "output_shape": [
+            64,
+            256,
+            28,
+            28
+          ],
+          "flops": 51380224
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv_Relu",
+      "node_name": "/features/features.11/Conv",
+      "fusion_desc": "Conv + Bias + Relu",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "activation": "Relu"
+      },
+      "shapes": [
+        {
+          "source_model": "vgg11_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            256,
+            28,
+            28
+          ],
+          "output_shape": [
+            128,
+            512,
+            28,
+            28
+          ],
+          "flops": 236862832640,
+          "weight_shape": [
+            512,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        },
+        {
+          "source_model": "vgg11_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            256,
+            28,
+            28
+          ],
+          "output_shape": [
+            16,
+            512,
+            28,
+            28
+          ],
+          "flops": 29607854080,
+          "weight_shape": [
+            512,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        },
+        {
+          "source_model": "vgg11_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            256,
+            28,
+            28
+          ],
+          "output_shape": [
+            64,
+            512,
+            28,
+            28
+          ],
+          "flops": 118431416320,
+          "weight_shape": [
+            512,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv_Relu",
+      "node_name": "/features/features.13/Conv",
+      "fusion_desc": "Conv + Bias + Relu",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "activation": "Relu"
+      },
+      "shapes": [
+        {
+          "source_model": "vgg11_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            512,
+            28,
+            28
+          ],
+          "output_shape": [
+            128,
+            512,
+            28,
+            28
+          ],
+          "flops": 473622904832,
+          "weight_shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        },
+        {
+          "source_model": "vgg11_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            512,
+            28,
+            28
+          ],
+          "output_shape": [
+            16,
+            512,
+            28,
+            28
+          ],
+          "flops": 59202863104,
+          "weight_shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        },
+        {
+          "source_model": "vgg11_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            512,
+            28,
+            28
+          ],
+          "output_shape": [
+            64,
+            512,
+            28,
+            28
+          ],
+          "flops": 236811452416,
+          "weight_shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "MaxPool",
+      "node_name": "/features/features.15/MaxPool",
+      "fusion_desc": "MaxPool",
+      "attributes": {
+        "kernel_shape": [
+          2,
+          2
+        ],
+        "strides": [
+          2,
+          2
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "ceil_mode": 0
+      },
+      "shapes": [
+        {
+          "source_model": "vgg11_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            512,
+            28,
+            28
+          ],
+          "output_shape": [
+            128,
+            512,
+            14,
+            14
+          ],
+          "flops": 51380224
+        },
+        {
+          "source_model": "vgg11_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            512,
+            28,
+            28
+          ],
+          "output_shape": [
+            16,
+            512,
+            14,
+            14
+          ],
+          "flops": 6422528
+        },
+        {
+          "source_model": "vgg11_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            512,
+            28,
+            28
+          ],
+          "output_shape": [
+            64,
+            512,
+            14,
+            14
+          ],
+          "flops": 25690112
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv_Relu",
+      "node_name": "/features/features.16/Conv",
+      "fusion_desc": "Conv + Bias + Relu",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "activation": "Relu"
+      },
+      "shapes": [
+        {
+          "source_model": "vgg11_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            512,
+            14,
+            14
+          ],
+          "output_shape": [
+            128,
+            512,
+            14,
+            14
+          ],
+          "flops": 118405726208,
+          "weight_shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        },
+        {
+          "source_model": "vgg11_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            512,
+            14,
+            14
+          ],
+          "output_shape": [
+            16,
+            512,
+            14,
+            14
+          ],
+          "flops": 14800715776,
+          "weight_shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        },
+        {
+          "source_model": "vgg11_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            512,
+            14,
+            14
+          ],
+          "output_shape": [
+            64,
+            512,
+            14,
+            14
+          ],
+          "flops": 59202863104,
+          "weight_shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv_Relu",
+      "node_name": "/features/features.18/Conv",
+      "fusion_desc": "Conv + Bias + Relu",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "activation": "Relu"
+      },
+      "shapes": [
+        {
+          "source_model": "vgg11_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            512,
+            14,
+            14
+          ],
+          "output_shape": [
+            128,
+            512,
+            14,
+            14
+          ],
+          "flops": 118405726208,
+          "weight_shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        },
+        {
+          "source_model": "vgg11_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            512,
+            14,
+            14
+          ],
+          "output_shape": [
+            16,
+            512,
+            14,
+            14
+          ],
+          "flops": 14800715776,
+          "weight_shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        },
+        {
+          "source_model": "vgg11_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            512,
+            14,
+            14
+          ],
+          "output_shape": [
+            64,
+            512,
+            14,
+            14
+          ],
+          "flops": 59202863104,
+          "weight_shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "bias_shape": [
+            512
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "MaxPool",
+      "node_name": "/features/features.20/MaxPool",
+      "fusion_desc": "MaxPool",
+      "attributes": {
+        "kernel_shape": [
+          2,
+          2
+        ],
+        "strides": [
+          2,
+          2
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "ceil_mode": 0
+      },
+      "shapes": [
+        {
+          "source_model": "vgg11_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            512,
+            14,
+            14
+          ],
+          "output_shape": [
+            128,
+            512,
+            7,
+            7
+          ],
+          "flops": 12845056
+        },
+        {
+          "source_model": "vgg11_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            512,
+            14,
+            14
+          ],
+          "output_shape": [
+            16,
+            512,
+            7,
+            7
+          ],
+          "flops": 1605632
+        },
+        {
+          "source_model": "vgg11_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            512,
+            14,
+            14
+          ],
+          "output_shape": [
+            64,
+            512,
+            7,
+            7
+          ],
+          "flops": 6422528
+        }
+      ]
+    },
+    {
+      "kernel_type": "AveragePool",
+      "node_name": "/avgpool/AveragePool",
+      "fusion_desc": "AveragePool",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "vgg11_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            512,
+            7,
+            7
+          ],
+          "output_shape": null,
+          "flops": 0
+        },
+        {
+          "source_model": "vgg11_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": [
+            16,
+            512,
+            7,
+            7
+          ],
+          "output_shape": null,
+          "flops": 0
+        },
+        {
+          "source_model": "vgg11_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            512,
+            7,
+            7
+          ],
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Flatten",
+      "node_name": "/Flatten",
+      "fusion_desc": "Flatten",
+      "attributes": {
+        "axis": 1
+      },
+      "shapes": [
+        {
+          "source_model": "vgg11_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        },
+        {
+          "source_model": "vgg11_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        },
+        {
+          "source_model": "vgg11_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Gemm",
+      "node_name": "/classifier/classifier.0/Gemm",
+      "fusion_desc": "Gemm (fully connected)",
+      "attributes": {
+        "transA": 0,
+        "transB": 1
+      },
+      "shapes": [
+        {
+          "source_model": "vgg11_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            4096,
+            25088
+          ],
+          "bias_shape": [
+            4096
+          ]
+        },
+        {
+          "source_model": "vgg11_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            4096,
+            25088
+          ],
+          "bias_shape": [
+            4096
+          ]
+        },
+        {
+          "source_model": "vgg11_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            4096,
+            25088
+          ],
+          "bias_shape": [
+            4096
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Relu",
+      "node_name": "/classifier/classifier.1/Relu",
+      "fusion_desc": "Relu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "vgg11_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        },
+        {
+          "source_model": "vgg11_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        },
+        {
+          "source_model": "vgg11_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Gemm",
+      "node_name": "/classifier/classifier.3/Gemm",
+      "fusion_desc": "Gemm (fully connected)",
+      "attributes": {
+        "transA": 0,
+        "transB": 1
+      },
+      "shapes": [
+        {
+          "source_model": "vgg11_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            4096,
+            4096
+          ],
+          "bias_shape": [
+            4096
+          ]
+        },
+        {
+          "source_model": "vgg11_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            4096,
+            4096
+          ],
+          "bias_shape": [
+            4096
+          ]
+        },
+        {
+          "source_model": "vgg11_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            4096,
+            4096
+          ],
+          "bias_shape": [
+            4096
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Relu",
+      "node_name": "/classifier/classifier.4/Relu",
+      "fusion_desc": "Relu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "vgg11_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        },
+        {
+          "source_model": "vgg11_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        },
+        {
+          "source_model": "vgg11_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Gemm",
+      "node_name": "/classifier/classifier.6/Gemm",
+      "fusion_desc": "Gemm (fully connected)",
+      "attributes": {
+        "transA": 0,
+        "transB": 1
+      },
+      "shapes": [
+        {
+          "source_model": "vgg11_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": [
+            128,
+            1000
+          ],
+          "flops": 0,
+          "weight_shape": [
+            1000,
+            4096
+          ],
+          "bias_shape": [
+            1000
+          ]
+        },
+        {
+          "source_model": "vgg11_bs16_224x224",
+          "batch_size": 16,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": [
+            16,
+            1000
+          ],
+          "flops": 0,
+          "weight_shape": [
+            1000,
+            4096
+          ],
+          "bias_shape": [
+            1000
+          ]
+        },
+        {
+          "source_model": "vgg11_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": [
+            64,
+            1000
+          ],
+          "flops": 0,
+          "weight_shape": [
+            1000,
+            4096
+          ],
+          "bias_shape": [
+            1000
+          ]
+        }
+      ]
+    }
+  ]
+}

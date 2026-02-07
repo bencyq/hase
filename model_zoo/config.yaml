@@ -1,0 +1,8 @@
+# Model Zoo 导出配置
+# models: 要导出的模型名称列表
+# batch_sizes: 导出模型时使用的 batch size 列表
+# input_sizes: 输入张量的空间尺寸列表 (H=W)
+
+models: [resnet18, resnet50, vgg11, vgg13, alexnet]
+batch_sizes: [16, 64, 128]
+input_sizes: [224, 320, 512]

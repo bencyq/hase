@@ -19,8 +19,7 @@
 - **Description**:
     - 创建config.yaml，设定batchsize和输入张量的类型，张量输入则有三种类型：224x224，320x320，512x512，batchsize设置有16，64，128
     - 编写一个脚本，从 `torchvision` 加载 `ResNet18`。
-    - 将模型导出为 onnx runtime 优化后的ONNX 格式，并根据config.yaml里的不同组合导出。
-<!-- 考虑下固定batchsize，因为不同的batchsize在实际运行时，虽然kernel的融合规则一致，但是底层GPU运行算法不一样 -->
+    - 将模型导出为 onnx runtime 优化后的ONNX 格式，并根据config.yaml里的不同组合导出。只能使用CUDA runtime
     - 保存到 `model_zoo/models/`。
 - **Acceptance Criteria**:
     - 运行脚本后，`model_zoo/models/` 下出现 `.onnx` 文件。

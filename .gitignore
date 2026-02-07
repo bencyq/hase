@@ -45,6 +45,6 @@ cover/
 docs/_build/
 
 # model
-*onnx_models*
-*ir_models
+*.onnx
 .vscode
+logs/

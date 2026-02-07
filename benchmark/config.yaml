@@ -1,0 +1,9 @@
+# Prometheus Configuration
+PROMETHEUS:
+  URL: "http://localhost:9090"
+  METRICS:
+    # Profiling metrics (recommended to keep the same family for consistency)
+    # Note: these usually require DCGM Exporter profiling metrics enabled.
+    SM_ACTIVE: "DCGM_FI_PROF_SM_ACTIVE"
+    SM_OCCUPANCY: "DCGM_FI_PROF_SM_OCCUPANCY"
+    DRAM_ACTIVE: "DCGM_FI_PROF_DRAM_ACTIVE"
