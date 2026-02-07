@@ -7,3 +7,41 @@ PROMETHEUS:
     SM_ACTIVE: "DCGM_FI_PROF_SM_ACTIVE"
     SM_OCCUPANCY: "DCGM_FI_PROF_SM_OCCUPANCY"
     DRAM_ACTIVE: "DCGM_FI_PROF_DRAM_ACTIVE"
+
+# Stress levels for data collection
+STRESS_LEVELS:
+  - sm_active: 0.0
+    sm_occ: 0.0
+    dram: 0.0
+  - sm_active: 0.3
+    sm_occ: 0.3
+    dram: 0.3
+  - sm_active: 0.6
+    sm_occ: 0.3
+    dram: 0.3
+  - sm_active: 0.9
+    sm_occ: 0.3
+    dram: 0.3
+  - sm_active: 0.3
+    sm_occ: 0.6
+    dram: 0.3
+  - sm_active: 0.3
+    sm_occ: 0.9
+    dram: 0.3
+  - sm_active: 0.3
+    sm_occ: 0.3
+    dram: 0.6
+  - sm_active: 0.3
+    sm_occ: 0.3
+    dram: 0.9
+  - sm_active: 0.9
+    sm_occ: 0.9
+    dram: 0.9
+
+# Runner params
+RUNNER:
+  WARMUP: 10
+  LOOPS: 50
+  SETTLE_SEC: 10.0
+  METRIC_WINDOW_SEC: 3.0
+  BETWEEN_KERNEL_SEC: 2.0

@@ -1,3 +1,4 @@
+import argparse
 import datetime
 import torch
 import threading
@@ -113,71 +114,35 @@ class GPUQuantitativeStressor:
                 else:
                     time.sleep(0.01)
 
-# --- 使用示例 ---
+def _clamp_ratio(x):
+    return max(0.0, min(1.0, float(x)))
+
+
 if __name__ == "__main__":
-    stressor = GPUQuantitativeStressor(device_id=0)
-    
-    stressor.set_targets(sm_active=0, sm_occ=0, dram=0)
-    stressor.start()
-    time.sleep(30) # 维持一段时间观察 DCGM
-    stressor.stop()
-    
-    stressor.set_targets(sm_active=0.3, sm_occ=0.3, dram=0.3)
-    stressor.start()
-    time.sleep(30) # 维持一段时间观察 DCGM
-    stressor.stop()
+    parser = argparse.ArgumentParser(description="GPU Stressor")
+    parser.add_argument("--device", type=int, default=0, help="GPU 设备 ID")
+    parser.add_argument("--sm-active", type=float, default=0.0, help="SM_ACTIVE (0.0-1.0)")
+    parser.add_argument("--sm-occ", type=float, default=0.0, help="SM_OCCUPANCY (0.0-1.0)")
+    parser.add_argument("--dram", type=float, default=0.0, help="DRAM_ACTIVE (0.0-1.0)")
+    parser.add_argument("--duration", type=float, default=0.0,
+                        help="持续时间(秒)，0 表示一直运行")
+    args = parser.parse_args()
 
-    stressor.set_targets(sm_active=0.5, sm_occ=0.3, dram=0.3)
+    stressor = GPUQuantitativeStressor(device_id=args.device)
+    stressor.set_targets(
+        sm_active=_clamp_ratio(args.sm_active),
+        sm_occ=_clamp_ratio(args.sm_occ),
+        dram=_clamp_ratio(args.dram),
+    )
     stressor.start()
-    time.sleep(30) # 维持一段时间观察 DCGM
-    stressor.stop()
 
-    stressor.set_targets(sm_active=0.9, sm_occ=0.3, dram=0.3)
-    stressor.start()
-    time.sleep(30) # 维持一段时间观察 DCGM
-    stressor.stop()
-
-    stressor.set_targets(sm_active=0.3, sm_occ=0.5, dram=0.3)
-    stressor.start()
-    time.sleep(30) # 维持一段时间观察 DCGM
-    stressor.stop()
-
-    stressor.set_targets(sm_active=0.3, sm_occ=0.7, dram=0.3)
-    stressor.start()
-    time.sleep(30) # 维持一段时间观察 DCGM
-    stressor.stop()
-
-    stressor.set_targets(sm_active=0.3, sm_occ=0.9, dram=0.3)
-    stressor.start()
-    time.sleep(30) # 维持一段时间观察 DCGM
-    stressor.stop()
-
-    stressor.set_targets(sm_active=0.3, sm_occ=0.3, dram=0.5)
-    stressor.start()
-    time.sleep(30) # 维持一段时间观察 DCGM
-    stressor.stop()
-    
-    stressor.set_targets(sm_active=0.3, sm_occ=0.3, dram=0.7)
-    stressor.start()
-    time.sleep(30) # 维持一段时间观察 DCGM
-    stressor.stop()
-
-    stressor.set_targets(sm_active=0.3, sm_occ=0.3, dram=0.9)
-    stressor.start()
-    time.sleep(30) # 维持一段时间观察 DCGM
-    stressor.stop()
-
-    stressor.set_targets(sm_active=0.5, sm_occ=0.5, dram=0.3)
-    stressor.start()
-    time.sleep(30) # 维持一段时间观察 DCGM
-    stressor.stop()
-
-    stressor.set_targets(sm_active=0.7, sm_occ=0.7, dram=0.3)
-    stressor.start()
-    time.sleep(30) # 维持一段时间观察 DCGM
-    stressor.stop()
-
-    stressor.set_targets(sm_active=0.9, sm_occ=0.9, dram=0.3)
-    stressor.start()
-    time.sleep(30) # 维持一段时间观察 DCGM
-    stressor.stop()
+    try:
+        if args.duration and args.duration > 0:
+            time.sleep(args.duration)
+        else:
+            while True:
+                time.sleep(30)
+    except KeyboardInterrupt:
+        pass
+    finally:
+        stressor.stop()
