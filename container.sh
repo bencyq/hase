@@ -1,0 +1,1 @@
+docker run -it --gpus all -v /data/cyq:/cyq -v /tmp/nvidia-mps:/tmp/nvidia-mps --ipc=host -e CUDA_MPS_PIPE_DIRECTORY=/tmp/nvidia-mps -e CUDA_MPS_LOG_DIRECTORY=/tmp/nvidia-mps-log bencyq/nnmeter:202602091555

@@ -158,7 +158,7 @@ if __name__ == "__main__":
     parser.add_argument("--sm-active", type=float, default=0.0, help="SM_ACTIVE (0.0-1.0)")
     parser.add_argument("--sm-occ", type=float, default=0.0, help="SM_OCCUPANCY (0.0-1.0)")
     parser.add_argument("--dram", type=float, default=0.0, help="DRAM_ACTIVE (0.0-1.0)")
-    parser.add_argument("--duration", type=float, default=0.0, help="持续时间(秒)，0 表示一直运行")
+    parser.add_argument("--duration", type=float, default=10.0, help="持续时间(秒)，0 表示一直运行")
     args = parser.parse_args()
 
     stressor = GPUQuantitativeStressor(device_id=args.device)

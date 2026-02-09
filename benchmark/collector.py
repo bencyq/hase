@@ -243,6 +243,16 @@ def _stop_stressor(proc):
 
 
 def collect_data(config_path, kernel_dir, output_csv, device_id):
+    overall_start_time = datetime.now()
+    logger.info("")
+    logger.info("=" * 80)
+    logger.info("数据采集开始")
+    logger.info("  开始时间: %s", overall_start_time.strftime("%Y-%m-%d %H:%M:%S"))
+    logger.info("  配置文件: %s", config_path)
+    logger.info("  Kernel 目录: %s", kernel_dir)
+    logger.info("  输出 CSV: %s", output_csv)
+    logger.info("  GPU 设备: %d", device_id)
+    
     cfg = _load_config(config_path)
     stress_levels = _get_stress_levels(cfg)
     warmup, loops, settle, metric_window, between_kernels = _get_runner_params(cfg)
@@ -253,8 +263,19 @@ def collect_data(config_path, kernel_dir, output_csv, device_id):
         logger.error("未找到 kernel ONNX: %s", kernel_dir)
         return None
 
-    logger.info("找到 %d 个 kernel 文件", len(kernel_files))
-    logger.info("Stress levels: %s", json.dumps(stress_levels, ensure_ascii=False))
+    total_levels = len(stress_levels)
+    total_kernels = len(kernel_files)
+    total_tasks = total_levels * total_kernels
+    
+    logger.info("=" * 80)
+    logger.info("数据采集配置:")
+    logger.info("  - Stress levels: %d 个", total_levels)
+    logger.info("  - Kernel 文件: %d 个", total_kernels)
+    logger.info("  - 总任务数: %d (levels × kernels)", total_tasks)
+    logger.info("  - Warmup: %d, Loops: %d", warmup, loops)
+    logger.info("  - SETTLE_SEC: %.1f, METRIC_WINDOW_SEC: %.1f, BETWEEN_KERNEL_SEC: %.1f",
+                settle, metric_window, between_kernels)
+    logger.info("=" * 80)
 
     # CSV header
     metrics_keys = list(collector.metrics_map.keys()) + ["sm_occupancy_when_active"]
@@ -263,32 +284,72 @@ def collect_data(config_path, kernel_dir, output_csv, device_id):
               ["Latency_ms"]
 
     os.makedirs(os.path.dirname(output_csv), exist_ok=True)
+    task_counter = 0
+    
     with open(output_csv, "w", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=columns)
         writer.writeheader()
 
-        for level in stress_levels:
-            logger.info("设置压力: %s", level)
+        for level_idx, level in enumerate(stress_levels, 1):
+            level_start_time = datetime.now()
+            logger.info("")
+            logger.info("─" * 80)
+            logger.info("[Level %d/%d] 开始设置压力: sm_active=%.2f, sm_occ=%.2f, dram=%.2f",
+                       level_idx, total_levels, level["sm_active"], level["sm_occ"], level["dram"])
+            logger.info("  时间: %s", level_start_time.strftime("%Y-%m-%d %H:%M:%S"))
+            
             proc = _start_stressor(device_id, level)
+            if proc:
+                logger.info("  Stressor 进程已启动 (PID: %d)", proc.pid)
+            else:
+                logger.info("  无背景负载 (所有参数为 0)")
+            
+            logger.info("  等待稳定期: %.1f 秒...", settle)
             time.sleep(settle)
 
-            for kernel_path in kernel_files:
+            # 每个 stress level 仅采集一次背景负载指标
+            logger.info("  采集 DCGM 背景负载指标 (窗口: %.1f 秒)...", metric_window)
+            pre_end = time.time()
+            pre_start = pre_end - max(metric_window, 1)
+            level_stats = collector.get_averages(pre_start, pre_end)
+            logger.info("  DCGM 指标: sm_active=%.3f, sm_occupancy=%.3f, dram_active=%.3f",
+                       level_stats.get("sm_active", 0.0),
+                       level_stats.get("sm_occupancy", 0.0),
+                       level_stats.get("dram_active", 0.0))
+
+            for kernel_idx, kernel_path in enumerate(kernel_files, 1):
+                task_counter += 1
                 kernel_id = _parse_kernel_id(kernel_path)
                 op_type = _parse_op_type(kernel_id)
                 input_shape = _get_input_shape_str(kernel_path)
+                
+                kernel_start_time = datetime.now()
+                
+                # 计算进度百分比
+                progress_percent = (task_counter / total_tasks) * 100
+                progress_bar_length = 30
+                filled = int(progress_bar_length * task_counter / total_tasks)
+                bar = '█' * filled + '░' * (progress_bar_length - filled)
+                
+                # 输出进度条到 stdout
+                sys.stdout.write(f'\r进度: [{bar}] {progress_percent:.1f}% [{task_counter}/{total_tasks}] - {kernel_id}')
+                sys.stdout.flush()
 
                 # 等待背景负载稳定
                 if between_kernels > 0:
+                    # logger.info("    等待背景负载稳定: %.1f 秒...", between_kernels)
                     time.sleep(between_kernels)
 
-                # 先采集背景负载指标（必须早于 kernel 执行）
-                pre_end = time.time()
-                pre_start = pre_end - max(metric_window, 1)
-                stats = collector.get_averages(pre_start, pre_end)
-
+                # logger.info("    执行推理 (Warmup=%d, Loops=%d)...", warmup, loops)
                 avg_ms, start_dt, end_dt = run_kernel(
                     kernel_path, warmup=warmup, loops=loops, use_warmup=True
                 )
+                
+                # kernel_end_time = datetime.now()
+                # elapsed = (kernel_end_time - kernel_start_time).total_seconds()
+                # logger.info("    推理完成: 平均耗时=%.3f ms, 执行时间=%.1f 秒",
+                #            avg_ms, elapsed)
+                # logger.info("    结束时间: %s", kernel_end_time.strftime("%Y-%m-%d %H:%M:%S"))
 
                 row = {
                     "Kernel_ID": kernel_id,
@@ -297,13 +358,28 @@ def collect_data(config_path, kernel_dir, output_csv, device_id):
                     "Latency_ms": avg_ms,
                 }
                 for k in metrics_keys:
-                    row["DCGM_{}".format(k)] = stats.get(k, 0.0)
+                    row["DCGM_{}".format(k)] = level_stats.get(k, 0.0)
 
                 writer.writerow(row)
 
+            level_end_time = datetime.now()
+            level_elapsed = (level_end_time - level_start_time).total_seconds()
+            logger.info("")
+            logger.info("[Level %d/%d] 完成，耗时: %.1f 秒", level_idx, total_levels, level_elapsed)
+            logger.info("  停止 Stressor...")
             _stop_stressor(proc)
+            logger.info("  Stressor 已停止")
 
-    logger.info("数据采集完成，CSV 输出: %s", output_csv)
+    overall_end_time = datetime.now()
+    overall_elapsed = (overall_end_time - overall_start_time).total_seconds()
+    logger.info("")
+    logger.info("=" * 80)
+    logger.info("数据采集完成")
+    logger.info("  结束时间: %s", overall_end_time.strftime("%Y-%m-%d %H:%M:%S"))
+    logger.info("  总耗时: %.1f 秒 (%.1f 分钟)", overall_elapsed, overall_elapsed / 60)
+    logger.info("  完成任务: %d/%d", task_counter, total_tasks)
+    logger.info("  CSV 输出: %s", output_csv)
+    logger.info("=" * 80)
     return output_csv
 
 

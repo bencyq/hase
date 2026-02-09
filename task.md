@@ -93,7 +93,7 @@
     - 作为一个独立的 Process 运行。
 - **Acceptance Criteria**:
     - 启动 Stressor 后，使用 `nvidia-smi` 可以看到 GPU 利用率上升。
-
+- **注意事项** 确保MPS启动
 
 ### Task 4.3: Data Collector Orchestrator
 - **Files**: `benchmark/collector.py`
@@ -101,11 +101,11 @@
     -  全流程编排 (Workflow Orchestration)：
         1. 资源调度：根据输入参数或配置，指定用于 Benchmark 的目标 GPU 设备（支持通过设备 ID 如 0-7 进行指定）。
         2. 干扰注入循环：读取 benchmark/config.yaml 中的 Stress Level 配置组合（例如：不同的 sm-active, sm-occ, dram 强度配比），调用 Stressor (Task 4.2) 动态调整 GPU 负载环境。
-        3. Kernel 遍历循环：在每一种 Stress Level 环境下，遍历 kernel_model/kernel_onnx/ 目录下的所有 ONNX Kernel 文件。
+        3. Kernel 遍历循环：在每一种 Stress Level 环境下，遍历 kernel_model/kernel_onnx/ 目录下的所有 ONNX Kernel 文件。记录下stress level开启后的DCGM指标，作为当前轮次所有kernel运行的背景负载
     - 执行与采集 (Execution & Acquisition)：
     在“特定干扰环境 + 特定 Kernel”的组合下执行以下原子操作：
         1. 性能测试：调用 Kernel Runner (Task 4.1)，先执行预热（Warmup），随后正式运行并记录端到端时延（Latency）。
-        2. 指标同步：根据 Kernel 运行的精确起止时间戳，结合 benchmark/config.yaml 中定义的监控指标列表，从 DCGM 中提取对应的硬件性能数据。注意，提取的时间戳不是kernel开始时，而是kernel运行开始前的背景负载，所以每个kernel之间要留一定时间间隙，使背景负载稳定下。
+        <!-- 2. 指标同步：根据 Kernel 运行的精确起止时间戳，结合 benchmark/config.yaml 中定义的监控指标列表，从 DCGM 中提取对应的硬件性能数据。注意，提取的时间戳不是kernel开始时，而是kernel运行开始前的背景负载，所以每个kernel之间要留一定时间间隙，使背景负载稳定下。 -->
     - 数据持久化 (Data Persistence)：
     将单次测试结果聚合，格式化写入 CSV 文件。
         - Schema: [Kernel_ID, OpType, Input_Shape, DCGM_Metrics (动态列), Latency_ms]。
