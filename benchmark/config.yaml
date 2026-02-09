@@ -1,6 +1,6 @@
 # Prometheus Configuration
 PROMETHEUS:
-  URL: "http://localhost:9090"
+  URL: "http://10.90.1.49:30778"
   METRICS:
     # Profiling metrics (recommended to keep the same family for consistency)
     # Note: these usually require DCGM Exporter profiling metrics enabled.
@@ -10,30 +10,30 @@ PROMETHEUS:
 
 # Stress levels for data collection
 STRESS_LEVELS:
-  - sm_active: 0.0
-    sm_occ: 0.0
-    dram: 0.0
   - sm_active: 0.3
-    sm_occ: 0.3
-    dram: 0.3
-  - sm_active: 0.6
-    sm_occ: 0.3
-    dram: 0.3
-  - sm_active: 0.9
-    sm_occ: 0.3
-    dram: 0.3
+    sm_occ: 0.2
+    dram: 0.2
   - sm_active: 0.3
     sm_occ: 0.6
-    dram: 0.3
+    dram: 0.2
   - sm_active: 0.3
-    sm_occ: 0.9
-    dram: 0.3
-  - sm_active: 0.3
-    sm_occ: 0.3
+    sm_occ: 0.2
     dram: 0.6
-  - sm_active: 0.3
-    sm_occ: 0.3
-    dram: 0.9
+  - sm_active: 0.5
+    sm_occ: 0.2
+    dram: 0.2
+  - sm_active: 0.5
+    sm_occ: 0.6
+    dram: 0.2
+  - sm_active: 0.5
+    sm_occ: 0.2
+    dram: 0.6
+  - sm_active: 0.7
+    sm_occ: 0.6
+    dram: 0.2
+  - sm_active: 0.7
+    sm_occ: 0.2
+    dram: 0.6
   - sm_active: 0.9
     sm_occ: 0.9
     dram: 0.9
@@ -42,6 +42,6 @@ STRESS_LEVELS:
 RUNNER:
   WARMUP: 10
   LOOPS: 50
-  SETTLE_SEC: 10.0
-  METRIC_WINDOW_SEC: 3.0
-  BETWEEN_KERNEL_SEC: 2.0
+  SETTLE_SEC: 60.0
+  METRIC_WINDOW_SEC: 10
+  BETWEEN_KERNEL_SEC: 2

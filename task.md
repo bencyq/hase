@@ -94,6 +94,7 @@
 - **Acceptance Criteria**:
     - 启动 Stressor 后，使用 `nvidia-smi` 可以看到 GPU 利用率上升。
 
+
 ### Task 4.3: Data Collector Orchestrator
 - **Files**: `benchmark/collector.py`
 - **Description**:
@@ -108,6 +109,7 @@
     - 数据持久化 (Data Persistence)：
     将单次测试结果聚合，格式化写入 CSV 文件。
         - Schema: [Kernel_ID, OpType, Input_Shape, DCGM_Metrics (动态列), Latency_ms]。
+    - **注意事项**：注意节点间的时间同步，以及dcgm-exporter和Prometheus设置的scrape interval
 - **Acceptance Criteria**:
     - 运行脚本后，能够自动化完成所有组合的测试，并生成一个包含数百条样本数据的 CSV 文件，数据完整且格式符合定义。
 

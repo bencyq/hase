@@ -112,10 +112,10 @@ class PrometheusCollector:
         window = self._window_seconds_to_prom_duration(float(end_time) - float(start_time))
 
         # Use Prometheus to compute averages: avg_over_time over the time window ending at end_time.
-        # We use subquery form so metric_name can be a selector or an instant-vector expression.
+        # Use range vector syntax for better compatibility with Prometheus scrape intervals.
         stats: dict = {}
         for key, metric_name in self.metrics_map.items():
-            promql = f"avg_over_time(({metric_name})[{window}:])"
+            promql = f"avg_over_time({metric_name}[{window}])"
             v = self.query_instant(promql, ts=end_time)
             stats[key] = float(v) if v is not None else 0.0
 
