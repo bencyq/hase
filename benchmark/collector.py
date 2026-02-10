@@ -7,6 +7,8 @@ import json
 import logging
 import argparse
 import subprocess
+import multiprocessing as mp
+import queue as pyqueue
 from datetime import datetime
 from typing import Optional, Dict
 
@@ -271,46 +273,71 @@ def _stop_stressor(proc):
         proc.kill()
 
 
-def collect_data(config_path, kernel_dir, output_csv, device_id):
-    overall_start_time = datetime.now()
-    logger.info("")
-    logger.info("=" * 80)
-    logger.info("数据采集开始")
-    logger.info("  开始时间: %s", overall_start_time.strftime("%Y-%m-%d %H:%M:%S"))
-    logger.info("  配置文件: %s", config_path)
-    logger.info("  Kernel 目录: %s", kernel_dir)
-    logger.info("  输出 CSV: %s", output_csv)
-    logger.info("  GPU 设备: %d", device_id)
-    
-    cfg = _load_config(config_path)
-    stress_levels = _get_stress_levels(cfg)
-    warmup, loops, settle, metric_window, between_kernels = _get_runner_params(cfg)
+def _detect_visible_devices():
+    """返回当前可见 GPU 设备 id 列表（如 [0,1,2]）"""
+    try:
+        import torch
+        if torch.cuda.is_available():
+            return list(range(torch.cuda.device_count()))
+    except Exception:
+        pass
+    return [0]
 
+
+def _split_levels(stress_levels, device_ids):
+    """按轮询把 stress_levels 分配到多卡，保证每个 level 只跑一次"""
+    buckets = {d: [] for d in device_ids}
+    for idx, level in enumerate(stress_levels):
+        d = device_ids[idx % len(device_ids)]
+        buckets[d].append(level)
+    return buckets
+
+
+def _render_progress_line(progress_by_device):
+    """渲染单行汇总进度（由主进程调用）"""
+    total_done = 0
+    total_all = 0
+    parts = []
+    for dev in sorted(progress_by_device.keys()):
+        cur = int(progress_by_device[dev].get("current", 0))
+        tot = int(progress_by_device[dev].get("total", 0))
+        total_done += cur
+        total_all += tot
+        parts.append("GPU{} {}/{}".format(dev, cur, tot))
+
+    if total_all <= 0:
+        percent = 0.0
+    else:
+        percent = (float(total_done) / float(total_all)) * 100.0
+    bar_len = 24
+    filled = int(bar_len * percent / 100.0)
+    bar = "#" * filled + "-" * (bar_len - filled)
+    return "[{}] {:6.2f}% ({}/{}) | {}".format(
+        bar, percent, total_done, total_all, " | ".join(parts)
+    )
+
+
+def _collect_levels_on_device(config_path, kernel_dir, output_csv, device_id, stress_levels,
+                              warmup, loops, settle, metric_window, between_kernels,
+                              progress_queue=None):
     collector = PrometheusCollector(config_path=config_path, device_id=device_id)
     kernel_files = _list_kernel_files(kernel_dir)
     if not kernel_files:
-        logger.error("未找到 kernel ONNX: %s", kernel_dir)
+        logger.error("[GPU %d] 未找到 kernel ONNX: %s", device_id, kernel_dir)
         return None
 
     total_levels = len(stress_levels)
     total_kernels = len(kernel_files)
     total_tasks = total_levels * total_kernels
-    
-    logger.info("=" * 80)
-    logger.info("数据采集配置:")
-    logger.info("  - Stress levels: %d 个", total_levels)
-    logger.info("  - Kernel 文件: %d 个", total_kernels)
-    logger.info("  - 总任务数: %d (levels × kernels)", total_tasks)
-    logger.info("  - Warmup: %d, Loops: %d", warmup, loops)
-    logger.info("  - SETTLE_SEC: %.1f, METRIC_WINDOW_SEC: %.1f, BETWEEN_KERNEL_SEC: %.1f",
-                settle, metric_window, between_kernels)
-    logger.info("=" * 80)
-
-    # 获取 GPU 型号
     gpu_name = _get_gpu_name(device_id)
-    logger.info("  GPU 型号: %s", gpu_name)
+    if progress_queue is not None:
+        progress_queue.put({
+            "type": "init",
+            "device_id": device_id,
+            "current": 0,
+            "total": total_tasks,
+        })
 
-    # CSV header
     metrics_keys = list(collector.metrics_map.keys()) + ["sm_occupancy_when_active"]
     columns = ["GPU"] + \
               ["Kernel_ID", "OpType", "Input_Shape"] + \
@@ -319,71 +346,42 @@ def collect_data(config_path, kernel_dir, output_csv, device_id):
 
     os.makedirs(os.path.dirname(output_csv), exist_ok=True)
     task_counter = 0
-    
+
+    logger.debug("[GPU %d] 开始执行: levels=%d, kernels=%d, tasks=%d, 型号=%s",
+                 device_id, total_levels, total_kernels, total_tasks, gpu_name)
+
     with open(output_csv, "w", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=columns)
         writer.writeheader()
 
         for level_idx, level in enumerate(stress_levels, 1):
-            level_start_time = datetime.now()
-            logger.info("")
-            logger.info("─" * 80)
-            logger.info("[Level %d/%d] 开始设置压力: sm_active=%.2f, sm_occ=%.2f, dram=%.2f",
-                       level_idx, total_levels, level["sm_active"], level["sm_occ"], level["dram"])
-            logger.info("  时间: %s", level_start_time.strftime("%Y-%m-%d %H:%M:%S"))
-            
+            logger.debug("[GPU %d][Level %d/%d] 压力: sm_active=%.2f sm_occ=%.2f dram=%.2f",
+                         device_id, level_idx, total_levels,
+                         level["sm_active"], level["sm_occ"], level["dram"])
             proc = _start_stressor(device_id, level)
-            if proc:
-                logger.info("  Stressor 进程已启动 (PID: %d)", proc.pid)
-            else:
-                logger.info("  无背景负载 (所有参数为 0)")
-            
-            logger.info("  等待稳定期: %.1f 秒...", settle)
             time.sleep(settle)
 
-            # 每个 stress level 仅采集一次背景负载指标
-            logger.info("  采集 DCGM 背景负载指标 (窗口: %.1f 秒)...", metric_window)
+            # 每个 stress level 仅采集一次背景指标
             pre_end = time.time()
             pre_start = pre_end - max(metric_window, 1)
             level_stats = collector.get_averages(pre_start, pre_end)
-            logger.info("  DCGM 指标: sm_active=%.3f, sm_occupancy=%.3f, dram_active=%.3f",
-                       level_stats.get("sm_active", 0.0),
-                       level_stats.get("sm_occupancy", 0.0),
-                       level_stats.get("dram_active", 0.0))
 
             for kernel_idx, kernel_path in enumerate(kernel_files, 1):
                 task_counter += 1
                 kernel_id = _parse_kernel_id(kernel_path)
                 op_type = _parse_op_type(kernel_id)
                 input_shape = _get_input_shape_str(kernel_path)
-                
-                kernel_start_time = datetime.now()
-                
-                # 计算进度百分比
-                progress_percent = (task_counter / total_tasks) * 100
-                progress_bar_length = 30
-                filled = int(progress_bar_length * task_counter / total_tasks)
-                bar = '█' * filled + '░' * (progress_bar_length - filled)
-                
-                # 输出进度条到 stdout
-                sys.stdout.write(f'\r进度: [{bar}] {progress_percent:.1f}% [{task_counter}/{total_tasks}] - {kernel_id}')
-                sys.stdout.flush()
 
-                # 等待背景负载稳定
+                logger.debug("[GPU %d][Level %d/%d][Kernel %d/%d][Task %d/%d] %s",
+                             device_id, level_idx, total_levels,
+                             kernel_idx, total_kernels, task_counter, total_tasks, kernel_id)
+
                 if between_kernels > 0:
-                    # logger.info("    等待背景负载稳定: %.1f 秒...", between_kernels)
                     time.sleep(between_kernels)
 
-                # logger.info("    执行推理 (Warmup=%d, Loops=%d)...", warmup, loops)
                 avg_ms, start_dt, end_dt = run_kernel(
                     kernel_path, warmup=warmup, loops=loops, use_warmup=True
                 )
-                
-                # kernel_end_time = datetime.now()
-                # elapsed = (kernel_end_time - kernel_start_time).total_seconds()
-                # logger.info("    推理完成: 平均耗时=%.3f ms, 执行时间=%.1f 秒",
-                #            avg_ms, elapsed)
-                # logger.info("    结束时间: %s", kernel_end_time.strftime("%Y-%m-%d %H:%M:%S"))
 
                 row = {
                     "GPU": gpu_name,
@@ -394,27 +392,162 @@ def collect_data(config_path, kernel_dir, output_csv, device_id):
                 }
                 for k in metrics_keys:
                     row["DCGM_{}".format(k)] = level_stats.get(k, 0.0)
-
                 writer.writerow(row)
+                if progress_queue is not None:
+                    progress_queue.put({
+                        "type": "progress",
+                        "device_id": device_id,
+                        "current": task_counter,
+                        "total": total_tasks,
+                        "kernel_id": kernel_id,
+                    })
 
-            level_end_time = datetime.now()
-            level_elapsed = (level_end_time - level_start_time).total_seconds()
-            logger.info("")
-            logger.info("[Level %d/%d] 完成，耗时: %.1f 秒", level_idx, total_levels, level_elapsed)
-            logger.info("  停止 Stressor...")
             _stop_stressor(proc)
-            logger.info("  Stressor 已停止")
+
+    if progress_queue is not None:
+        progress_queue.put({
+            "type": "done",
+            "device_id": device_id,
+            "current": task_counter,
+            "total": total_tasks,
+        })
+    logger.debug("[GPU %d] 完成并输出: %s", device_id, output_csv)
+    return output_csv
+
+
+def _merge_csv_files(part_files, output_csv):
+    if not part_files:
+        return None
+    os.makedirs(os.path.dirname(output_csv), exist_ok=True)
+
+    with open(output_csv, "w", newline="") as out_f:
+        writer = None
+        for path in part_files:
+            with open(path, "r", newline="") as in_f:
+                reader = csv.DictReader(in_f)
+                if writer is None:
+                    writer = csv.DictWriter(out_f, fieldnames=reader.fieldnames)
+                    writer.writeheader()
+                for row in reader:
+                    writer.writerow(row)
+    return output_csv
+
+
+
+def collect_data(config_path, kernel_dir, output_csv, device_ids=None):
+    overall_start_time = datetime.now()
+    cfg = _load_config(config_path)
+    stress_levels = _get_stress_levels(cfg)
+    warmup, loops, settle, metric_window, between_kernels = _get_runner_params(cfg)
+
+    if device_ids is None:
+        device_ids = _detect_visible_devices()
+    elif isinstance(device_ids, int):
+        device_ids = [device_ids]
+    else:
+        device_ids = [int(d) for d in device_ids]
+    device_ids = sorted(set(device_ids))
+    if not device_ids:
+        device_ids = [0]
+
+    logger.info("=" * 80)
+    logger.info("数据采集开始: %s", overall_start_time.strftime("%Y-%m-%d %H:%M:%S"))
+    logger.info("设备列表: %s", device_ids)
+    logger.info("stress levels: %d", len(stress_levels))
+
+    # 单卡/多卡统一走 worker + queue，主进程汇总进度
+    level_buckets = _split_levels(stress_levels, device_ids)
+    part_files = []
+    processes = []
+    progress_queue = mp.Queue()
+    progress_by_device = {}
+    finished_workers = 0
+    refresh_interval = 0.2
+    last_print_ts = 0.0
+    last_snapshot = None
+    last_line_len = 0
+
+    for dev in device_ids:
+        dev_levels = level_buckets.get(dev) or []
+        if not dev_levels:
+            continue
+        part_csv = "{}.gpu{}.part.csv".format(
+            output_csv[:-4] if output_csv.endswith(".csv") else output_csv, dev
+        )
+        part_files.append(part_csv)
+        p = mp.Process(
+            target=_collect_levels_on_device,
+            args=(config_path, kernel_dir, part_csv, dev, dev_levels,
+                  warmup, loops, settle, metric_window, between_kernels, progress_queue)
+        )
+        p.start()
+        processes.append(p)
+        logger.info("启动 GPU %d worker, 分配 levels=%d, 输出=%s", dev, len(dev_levels), part_csv)
+
+    # 主进程消费进度并节流刷新 stdout
+    while finished_workers < len(processes):
+        try:
+            msg = progress_queue.get(timeout=0.3)
+        except pyqueue.Empty:
+            msg = None
+
+        if msg:
+            dev = msg.get("device_id")
+            cur = int(msg.get("current", 0))
+            tot = int(msg.get("total", 0))
+            progress_by_device.setdefault(dev, {"current": 0, "total": 0})
+            progress_by_device[dev]["current"] = cur
+            if tot > 0:
+                progress_by_device[dev]["total"] = tot
+            if msg.get("type") == "done":
+                finished_workers += 1
+
+        now = time.time()
+        if progress_by_device:
+            snapshot = tuple(
+                (dev, progress_by_device[dev].get("current", 0), progress_by_device[dev].get("total", 0))
+                for dev in sorted(progress_by_device.keys())
+            )
+            if snapshot != last_snapshot and (now - last_print_ts >= refresh_interval):
+                line = "进度: " + _render_progress_line(progress_by_device)
+                pad = max(0, last_line_len - len(line))
+                sys.stdout.write("\r" + line + (" " * pad))
+                sys.stdout.flush()
+                last_print_ts = now
+                last_snapshot = snapshot
+                last_line_len = len(line)
+
+        # 若 worker 异常退出导致没有 done 消息，避免主循环卡住
+        if all(not p.is_alive() for p in processes):
+            break
+
+    if progress_by_device:
+        line = "进度: " + _render_progress_line(progress_by_device)
+        pad = max(0, last_line_len - len(line))
+        sys.stdout.write("\r" + line + (" " * pad) + "\n")
+        sys.stdout.flush()
+
+    failed = False
+    for p in processes:
+        p.join()
+        if p.exitcode != 0:
+            failed = True
+            logger.error("worker 进程失败, pid=%d, exitcode=%s", p.pid, p.exitcode)
+
+    if failed:
+        logger.error("多卡采集失败，未合并 CSV")
+        return None
+
+    _merge_csv_files(part_files, output_csv)
+    for pf in part_files:
+        try:
+            os.remove(pf)
+        except Exception:
+            pass
 
     overall_end_time = datetime.now()
-    overall_elapsed = (overall_end_time - overall_start_time).total_seconds()
-    logger.info("")
-    logger.info("=" * 80)
-    logger.info("数据采集完成")
-    logger.info("  结束时间: %s", overall_end_time.strftime("%Y-%m-%d %H:%M:%S"))
-    logger.info("  总耗时: %.1f 秒 (%.1f 分钟)", overall_elapsed, overall_elapsed / 60)
-    logger.info("  完成任务: %d/%d", task_counter, total_tasks)
-    logger.info("  CSV 输出: %s", output_csv)
-    logger.info("=" * 80)
+    logger.info("数据采集完成: %s, 总耗时 %.1f 秒",
+                output_csv, (overall_end_time - overall_start_time).total_seconds())
     return output_csv
 
 
@@ -428,14 +561,23 @@ def main():
                         help="kernel ONNX 目录")
     parser.add_argument("--output", type=str, default=None,
                         help="输出 CSV 文件路径")
-    parser.add_argument("--device", type=int, default=0, help="GPU 设备 ID")
+    parser.add_argument("--device", type=int, default=None, help="单卡模式 GPU 设备 ID")
+    parser.add_argument("--devices", type=str, default=None,
+                        help="多卡列表，如 '0,1,2'；不传则自动使用所有可见 GPU")
     args = parser.parse_args()
 
     if args.output is None:
         ts = datetime.now().strftime("%Y%m%d_%H%M%S")
         args.output = os.path.join(PROJECT_ROOT, "benchmark", "data_{}.csv".format(ts))
 
-    collect_data(args.config, args.kernel_dir, args.output, args.device)
+    if args.devices:
+        device_ids = [int(x.strip()) for x in args.devices.split(",") if x.strip() != ""]
+    elif args.device is not None:
+        device_ids = [args.device]
+    else:
+        device_ids = None
+
+    collect_data(args.config, args.kernel_dir, args.output, device_ids)
 
 
 if __name__ == "__main__":

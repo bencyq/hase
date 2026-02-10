@@ -99,7 +99,7 @@
 - **Files**: `benchmark/collector.py`
 - **Description**:
     -  全流程编排 (Workflow Orchestration)：
-        1. 资源调度：根据输入参数或配置，指定用于 Benchmark 的目标 GPU 设备（支持通过设备 ID 如 0-7 进行指定）。
+        1. 资源调度：根据输入参数或配置，指定用于 Benchmark 的目标 GPU 设备（支持通过设备 ID 如 0-7 进行指定），如果有多个GPU卡可以用，对队列进行分配
         2. 干扰注入循环：读取 benchmark/config.yaml 中的 Stress Level 配置组合（例如：不同的 sm-active, sm-occ, dram 强度配比），调用 Stressor (Task 4.2) 动态调整 GPU 负载环境。
         3. Kernel 遍历循环：在每一种 Stress Level 环境下，遍历 kernel_model/kernel_onnx/ 目录下的所有 ONNX Kernel 文件。记录下stress level开启后的DCGM指标，作为当前轮次所有kernel运行的背景负载
     - 执行与采集 (Execution & Acquisition)：
@@ -110,7 +110,6 @@
     将单次测试结果聚合，格式化写入 CSV 文件，并记录当前的GPU型号
         - Schema: [GPU, Kernel_ID, OpType, Input_Shape, DCGM_Metrics (动态列), Latency_ms]。
     - **注意事项**：注意节点间的时间同步，以及dcgm-exporter和Prometheus设置的scrape interval
-    TODO:多 device 分配未完成
 - **Acceptance Criteria**:
     - 运行脚本后，能够自动化完成所有组合的测试，并生成一个包含数百条样本数据的 CSV 文件，数据完整且格式符合定义。
 
@@ -193,4 +192,4 @@
 ---
 
 ## FINAL TASK
-根据目前的环境配置编写requirmnet文件，以及READ.ME文件
+根据目前的环境配置编写requirmnet文件（包括cuda版本等其他信息），以及READ.ME文件
