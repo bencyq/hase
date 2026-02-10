@@ -1,13 +1,28 @@
-{
-  "timestamp": "2026-02-10T11:26:02",
-  "device": "cuda:0",
-  "warmup": 10,
-  "loops": 50,
-  "latency_ms": {
-    "compute_matmul_fp32": 0.123804,
-    "compute_conv2d_fp32": 0.805172,
-    "memory_elementwise_add_fp32": 0.301391,
-    "memory_clone_fp32": 0.207448
+[
+  {
+    "timestamp": "2026-02-10T11:26:02",
+    "device": "cuda:0",
+    "warmup": 10,
+    "loops": 50,
+    "latency_ms": {
+      "compute_matmul_fp32": 0.123804,
+      "compute_conv2d_fp32": 0.805172,
+      "memory_elementwise_add_fp32": 0.301391,
+      "memory_clone_fp32": 0.207448
+    },
+    "gpu_name": "NVIDIA RTX A6000"
   },
-  "gpu_name": "NVIDIA RTX A6000"
-}
+  {
+    "timestamp": "2026-02-10T14:29:32",
+    "device": "cuda:7",
+    "warmup": 10,
+    "loops": 50,
+    "latency_ms": {
+      "compute_matmul_fp32": 0.140147,
+      "compute_conv2d_fp32": 0.590085,
+      "memory_elementwise_add_fp32": 0.165708,
+      "memory_clone_fp32": 0.122894
+    },
+    "gpu_name": "NVIDIA A100-SXM4-40GB"
+  }
+]
