@@ -176,11 +176,14 @@
     - `inference/config.yaml`:
         设定指定的Prometheus url
     - `predict_model_latency.py`:
-        1. 解析输入模型，构建 DAG。
-        2. 对每个 kernel，调用Phase5训练好的模型，预测在当前状态下的耗时。（stress level由直接调用Prometheus获取实时的值）
-        3. 调用 `dag_critical_path.py` 累加耗时。
+        1. 根据输入的模型`model_zoo/models/<model>.onnx`的文件名来获取batchsize和输入张量大小。
+        2. 分析`graph_model/model_DAG/`下有没有当前的模型的DAG文件，没有则调用`graph_model/dag_critical_path.py`以及上一步的模型地址来生成DAG文件。
+        3. 确认DAG文件后，将batchsize 和输入张量大小融合进去，生成一个模拟的运行时 kernel 列表
+        4. 对每个 kernel，调用Phase5训练好的Random Forest模型，预测在当前状态下的耗时。（stress level由直接调用Prometheus获取实时的值）注意读取`training/models/preprocess_meta.json`里的数据，确保预测器的输入准确。
+        5. 计算累加耗时。
+        6. 其余重要配置项都写在`inference/config.yaml`里
 - **Acceptance Criteria**:
-    - 输入：`resnet18.onnx`，`inference/config.yaml` 。
+    - 输入：模型地址，`inference/config.yaml` 。
     - 输出：预测的总耗时 (ms)。
 
 ### Task 7.2: Evaluation
