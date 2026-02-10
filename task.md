@@ -159,18 +159,13 @@
 ### Task 6.1: DAG Critical Path Analyzer
 - **Files**: `graph_model/dag_critical_path.py`
 - **Description**:
-    - 重新加载 Phase 2 生成的 JSON 或原始模型。
-    - 构建 DAG (有向无环图)，表示算子间的依赖关系，并写入到`graph_model/model_DAG`下。
+    - 重新加载 Phase 2 生成的 JSON 或原始模型（提供两个函数，即既能够接收json定义，也能从原始模型提取）尽量复用`hase/kernel_model`里的函数。
+    - 构建 DAG (有向无环图)，表示kernel间的依赖关系，并写入到`graph_model/model_DAG`下。
     - 实现一个简单的 `calculate_latency` 函数：
-        - 输入：DAG + 每个 Node 的预测耗时。
-        - 逻辑：由于 ORT 默认是顺序流执行 (Stream 0)，初始版本只需对拓扑排序后的节点耗时进行求和。
+        - 输入：DAG + 每个 kernel 的预测耗时。
+        - 逻辑：确认ORT是否默认是顺序执行的。如果是顺序流执行 (Stream 0)，初始版本只需对拓扑排序后的节点耗时进行求和。如果不是另做打算
 - **Acceptance Criteria**:
-    - 给定`ort_analysis/ort_kernel_record/`下的JSON 内核描述文件，生成对应的DAG文件。
-
-### Task 6.2: Overlap Analyze
-- **Files**: `overlap_simulator.py`
-- **Description**:
-     - 分析可能存在的kernel并行，获得内核执行的关键路径。如果onnx runtime确实是将kernel依次串行执行的则罢了
+    - 给定`ort_analysis/ort_kernel_record/`下的JSON 内核描述文件，生成对应的DAG文件，并测试`calculate_latency` 函数
 
 ---
 

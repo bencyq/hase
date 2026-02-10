@@ -1,0 +1,249 @@
+{
+  "source_type": "kernel_json",
+  "source": "/cyq/hase/ort_analysis/ort_kernel_record/resnet18.json",
+  "model_name": "resnet18",
+  "nodes": [
+    "/conv1/Conv",
+    "/maxpool/MaxPool",
+    "/layer1/layer1.0/conv1/Conv",
+    "/layer1/layer1.0/conv2/Conv",
+    "/layer1/layer1.1/conv1/Conv",
+    "/layer1/layer1.1/conv2/Conv",
+    "/layer2/layer2.0/conv1/Conv",
+    "/layer2/layer2.0/conv2/Conv",
+    "/layer2/layer2.0/downsample/downsample.0/Conv",
+    "/layer2/layer2.1/conv1/Conv",
+    "/layer2/layer2.1/conv2/Conv",
+    "/layer3/layer3.0/conv1/Conv",
+    "/layer3/layer3.0/conv2/Conv",
+    "/layer3/layer3.0/downsample/downsample.0/Conv",
+    "/layer3/layer3.1/conv1/Conv",
+    "/layer3/layer3.1/conv2/Conv",
+    "/layer4/layer4.0/conv1/Conv",
+    "/layer4/layer4.0/conv2/Conv",
+    "/layer4/layer4.0/downsample/downsample.0/Conv",
+    "/layer4/layer4.1/conv1/Conv",
+    "/layer4/layer4.1/conv2/Conv",
+    "/avgpool/GlobalAveragePool",
+    "/Flatten",
+    "/fc/Gemm"
+  ],
+  "edges": [
+    [
+      "/conv1/Conv",
+      "/maxpool/MaxPool"
+    ],
+    [
+      "/maxpool/MaxPool",
+      "/layer1/layer1.0/conv1/Conv"
+    ],
+    [
+      "/layer1/layer1.0/conv1/Conv",
+      "/layer1/layer1.0/conv2/Conv"
+    ],
+    [
+      "/layer1/layer1.0/conv2/Conv",
+      "/layer1/layer1.1/conv1/Conv"
+    ],
+    [
+      "/layer1/layer1.1/conv1/Conv",
+      "/layer1/layer1.1/conv2/Conv"
+    ],
+    [
+      "/layer1/layer1.1/conv2/Conv",
+      "/layer2/layer2.0/conv1/Conv"
+    ],
+    [
+      "/layer2/layer2.0/conv1/Conv",
+      "/layer2/layer2.0/conv2/Conv"
+    ],
+    [
+      "/layer2/layer2.0/conv2/Conv",
+      "/layer2/layer2.0/downsample/downsample.0/Conv"
+    ],
+    [
+      "/layer2/layer2.0/downsample/downsample.0/Conv",
+      "/layer2/layer2.1/conv1/Conv"
+    ],
+    [
+      "/layer2/layer2.1/conv1/Conv",
+      "/layer2/layer2.1/conv2/Conv"
+    ],
+    [
+      "/layer2/layer2.1/conv2/Conv",
+      "/layer3/layer3.0/conv1/Conv"
+    ],
+    [
+      "/layer3/layer3.0/conv1/Conv",
+      "/layer3/layer3.0/conv2/Conv"
+    ],
+    [
+      "/layer3/layer3.0/conv2/Conv",
+      "/layer3/layer3.0/downsample/downsample.0/Conv"
+    ],
+    [
+      "/layer3/layer3.0/downsample/downsample.0/Conv",
+      "/layer3/layer3.1/conv1/Conv"
+    ],
+    [
+      "/layer3/layer3.1/conv1/Conv",
+      "/layer3/layer3.1/conv2/Conv"
+    ],
+    [
+      "/layer3/layer3.1/conv2/Conv",
+      "/layer4/layer4.0/conv1/Conv"
+    ],
+    [
+      "/layer4/layer4.0/conv1/Conv",
+      "/layer4/layer4.0/conv2/Conv"
+    ],
+    [
+      "/layer4/layer4.0/conv2/Conv",
+      "/layer4/layer4.0/downsample/downsample.0/Conv"
+    ],
+    [
+      "/layer4/layer4.0/downsample/downsample.0/Conv",
+      "/layer4/layer4.1/conv1/Conv"
+    ],
+    [
+      "/layer4/layer4.1/conv1/Conv",
+      "/layer4/layer4.1/conv2/Conv"
+    ],
+    [
+      "/layer4/layer4.1/conv2/Conv",
+      "/avgpool/GlobalAveragePool"
+    ],
+    [
+      "/avgpool/GlobalAveragePool",
+      "/Flatten"
+    ],
+    [
+      "/Flatten",
+      "/fc/Gemm"
+    ]
+  ],
+  "topological_order": [
+    "/conv1/Conv",
+    "/maxpool/MaxPool",
+    "/layer1/layer1.0/conv1/Conv",
+    "/layer1/layer1.0/conv2/Conv",
+    "/layer1/layer1.1/conv1/Conv",
+    "/layer1/layer1.1/conv2/Conv",
+    "/layer2/layer2.0/conv1/Conv",
+    "/layer2/layer2.0/conv2/Conv",
+    "/layer2/layer2.0/downsample/downsample.0/Conv",
+    "/layer2/layer2.1/conv1/Conv",
+    "/layer2/layer2.1/conv2/Conv",
+    "/layer3/layer3.0/conv1/Conv",
+    "/layer3/layer3.0/conv2/Conv",
+    "/layer3/layer3.0/downsample/downsample.0/Conv",
+    "/layer3/layer3.1/conv1/Conv",
+    "/layer3/layer3.1/conv2/Conv",
+    "/layer4/layer4.0/conv1/Conv",
+    "/layer4/layer4.0/conv2/Conv",
+    "/layer4/layer4.0/downsample/downsample.0/Conv",
+    "/layer4/layer4.1/conv1/Conv",
+    "/layer4/layer4.1/conv2/Conv",
+    "/avgpool/GlobalAveragePool",
+    "/Flatten",
+    "/fc/Gemm"
+  ],
+  "node_meta": {
+    "/conv1/Conv": {
+      "kernel_type": "Conv_Relu",
+      "fusion_desc": "Conv + Bias + Relu"
+    },
+    "/maxpool/MaxPool": {
+      "kernel_type": "MaxPool",
+      "fusion_desc": "MaxPool"
+    },
+    "/layer1/layer1.0/conv1/Conv": {
+      "kernel_type": "Conv_Relu",
+      "fusion_desc": "Conv + Bias + Relu"
+    },
+    "/layer1/layer1.0/conv2/Conv": {
+      "kernel_type": "Conv_Add_Relu",
+      "fusion_desc": "Conv + Bias + Add(residual) + Relu"
+    },
+    "/layer1/layer1.1/conv1/Conv": {
+      "kernel_type": "Conv_Relu",
+      "fusion_desc": "Conv + Bias + Relu"
+    },
+    "/layer1/layer1.1/conv2/Conv": {
+      "kernel_type": "Conv_Add_Relu",
+      "fusion_desc": "Conv + Bias + Add(residual) + Relu"
+    },
+    "/layer2/layer2.0/conv1/Conv": {
+      "kernel_type": "Conv_Relu",
+      "fusion_desc": "Conv + Bias + Relu"
+    },
+    "/layer2/layer2.0/conv2/Conv": {
+      "kernel_type": "Conv",
+      "fusion_desc": "Conv + Bias"
+    },
+    "/layer2/layer2.0/downsample/downsample.0/Conv": {
+      "kernel_type": "Conv_Add_Relu",
+      "fusion_desc": "Conv + Bias + Add(residual) + Relu"
+    },
+    "/layer2/layer2.1/conv1/Conv": {
+      "kernel_type": "Conv_Relu",
+      "fusion_desc": "Conv + Bias + Relu"
+    },
+    "/layer2/layer2.1/conv2/Conv": {
+      "kernel_type": "Conv_Add_Relu",
+      "fusion_desc": "Conv + Bias + Add(residual) + Relu"
+    },
+    "/layer3/layer3.0/conv1/Conv": {
+      "kernel_type": "Conv_Relu",
+      "fusion_desc": "Conv + Bias + Relu"
+    },
+    "/layer3/layer3.0/conv2/Conv": {
+      "kernel_type": "Conv",
+      "fusion_desc": "Conv + Bias"
+    },
+    "/layer3/layer3.0/downsample/downsample.0/Conv": {
+      "kernel_type": "Conv_Add_Relu",
+      "fusion_desc": "Conv + Bias + Add(residual) + Relu"
+    },
+    "/layer3/layer3.1/conv1/Conv": {
+      "kernel_type": "Conv_Relu",
+      "fusion_desc": "Conv + Bias + Relu"
+    },
+    "/layer3/layer3.1/conv2/Conv": {
+      "kernel_type": "Conv_Add_Relu",
+      "fusion_desc": "Conv + Bias + Add(residual) + Relu"
+    },
+    "/layer4/layer4.0/conv1/Conv": {
+      "kernel_type": "Conv_Relu",
+      "fusion_desc": "Conv + Bias + Relu"
+    },
+    "/layer4/layer4.0/conv2/Conv": {
+      "kernel_type": "Conv",
+      "fusion_desc": "Conv + Bias"
+    },
+    "/layer4/layer4.0/downsample/downsample.0/Conv": {
+      "kernel_type": "Conv_Add_Relu",
+      "fusion_desc": "Conv + Bias + Add(residual) + Relu"
+    },
+    "/layer4/layer4.1/conv1/Conv": {
+      "kernel_type": "Conv_Relu",
+      "fusion_desc": "Conv + Bias + Relu"
+    },
+    "/layer4/layer4.1/conv2/Conv": {
+      "kernel_type": "Conv_Add_Relu",
+      "fusion_desc": "Conv + Bias + Add(residual) + Relu"
+    },
+    "/avgpool/GlobalAveragePool": {
+      "kernel_type": "GlobalAveragePool",
+      "fusion_desc": "GlobalAveragePool"
+    },
+    "/Flatten": {
+      "kernel_type": "Flatten",
+      "fusion_desc": "Flatten"
+    },
+    "/fc/Gemm": {
+      "kernel_type": "Gemm",
+      "fusion_desc": "Gemm (fully connected)"
+    }
+  }
+}
