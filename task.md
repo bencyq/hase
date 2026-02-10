@@ -107,9 +107,10 @@
         1. 性能测试：调用 Kernel Runner (Task 4.1)，先执行预热（Warmup），随后正式运行并记录端到端时延（Latency）。
         <!-- 2. 指标同步：根据 Kernel 运行的精确起止时间戳，结合 benchmark/config.yaml 中定义的监控指标列表，从 DCGM 中提取对应的硬件性能数据。注意，提取的时间戳不是kernel开始时，而是kernel运行开始前的背景负载，所以每个kernel之间要留一定时间间隙，使背景负载稳定下。 -->
     - 数据持久化 (Data Persistence)：
-    将单次测试结果聚合，格式化写入 CSV 文件。
-        - Schema: [Kernel_ID, OpType, Input_Shape, DCGM_Metrics (动态列), Latency_ms]。
+    将单次测试结果聚合，格式化写入 CSV 文件，并记录当前的GPU型号
+        - Schema: [GPU, Kernel_ID, OpType, Input_Shape, DCGM_Metrics (动态列), Latency_ms]。
     - **注意事项**：注意节点间的时间同步，以及dcgm-exporter和Prometheus设置的scrape interval
+    TODO:多 device 分配未完成
 - **Acceptance Criteria**:
     - 运行脚本后，能够自动化完成所有组合的测试，并生成一个包含数百条样本数据的 CSV 文件，数据完整且格式符合定义。
 
@@ -117,17 +118,25 @@
 ## Phase 5: Kernel Latency Modeling
 *目标：训练一个回归模型，输入算子特征和负载，输出预测时延。*
 
-### Task 5.1: Dataset Preparation
+### Task 5.1: 硬件性能特征算子定义
+- **Files**: `training/performance_kernel.py`
+- **Description**:
+    - 在`training/performance_kernel.py`中定义多个算子，用来体现硬件的性能。这些算子要能分别体现出硬件对计算密集型、显存密集型算子的敏感性。
+    - 在硬件上获取这些算子的执行时间
+- **Acceptance Criteria**:
+    - 训练脚本运行结束，保存硬件性能特征算子的执行时间
+
+### Task 5.2: Dataset Preparation
 - **Files**: `training/train_kernel_model.py` (前半部分)
 - **Description**:
-    - 加载 Phase 4 生成的 CSV 数据。
+    - 加载 Phase 4 生成的 CSV 数据和Task 5.1获得的硬件性能特征算子执行时间
     - 特征工程：将 `Input_Shape` (String) 解析为数值特征 (H, W, C, Batch)。
     - 对 `OpType` 进行 One-Hot 编码或 Label Encoding。
     - 划分 Train/Test 集。
 - **Acceptance Criteria**:
     - 打印出处理后的 DataFrame 头部，确认特征已数值化。
 
-### Task 5.2: Regressor Training & Saving
+### Task 5.3: Regressor Training & Saving
 - **Files**: `training/train_kernel_model.py`
 - **Description**:
     - 在`training/train_kernel_model.py`中定义多个回归模型（比如XGBoost 和 RandomForest）。
