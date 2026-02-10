@@ -25,8 +25,9 @@ logging = logging.getLogger("nn-Meter")
 logger = get_logger("collector")
 
 class PrometheusCollector:
-    def __init__(self, config_path="nn_meter/hase/config.yaml"):
+    def __init__(self, config_path="nn_meter/hase/config.yaml", device_id=0):
         self.url = "http://localhost:9090"
+        self.device_id = device_id
         # internal keys: sm_active / sm_occupancy / dram_active
         self.metrics_map = {
             "sm_active": "DCGM_FI_PROF_SM_ACTIVE",
@@ -113,9 +114,10 @@ class PrometheusCollector:
 
         # Use Prometheus to compute averages: avg_over_time over the time window ending at end_time.
         # Use range vector syntax for better compatibility with Prometheus scrape intervals.
+        # Filter by device_id using gpu label
         stats: dict = {}
         for key, metric_name in self.metrics_map.items():
-            promql = f"avg_over_time({metric_name}[{window}])"
+            promql = f'avg_over_time({metric_name}{{gpu="{self.device_id}"}}[{window}])'
             v = self.query_instant(promql, ts=end_time)
             stats[key] = float(v) if v is not None else 0.0
 
@@ -284,7 +286,7 @@ def collect_data(config_path, kernel_dir, output_csv, device_id):
     stress_levels = _get_stress_levels(cfg)
     warmup, loops, settle, metric_window, between_kernels = _get_runner_params(cfg)
 
-    collector = PrometheusCollector(config_path=config_path)
+    collector = PrometheusCollector(config_path=config_path, device_id=device_id)
     kernel_files = _list_kernel_files(kernel_dir)
     if not kernel_files:
         logger.error("未找到 kernel ONNX: %s", kernel_dir)
