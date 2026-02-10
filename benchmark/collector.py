@@ -217,6 +217,33 @@ def _get_input_shape_str(model_path):
         return ""
 
 
+def _get_gpu_name(device_id):
+    """
+    获取指定 GPU 设备的型号名称。
+    使用 nvidia-smi 命令查询。
+    """
+    try:
+        cmd = [
+            "nvidia-smi",
+            "--query-gpu=name",
+            "--format=csv,noheader,nounits",
+            f"--id={device_id}"
+        ]
+        result = subprocess.run(
+            cmd,
+            capture_output=True,
+            text=True,
+            timeout=5,
+            check=True
+        )
+        gpu_name = result.stdout.strip()
+        if gpu_name:
+            return gpu_name
+    except Exception as e:
+        logger.warning(f"无法获取 GPU {device_id} 型号: {e}")
+    return "Unknown"
+
+
 def _start_stressor(device_id, level):
     if level["sm_active"] == 0 and level["sm_occ"] == 0 and level["dram"] == 0:
         return None
@@ -277,9 +304,14 @@ def collect_data(config_path, kernel_dir, output_csv, device_id):
                 settle, metric_window, between_kernels)
     logger.info("=" * 80)
 
+    # 获取 GPU 型号
+    gpu_name = _get_gpu_name(device_id)
+    logger.info("  GPU 型号: %s", gpu_name)
+
     # CSV header
     metrics_keys = list(collector.metrics_map.keys()) + ["sm_occupancy_when_active"]
-    columns = ["Kernel_ID", "OpType", "Input_Shape"] + \
+    columns = ["GPU"] + \
+              ["Kernel_ID", "OpType", "Input_Shape"] + \
               ["DCGM_{}".format(k) for k in metrics_keys] + \
               ["Latency_ms"]
 
@@ -352,6 +384,7 @@ def collect_data(config_path, kernel_dir, output_csv, device_id):
                 # logger.info("    结束时间: %s", kernel_end_time.strftime("%Y-%m-%d %H:%M:%S"))
 
                 row = {
+                    "GPU": gpu_name,
                     "Kernel_ID": kernel_id,
                     "OpType": op_type,
                     "Input_Shape": input_shape,
