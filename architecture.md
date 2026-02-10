@@ -23,6 +23,7 @@ hase/
 │   └── overlap_simulator.py       # kernel并行重叠建模
 │
 ├── training/                      # 训练流程
+│   ├── performance_kernel.py
 │   └── train_kernel_model.py
 │
 ├── inference/                     # 推理时间预测入口
