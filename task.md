@@ -122,6 +122,8 @@
 - **Description**:
     - 在`training/performance_kernel.py`中定义多个算子，用来体现硬件的性能。这些算子要能分别体现出硬件对计算密集型、显存密集型算子的敏感性。
     - 在硬件上获取这些算子的执行时间
+    - 支持 `--device` 参数（`auto/cpu/cuda/cuda:N`）选择执行设备并校验可用性。
+    - 当输出为 `training/performance_kernel_times.json` 时采用追加语义（历史记录保留为数组），而非覆写。
 - **Acceptance Criteria**:
     - 训练脚本运行结束，保存硬件性能特征算子的执行时间
 
@@ -132,13 +134,17 @@
     - 特征工程：将 `Input_Shape` (String) 解析为数值特征 (H, W, C, Batch)。
     - 对 `OpType` 进行 One-Hot 编码或 Label Encoding。
     - 划分 Train/Test 集。
+    - 从 `training/performance_kernel_times.json` 按 `gpu_name` 映射 4 个 `hwpk_*` 特征到数据集。
+    - 数据集数据不需要 `Kernel_ID`、`Input_Shape`、`Source_File`；保留单列 `GPU Type`，不再生成 GPU one-hot 列。
+    - `OpType` 与 `kernel_group` 使用单列编码+标准化，不再展开成多列 one-hot。
+    - 新增 `preprocess_meta.json`，保存类别映射、标准化参数与 `feature_cols`，用于训练/预测一致性对齐。
 - **Acceptance Criteria**:
     - 打印出处理后的 DataFrame 头部，确认特征已数值化。
 
 ### Task 5.3: Regressor Training & Saving
 - **Files**: `training/train_kernel_model.py`
 - **Description**:
-    - 在`training/train_kernel_model.py`中定义多个回归模型（比如XGBoost 和 RandomForest）。
+    - 在`training/train_kernel_model.py`中定义多个回归模型（比如XGBoost、RandomForest和LightGBM）。
     - 在 `train_kernel_model.py` 中训练模型，目标是预测 `Latency_ms`。
     - 评估模型在 Test 集上的 MAPE (Mean Absolute Percentage Error)。
     - 保存训练好的模型到磁盘。

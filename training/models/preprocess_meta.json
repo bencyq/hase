@@ -1,0 +1,86 @@
+{
+  "target_col": "Latency_ms",
+  "category_maps": {
+    "GPU Type": {
+      "NVIDIA A100-SXM4-40GB": 0,
+      "NVIDIA RTX A6000": 1
+    },
+    "OpType": {
+      "Conv": 0,
+      "Conv_Add_Relu": 1,
+      "Conv_Relu": 2,
+      "Flatten": 3,
+      "Gemm": 4,
+      "GlobalAveragePool": 5,
+      "MaxPool": 6
+    },
+    "kernel_group": {
+      "Conv": 0,
+      "Conv_Add_Relu": 1,
+      "Conv_Relu": 2,
+      "Flatten": 3,
+      "Gemm": 4,
+      "GlobalAveragePool": 5,
+      "MaxPool": 6
+    }
+  },
+  "scaler": {
+    "mean": {
+      "OpType": 1.709148839326354,
+      "DCGM_sm_active": 0.6522652226900318,
+      "DCGM_sm_occupancy": 0.302420622325899,
+      "DCGM_dram_active": 0.4366146020710059,
+      "DCGM_sm_occupancy_when_active": 0.44938213931191806,
+      "batch": 69.34182976786528,
+      "channel": 235.86731907146108,
+      "height": 62.39804278561675,
+      "width": 62.39804278561675,
+      "kernel_h": 2.7000455166135637,
+      "kernel_w": 2.7000455166135637,
+      "kernel_group": 1.709148839326354,
+      "hwpk_compute_matmul_fp32": 0.12912644720072827,
+      "hwpk_compute_conv2d_fp32": 0.735124322030041,
+      "hwpk_memory_elementwise_add_fp32": 0.25720293149749657,
+      "hwpk_memory_clone_fp32": 0.17991118297678657,
+      "GPU Type": 0.6743286299499317
+    },
+    "std": {
+      "OpType": 1.5669181979935167,
+      "DCGM_sm_active": 0.29440083171573295,
+      "DCGM_sm_occupancy": 0.14769624562752617,
+      "DCGM_dram_active": 0.23587008883518268,
+      "DCGM_sm_occupancy_when_active": 0.05095901028189861,
+      "batch": 45.915103853495275,
+      "channel": 180.19251175969868,
+      "height": 89.50495370190289,
+      "width": 89.50495370190289,
+      "kernel_h": 1.371457864907066,
+      "kernel_w": 1.371457864907066,
+      "kernel_group": 1.5669181979935167,
+      "hwpk_compute_matmul_fp32": 0.007658740784029831,
+      "hwpk_compute_conv2d_fp32": 0.10079517707976655,
+      "hwpk_memory_elementwise_add_fp32": 0.06358446587526892,
+      "hwpk_memory_clone_fp32": 0.039624130713630204,
+      "GPU Type": 0.4686251474043831
+    }
+  },
+  "feature_cols": [
+    "OpType",
+    "DCGM_sm_active",
+    "DCGM_sm_occupancy",
+    "DCGM_dram_active",
+    "DCGM_sm_occupancy_when_active",
+    "batch",
+    "channel",
+    "height",
+    "width",
+    "kernel_h",
+    "kernel_w",
+    "kernel_group",
+    "hwpk_compute_matmul_fp32",
+    "hwpk_compute_conv2d_fp32",
+    "hwpk_memory_elementwise_add_fp32",
+    "hwpk_memory_clone_fp32",
+    "GPU Type"
+  ]
+}

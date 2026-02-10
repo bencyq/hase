@@ -1,23 +1,27 @@
 # -*- coding: utf-8 -*-
 """
-Task 5.2: Dataset Preparation
+Task 5.2 + Task 5.3: Dataset Preparation & Regressor Training
 
 功能：
 1. 支持输入单个 CSV 或 CSV 目录，合并为统一数据集。
 2. 清理空值行（报告并删除）。
 3. 解析 Kernel_ID / Input_Shape，提取结构化特征。
-4. 加载 Task 5.1 的硬件性能特征算子时间并并入特征。
-5. 对数值列做标准化（保留 Latency_ms 原值，同时新增 Latency_ms_z）。
+4. 根据 GPU 型号加载 Task 5.1 的硬件性能特征算子时间并并入特征。
+5. 保留 Latency_ms 原值，对其他特征做数值化与标准化。
 6. 划分并导出 train.csv / test.csv。
+7. 训练多个回归模型（XGBoost、RandomForest、LightGBM），评估 MAPE 并保存模型。
 """
 import argparse
 import json
 import os
 import re
-from typing import Dict, List, Tuple
+from typing import Dict, List, Optional, Tuple
 
 import numpy as np
 import pandas as pd
+from joblib import dump
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import mean_absolute_percentage_error
 
 
 KERNEL_ID_PATTERN = re.compile(
@@ -130,25 +134,62 @@ def parse_kernel_id(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def add_performance_kernel_features(df: pd.DataFrame, perf_json_path: str) -> pd.DataFrame:
-    """加载 Task5.1 的硬件性能特征算子时间并加入数据集。"""
+    """按 GPU 型号加载 Task5.1 性能特征并加入数据集。"""
     if not os.path.isfile(perf_json_path):
         raise ValueError("性能特征文件不存在: {}".format(perf_json_path))
+    if "GPU" not in df.columns:
+        raise ValueError("缺少必要列: GPU")
 
     with open(perf_json_path, "r", encoding="utf-8") as f:
         payload = json.load(f)
-    latency_map: Dict[str, float] = payload.get("latency_ms", {})
-    if not latency_map:
-        raise ValueError("性能特征文件缺少 latency_ms 内容: {}".format(perf_json_path))
 
-    for name, value in latency_map.items():
-        df["hwpk_{}".format(name)] = float(value)
+    records = payload if isinstance(payload, list) else [payload]
+    gpu_to_latency: Dict[str, Dict[str, float]] = {}
+    for item in records:
+        if not isinstance(item, dict):
+            continue
+        gpu_name = item.get("gpu_name")
+        latency_map = item.get("latency_ms", {})
+        if not gpu_name or not isinstance(latency_map, dict):
+            continue
+        gpu_to_latency[str(gpu_name)] = {k: float(v) for k, v in latency_map.items()}
+
+    required_ops = [
+        "compute_matmul_fp32",
+        "compute_conv2d_fp32",
+        "memory_elementwise_add_fp32",
+        "memory_clone_fp32",
+    ]
+    if not gpu_to_latency:
+        raise ValueError("性能特征文件缺少可用的 gpu_name/latency_ms 内容: {}".format(perf_json_path))
+
+    missing_gpu = sorted(set(df["GPU"].astype(str)) - set(gpu_to_latency.keys()))
+    if missing_gpu:
+        raise ValueError(
+            "以下 GPU 在性能特征文件中不存在映射: {}".format(", ".join(missing_gpu))
+        )
+
+    for op_name in required_ops:
+        col = "hwpk_{}".format(op_name)
+        df[col] = df["GPU"].astype(str).map(
+            lambda g: gpu_to_latency[g].get(op_name, np.nan)
+        )
+
+    if df[[f"hwpk_{x}" for x in required_ops]].isna().any().any():
+        raise ValueError("性能特征映射后存在空值，请检查 performance_kernel_times.json 中的算子字段。")
     return df
 
 
-def build_numeric_dataset(df: pd.DataFrame) -> pd.DataFrame:
-    """做类别编码、数值化和标准化。"""
+def build_numeric_dataset(df: pd.DataFrame) -> Tuple[pd.DataFrame, Dict]:
+    """做类别编码、数值化和标准化（保留 Latency_ms 原值），并返回预处理元信息。"""
     if "Latency_ms" not in df.columns:
         raise ValueError("缺少必要列: Latency_ms")
+    if "GPU" not in df.columns:
+        raise ValueError("缺少必要列: GPU")
+    if "OpType" not in df.columns:
+        raise ValueError("缺少必要列: OpType")
+    if "kernel_group" not in df.columns:
+        raise ValueError("缺少必要列: kernel_group")
 
     numeric_candidates = [
         c for c in df.columns if c.startswith("DCGM_") or c in ["Latency_ms"]
@@ -162,27 +203,35 @@ def build_numeric_dataset(df: pd.DataFrame) -> pd.DataFrame:
     if dropped > 0:
         print("Latency_ms 非法或空值行: {} 行，已删除。".format(dropped))
 
-    # 对类别特征进行 One-Hot，保留同类算子的共享列以建立关联
-    cat_cols = [c for c in ["GPU", "OpType", "kernel_fusion_rule", "kernel_group"] if c in df.columns]
-    df = pd.get_dummies(df, columns=cat_cols, prefix=cat_cols)
-    bool_cols = df.select_dtypes(include=["bool"]).columns.tolist()
-    if bool_cols:
-        df[bool_cols] = df[bool_cols].astype(float)
+    # 单列类别编码：避免 One-Hot 展开为大量列，同时保存映射供推理复用
+    df["GPU Type"] = df["GPU"].astype(str)
+    code_cols = ["GPU Type", "OpType", "kernel_group"]
+    category_maps: Dict[str, Dict[str, int]] = {}
+    for col in code_cols:
+        values = sorted(df[col].astype(str).unique().tolist())
+        mapping = {name: idx for idx, name in enumerate(values)}
+        category_maps[col] = mapping
+        df[col] = df[col].astype(str).map(mapping).astype(float)
 
-    # 标准化：对所有数值列做 z-score；Latency_ms 保留原值并附加 Latency_ms_z
-    numeric_cols = df.select_dtypes(include=[np.number]).columns.tolist()
-    means = df[numeric_cols].mean()
-    stds = df[numeric_cols].std(ddof=0).replace(0, 1.0)
-    z = (df[numeric_cols] - means) / stds
+    # 标准化：仅对特征列做 z-score，不改动目标列 Latency_ms
+    feature_numeric_cols = [
+        c
+        for c in df.columns
+        if c != "Latency_ms" and pd.api.types.is_numeric_dtype(df[c])
+    ]
+    means = df[feature_numeric_cols].mean()
+    stds = df[feature_numeric_cols].std(ddof=0).replace(0, 1.0)
+    df[feature_numeric_cols] = (df[feature_numeric_cols] - means) / stds
 
-    for col in numeric_cols:
-        if col == "Latency_ms":
-            df["Latency_ms_raw"] = df["Latency_ms"]
-            df["Latency_ms_z"] = z[col]
-        else:
-            df[col] = z[col]
-
-    return df
+    preprocess_meta = {
+        "target_col": "Latency_ms",
+        "category_maps": category_maps,
+        "scaler": {
+            "mean": {k: float(v) for k, v in means.to_dict().items()},
+            "std": {k: float(v) for k, v in stds.to_dict().items()},
+        },
+    }
+    return df, preprocess_meta
 
 
 def split_train_test(df: pd.DataFrame, test_size: float, seed: int) -> Tuple[pd.DataFrame, pd.DataFrame]:
@@ -199,30 +248,123 @@ def split_train_test(df: pd.DataFrame, test_size: float, seed: int) -> Tuple[pd.
     return train_df, test_df
 
 
-def main():
-    parser = argparse.ArgumentParser(description="Task5.2 dataset preparation")
-    parser.add_argument(
-        "--input",
-        type=str,
-        default="benchmark/csv",
-        help="CSV 文件或目录路径（目录会读取所有 CSV）",
-    )
-    parser.add_argument(
-        "--performance-kernel-json",
-        type=str,
-        default="training/performance_kernel_times.json",
-        help="Task5.1 输出 JSON 路径",
-    )
-    parser.add_argument(
-        "--output-dir",
-        type=str,
-        default="training/dataset",
-        help="输出目录（merged/train/test）",
-    )
-    parser.add_argument("--test-size", type=float, default=0.2, help="测试集比例")
-    parser.add_argument("--seed", type=int, default=42, help="随机种子")
-    args = parser.parse_args()
+def build_regressors(seed: int):
+    """
+    构建多个回归模型。
+    XGBoost / LightGBM 如缺失依赖则跳过并提示。
+    """
+    models = {}
+    unavailable = {}
 
+    models["RandomForest"] = RandomForestRegressor(
+        n_estimators=300,
+        max_depth=16,
+        min_samples_leaf=2,
+        random_state=seed,
+        n_jobs=-1,
+    )
+
+    try:
+        from xgboost import XGBRegressor  # type: ignore
+
+        models["XGBoost"] = XGBRegressor(
+            n_estimators=400,
+            max_depth=8,
+            learning_rate=0.05,
+            subsample=0.9,
+            colsample_bytree=0.9,
+            objective="reg:squarederror",
+            random_state=seed,
+            n_jobs=-1,
+        )
+    except Exception as e:
+        unavailable["XGBoost"] = str(e).split("\n")[0]
+
+    try:
+        from lightgbm import LGBMRegressor  # type: ignore
+
+        models["LightGBM"] = LGBMRegressor(
+            n_estimators=400,
+            learning_rate=0.05,
+            num_leaves=63,
+            subsample=0.9,
+            colsample_bytree=0.9,
+            random_state=seed,
+        )
+    except Exception as e:
+        unavailable["LightGBM"] = str(e).split("\n")[0]
+
+    return models, unavailable
+
+
+def build_xy(train_df: pd.DataFrame, test_df: pd.DataFrame):
+    """从处理后的数据构造训练/测试特征与标签。"""
+    target_col = "Latency_ms"
+    drop_cols = {"Kernel_ID", "Input_Shape", "Source_File", "GPU", "Latency_ms"}
+
+    feature_cols = [c for c in train_df.columns if c not in drop_cols]
+    feature_cols = [c for c in feature_cols if pd.api.types.is_numeric_dtype(train_df[c])]
+
+    x_train = train_df[feature_cols]
+    y_train = pd.to_numeric(train_df[target_col], errors="coerce")
+    x_test = test_df[feature_cols]
+    y_test = pd.to_numeric(test_df[target_col], errors="coerce")
+    return x_train, y_train, x_test, y_test, feature_cols, target_col
+
+
+def train_and_save_models(
+    train_df: pd.DataFrame,
+    test_df: pd.DataFrame,
+    model_dir: str,
+    seed: int,
+    preprocess_meta: Optional[Dict] = None,
+):
+    """训练模型，评估 MAPE，并保存模型与评估结果。"""
+    os.makedirs(model_dir, exist_ok=True)
+
+    x_train, y_train, x_test, y_test, feature_cols, target_col = build_xy(train_df, test_df)
+    models, unavailable = build_regressors(seed)
+
+    if unavailable:
+        for name, reason in unavailable.items():
+            print("模型 {} 跳过：{}".format(name, reason))
+
+    if not models:
+        raise RuntimeError("没有可用的回归模型，请安装依赖后重试。")
+
+    metrics = {"target_column": target_col, "feature_count": len(feature_cols), "mape": {}}
+    for model_name, model in models.items():
+        model.fit(x_train, y_train)
+        pred = model.predict(x_test)
+        mape = float(mean_absolute_percentage_error(y_test, pred) * 100.0)
+        metrics["mape"][model_name] = mape
+
+        model_path = os.path.join(model_dir, "{}.joblib".format(model_name.lower()))
+        dump(model, model_path)
+        print("{} MAPE: {:.4f}%".format(model_name, mape))
+        print("模型已保存: {}".format(model_path))
+
+    ranking = sorted(metrics["mape"].items(), key=lambda x: x[1])
+    print("测试集 MAPE 对比（越小越好）:")
+    for idx, (name, score) in enumerate(ranking, start=1):
+        print("{}. {}: {:.4f}%".format(idx, name, score))
+
+    metrics_path = os.path.join(model_dir, "metrics.json")
+    with open(metrics_path, "w", encoding="utf-8") as f:
+        json.dump(metrics, f, ensure_ascii=False, indent=2)
+    print("评估结果已保存: {}".format(metrics_path))
+
+    if preprocess_meta is not None:
+        preprocess_meta = dict(preprocess_meta)
+        preprocess_meta["feature_cols"] = feature_cols
+        preprocess_meta_path = os.path.join(model_dir, "preprocess_meta.json")
+        with open(preprocess_meta_path, "w", encoding="utf-8") as f:
+            json.dump(preprocess_meta, f, ensure_ascii=False, indent=2)
+        print("预处理元信息已保存: {}".format(preprocess_meta_path))
+
+
+def preprocess_and_split(args):
+    """执行 Task5.2：数据预处理并导出 merged/train/test。"""
     csv_files = collect_csv_files(args.input)
     print("读取 CSV 文件数: {}".format(len(csv_files)))
 
@@ -232,7 +374,20 @@ def main():
 
     parsed = parse_kernel_id(cleaned)
     featured = add_performance_kernel_features(parsed, args.performance_kernel_json)
-    final_df = build_numeric_dataset(featured)
+    final_df, preprocess_meta = build_numeric_dataset(featured)
+
+    # 输出前去掉不需要的原始标识列
+    drop_for_output = [
+        c
+        for c in ["Kernel_ID", "Input_Shape", "Source_File", "GPU", "kernel_fusion_rule"]
+        if c in final_df.columns
+    ]
+    if drop_for_output:
+        final_df = final_df.drop(columns=drop_for_output)
+
+    preprocess_meta["feature_cols"] = [
+        c for c in final_df.columns if c != "Latency_ms" and pd.api.types.is_numeric_dtype(final_df[c])
+    ]
 
     train_df, test_df = split_train_test(final_df, args.test_size, args.seed)
 
@@ -245,12 +400,92 @@ def main():
     train_df.to_csv(train_path, index=False)
     test_df.to_csv(test_path, index=False)
 
+    preprocess_meta_path = os.path.join(args.output_dir, "preprocess_meta.json")
+    with open(preprocess_meta_path, "w", encoding="utf-8") as f:
+        json.dump(preprocess_meta, f, ensure_ascii=False, indent=2)
+
     print("已输出: {}".format(merged_path))
     print("已输出: {}".format(train_path))
     print("已输出: {}".format(test_path))
+    print("已输出: {}".format(preprocess_meta_path))
     print("Train/Test 行数: {}/{}".format(len(train_df), len(test_df)))
     print("处理后 DataFrame 头部:")
     print(final_df.head().to_string(index=False))
+    return train_df, test_df, preprocess_meta
+
+
+def load_train_test_from_output(output_dir: str):
+    """读取已存在的 train/test 数据集，用于仅训练模式。"""
+    train_path = os.path.join(output_dir, "train.csv")
+    test_path = os.path.join(output_dir, "test.csv")
+    if not os.path.isfile(train_path) or not os.path.isfile(test_path):
+        raise ValueError(
+            "仅训练模式需要已有 train/test 文件: {}, {}".format(train_path, test_path)
+        )
+    train_df = pd.read_csv(train_path)
+    test_df = pd.read_csv(test_path)
+    print("读取已有数据集: train={}, test={}".format(len(train_df), len(test_df)))
+    return train_df, test_df
+
+
+def load_preprocess_meta_from_output(output_dir: str) -> Optional[Dict]:
+    """从输出目录读取预处理元信息（如果存在）。"""
+    meta_path = os.path.join(output_dir, "preprocess_meta.json")
+    if not os.path.isfile(meta_path):
+        return None
+    with open(meta_path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Task5.2+5.3 dataset preparation and training")
+    parser.add_argument(
+        "--input",
+        type=str,
+        default="benchmark/csv",
+        help="CSV 文件或目录路径（目录会读取所有 CSV）",
+    )
+    parser.add_argument(
+        "--performance-kernel-json",
+        type=str,
+        default="training/performance_kernel_times.json",
+        help="Task5.1 输出的 JSON 路径",
+    )
+    parser.add_argument(
+        "--output-dir",
+        type=str,
+        default="training/dataset",
+        help="输出目录（merged/train/test）",
+    )
+    parser.add_argument("--test-size", type=float, default=0.2, help="测试集比例")
+    parser.add_argument("--seed", type=int, default=42, help="随机种子")
+    parser.add_argument(
+        "--mode",
+        type=str,
+        default="all",
+        choices=["preprocess", "train", "all"],
+        help="执行模式：preprocess=只预处理，train=只训练，all=全流程",
+    )
+    parser.add_argument(
+        "--model-dir",
+        type=str,
+        default="training/models",
+        help="模型输出目录（Task5.3）",
+    )
+    args = parser.parse_args()
+
+    if args.mode == "preprocess":
+        preprocess_and_split(args)
+        print("仅预处理完成（--mode preprocess）。")
+        return
+
+    if args.mode == "train":
+        train_df, test_df = load_train_test_from_output(args.output_dir)
+        preprocess_meta = load_preprocess_meta_from_output(args.output_dir)
+    else:
+        train_df, test_df, preprocess_meta = preprocess_and_split(args)
+
+    train_and_save_models(train_df, test_df, args.model_dir, args.seed, preprocess_meta)
 
 
 if __name__ == "__main__":
