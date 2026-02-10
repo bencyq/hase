@@ -75,8 +75,34 @@ def build_performance_kernels(device):
 
 def collect_performance_kernel_times(warmup=10, loops=50):
     """采集硬件性能特征算子的执行时间。"""
-    use_cuda = torch.cuda.is_available()
-    device = torch.device("cuda:0" if use_cuda else "cpu")
+    auto_device = _resolve_device("auto")
+    return collect_performance_kernel_times_on_device(
+        device=auto_device, warmup=warmup, loops=loops
+    )
+
+
+def _resolve_device(device_arg):
+    """解析并校验设备参数。支持 auto / cpu / cuda / cuda:N。"""
+    if device_arg == "auto":
+        return torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+
+    device = torch.device(device_arg)
+    if device.type == "cuda":
+        if not torch.cuda.is_available():
+            raise ValueError("CUDA is not available, but CUDA device was requested.")
+        if device.index is not None and device.index >= torch.cuda.device_count():
+            raise ValueError(
+                f"CUDA device index out of range: {device.index}, "
+                f"available count: {torch.cuda.device_count()}"
+            )
+    return device
+
+
+def collect_performance_kernel_times_on_device(device, warmup=10, loops=50):
+    """在指定设备上采集硬件性能特征算子的执行时间。"""
+    use_cuda = device.type == "cuda"
+    if use_cuda:
+        torch.cuda.set_device(device)
 
     kernel_map = build_performance_kernels(device)
     results = {}
@@ -92,8 +118,14 @@ def collect_performance_kernel_times(warmup=10, loops=50):
         "latency_ms": results,
     }
     if use_cuda:
-        payload["gpu_name"] = torch.cuda.get_device_name(0)
+        payload["gpu_name"] = torch.cuda.get_device_name(device)
     return payload
+
+
+def _should_append_output(output_path):
+    """仅对 training/performance_kernel_times.json 启用追加语义。"""
+    normalized = os.path.normpath(output_path).replace("\\", "/")
+    return normalized.endswith("training/performance_kernel_times.json")
 
 
 def save_results(results, output_path):
@@ -101,6 +133,18 @@ def save_results(results, output_path):
     output_dir = os.path.dirname(output_path)
     if output_dir and not os.path.exists(output_dir):
         os.makedirs(output_dir)
+
+    if _should_append_output(output_path) and os.path.exists(output_path):
+        with open(output_path, "r", encoding="utf-8") as f:
+            existing = json.load(f)
+        if isinstance(existing, list):
+            merged = existing + [results]
+        else:
+            merged = [existing, results]
+        with open(output_path, "w", encoding="utf-8") as f:
+            json.dump(merged, f, ensure_ascii=False, indent=2)
+        return
+
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
 
@@ -110,6 +154,12 @@ def main():
     parser.add_argument("--warmup", type=int, default=10, help="warmup loops")
     parser.add_argument("--loops", type=int, default=50, help="measure loops")
     parser.add_argument(
+        "--device",
+        type=str,
+        default="auto",
+        help="target device: auto/cpu/cuda/cuda:N",
+    )
+    parser.add_argument(
         "--output",
         type=str,
         default="training/performance_kernel_times.json",
@@ -117,7 +167,10 @@ def main():
     )
     args = parser.parse_args()
 
-    results = collect_performance_kernel_times(warmup=args.warmup, loops=args.loops)
+    device = _resolve_device(args.device)
+    results = collect_performance_kernel_times_on_device(
+        device=device, warmup=args.warmup, loops=args.loops
+    )
     save_results(results, args.output)
 
     print("Performance kernel times saved to:", args.output)
