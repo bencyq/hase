@@ -66,7 +66,7 @@
 - **Acceptance Criteria**:
     - 指定 `ort_kernel_record/`目录下的某个kernel元数据文件，成功生成 `<kernel_fusion_rule>.onnx`，如`Conv_Add_Relu_255x255.onnx`，保存到`kernel_model/kernel_onnx/`下
     - 能用 ONNX Runtime 成功运行这个小模型。
-
+#FIXME: 会覆盖已有的模型文件
 
 ---
 
@@ -194,6 +194,16 @@
     - 输入：`resnet18.onnx`或者一个模型文件目录（包含多个模型）
     - 输出：单个或多个模型的延迟预测差距
 ---
+
+## Phase 8: Debug
+### Task 8.1 分解模型的内核，依次运行，查看执行时间
+- **Files**: `debug/debug.py`
+- **Description**: 
+    调用之前的函数，分割一个模型至内核，并依次运行内核，获得各个内核的执行时间
+- **Acceptance Criteria**:
+    - 输入：模型地址
+    - 输出：模型的内部结构，包括哪些内核，以及内核之间的执行顺序。各个内核的执行时间
+
 
 ## FINAL TASK
 根据目前的环境配置编写requirmnet文件（包括cuda版本等其他信息），以及READ.ME文件
