@@ -16,7 +16,7 @@ sys.path.insert(0, PROJECT_ROOT)
 from utils.logger import get_logger
 from ort_analysis.ort_graph_parser import (
     get_optimized_model, _build_initial_shape_map,
-    _infer_node_output_shape, _get_attr,
+    _build_initializer_value_map, _infer_node_output_shape, _get_attr,
 )
 
 logger = get_logger("fusion_detector")
@@ -158,8 +158,9 @@ def process_single_model(onnx_path):
 
     # 构建 shape_map
     shape_map = _build_initial_shape_map(model)
+    const_map = _build_initializer_value_map(model)
     for node in model.graph.node:
-        _infer_node_output_shape(node, shape_map)
+        _infer_node_output_shape(node, shape_map, const_map)
 
     init_names = set(init.name for init in model.graph.initializer)
     bs, input_size = _parse_model_filename(onnx_path)

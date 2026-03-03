@@ -1,0 +1,1240 @@
+{
+  "model_name": "alexnet",
+  "total_kernels": 15,
+  "kernel_types": [
+    "AveragePool",
+    "Conv_Relu",
+    "Flatten",
+    "Gemm",
+    "MaxPool",
+    "Relu"
+  ],
+  "kernels": [
+    {
+      "kernel_type": "Conv_Relu",
+      "node_name": "/features/features.0/Conv",
+      "fusion_desc": "Conv + Bias + Relu",
+      "attributes": {
+        "kernel_shape": [
+          11,
+          11
+        ],
+        "strides": [
+          4,
+          4
+        ],
+        "pads": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "activation": "Relu"
+      },
+      "shapes": [
+        {
+          "source_model": "alexnet_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            3,
+            224,
+            224
+          ],
+          "output_shape": [
+            128,
+            64,
+            55,
+            55
+          ],
+          "flops": 18040422400,
+          "weight_shape": [
+            64,
+            3,
+            11,
+            11
+          ],
+          "bias_shape": [
+            64
+          ]
+        },
+        {
+          "source_model": "alexnet_bs32_224x224",
+          "batch_size": 32,
+          "input_size": 224,
+          "activation_input_shape": [
+            32,
+            3,
+            224,
+            224
+          ],
+          "output_shape": [
+            32,
+            64,
+            55,
+            55
+          ],
+          "flops": 4510105600,
+          "weight_shape": [
+            64,
+            3,
+            11,
+            11
+          ],
+          "bias_shape": [
+            64
+          ]
+        },
+        {
+          "source_model": "alexnet_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            3,
+            224,
+            224
+          ],
+          "output_shape": [
+            64,
+            64,
+            55,
+            55
+          ],
+          "flops": 9020211200,
+          "weight_shape": [
+            64,
+            3,
+            11,
+            11
+          ],
+          "bias_shape": [
+            64
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "MaxPool",
+      "node_name": "/features/features.2/MaxPool",
+      "fusion_desc": "MaxPool",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          2,
+          2
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "ceil_mode": 0
+      },
+      "shapes": [
+        {
+          "source_model": "alexnet_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            64,
+            55,
+            55
+          ],
+          "output_shape": [
+            128,
+            64,
+            27,
+            27
+          ],
+          "flops": 53747712
+        },
+        {
+          "source_model": "alexnet_bs32_224x224",
+          "batch_size": 32,
+          "input_size": 224,
+          "activation_input_shape": [
+            32,
+            64,
+            55,
+            55
+          ],
+          "output_shape": [
+            32,
+            64,
+            27,
+            27
+          ],
+          "flops": 13436928
+        },
+        {
+          "source_model": "alexnet_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            64,
+            55,
+            55
+          ],
+          "output_shape": [
+            64,
+            64,
+            27,
+            27
+          ],
+          "flops": 26873856
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv_Relu",
+      "node_name": "/features/features.3/Conv",
+      "fusion_desc": "Conv + Bias + Relu",
+      "attributes": {
+        "kernel_shape": [
+          5,
+          5
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "activation": "Relu"
+      },
+      "shapes": [
+        {
+          "source_model": "alexnet_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            64,
+            27,
+            27
+          ],
+          "output_shape": [
+            128,
+            192,
+            27,
+            27
+          ],
+          "flops": 57366724608,
+          "weight_shape": [
+            192,
+            64,
+            5,
+            5
+          ],
+          "bias_shape": [
+            192
+          ]
+        },
+        {
+          "source_model": "alexnet_bs32_224x224",
+          "batch_size": 32,
+          "input_size": 224,
+          "activation_input_shape": [
+            32,
+            64,
+            27,
+            27
+          ],
+          "output_shape": [
+            32,
+            192,
+            27,
+            27
+          ],
+          "flops": 14341681152,
+          "weight_shape": [
+            192,
+            64,
+            5,
+            5
+          ],
+          "bias_shape": [
+            192
+          ]
+        },
+        {
+          "source_model": "alexnet_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            64,
+            27,
+            27
+          ],
+          "output_shape": [
+            64,
+            192,
+            27,
+            27
+          ],
+          "flops": 28683362304,
+          "weight_shape": [
+            192,
+            64,
+            5,
+            5
+          ],
+          "bias_shape": [
+            192
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "MaxPool",
+      "node_name": "/features/features.5/MaxPool",
+      "fusion_desc": "MaxPool",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          2,
+          2
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "ceil_mode": 0
+      },
+      "shapes": [
+        {
+          "source_model": "alexnet_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            192,
+            27,
+            27
+          ],
+          "output_shape": [
+            128,
+            192,
+            13,
+            13
+          ],
+          "flops": 37380096
+        },
+        {
+          "source_model": "alexnet_bs32_224x224",
+          "batch_size": 32,
+          "input_size": 224,
+          "activation_input_shape": [
+            32,
+            192,
+            27,
+            27
+          ],
+          "output_shape": [
+            32,
+            192,
+            13,
+            13
+          ],
+          "flops": 9345024
+        },
+        {
+          "source_model": "alexnet_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            192,
+            27,
+            27
+          ],
+          "output_shape": [
+            64,
+            192,
+            13,
+            13
+          ],
+          "flops": 18690048
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv_Relu",
+      "node_name": "/features/features.6/Conv",
+      "fusion_desc": "Conv + Bias + Relu",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "activation": "Relu"
+      },
+      "shapes": [
+        {
+          "source_model": "alexnet_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            192,
+            13,
+            13
+          ],
+          "output_shape": [
+            128,
+            384,
+            13,
+            13
+          ],
+          "flops": 28724527104,
+          "weight_shape": [
+            384,
+            192,
+            3,
+            3
+          ],
+          "bias_shape": [
+            384
+          ]
+        },
+        {
+          "source_model": "alexnet_bs32_224x224",
+          "batch_size": 32,
+          "input_size": 224,
+          "activation_input_shape": [
+            32,
+            192,
+            13,
+            13
+          ],
+          "output_shape": [
+            32,
+            384,
+            13,
+            13
+          ],
+          "flops": 7181131776,
+          "weight_shape": [
+            384,
+            192,
+            3,
+            3
+          ],
+          "bias_shape": [
+            384
+          ]
+        },
+        {
+          "source_model": "alexnet_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            192,
+            13,
+            13
+          ],
+          "output_shape": [
+            64,
+            384,
+            13,
+            13
+          ],
+          "flops": 14362263552,
+          "weight_shape": [
+            384,
+            192,
+            3,
+            3
+          ],
+          "bias_shape": [
+            384
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv_Relu",
+      "node_name": "/features/features.8/Conv",
+      "fusion_desc": "Conv + Bias + Relu",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "activation": "Relu"
+      },
+      "shapes": [
+        {
+          "source_model": "alexnet_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            384,
+            13,
+            13
+          ],
+          "output_shape": [
+            128,
+            256,
+            13,
+            13
+          ],
+          "flops": 38288293888,
+          "weight_shape": [
+            256,
+            384,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        },
+        {
+          "source_model": "alexnet_bs32_224x224",
+          "batch_size": 32,
+          "input_size": 224,
+          "activation_input_shape": [
+            32,
+            384,
+            13,
+            13
+          ],
+          "output_shape": [
+            32,
+            256,
+            13,
+            13
+          ],
+          "flops": 9572073472,
+          "weight_shape": [
+            256,
+            384,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        },
+        {
+          "source_model": "alexnet_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            384,
+            13,
+            13
+          ],
+          "output_shape": [
+            64,
+            256,
+            13,
+            13
+          ],
+          "flops": 19144146944,
+          "weight_shape": [
+            256,
+            384,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv_Relu",
+      "node_name": "/features/features.10/Conv",
+      "fusion_desc": "Conv + Bias + Relu",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "activation": "Relu"
+      },
+      "shapes": [
+        {
+          "source_model": "alexnet_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            256,
+            13,
+            13
+          ],
+          "output_shape": [
+            128,
+            256,
+            13,
+            13
+          ],
+          "flops": 25529221120,
+          "weight_shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        },
+        {
+          "source_model": "alexnet_bs32_224x224",
+          "batch_size": 32,
+          "input_size": 224,
+          "activation_input_shape": [
+            32,
+            256,
+            13,
+            13
+          ],
+          "output_shape": [
+            32,
+            256,
+            13,
+            13
+          ],
+          "flops": 6382305280,
+          "weight_shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        },
+        {
+          "source_model": "alexnet_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            256,
+            13,
+            13
+          ],
+          "output_shape": [
+            64,
+            256,
+            13,
+            13
+          ],
+          "flops": 12764610560,
+          "weight_shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "bias_shape": [
+            256
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "MaxPool",
+      "node_name": "/features/features.12/MaxPool",
+      "fusion_desc": "MaxPool",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          2,
+          2
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "ceil_mode": 0
+      },
+      "shapes": [
+        {
+          "source_model": "alexnet_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            256,
+            13,
+            13
+          ],
+          "output_shape": [
+            128,
+            256,
+            6,
+            6
+          ],
+          "flops": 10616832
+        },
+        {
+          "source_model": "alexnet_bs32_224x224",
+          "batch_size": 32,
+          "input_size": 224,
+          "activation_input_shape": [
+            32,
+            256,
+            13,
+            13
+          ],
+          "output_shape": [
+            32,
+            256,
+            6,
+            6
+          ],
+          "flops": 2654208
+        },
+        {
+          "source_model": "alexnet_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            256,
+            13,
+            13
+          ],
+          "output_shape": [
+            64,
+            256,
+            6,
+            6
+          ],
+          "flops": 5308416
+        }
+      ]
+    },
+    {
+      "kernel_type": "AveragePool",
+      "node_name": "/avgpool/AveragePool",
+      "fusion_desc": "AveragePool",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "alexnet_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            256,
+            6,
+            6
+          ],
+          "output_shape": [
+            128,
+            256,
+            6,
+            6
+          ],
+          "flops": 0
+        },
+        {
+          "source_model": "alexnet_bs32_224x224",
+          "batch_size": 32,
+          "input_size": 224,
+          "activation_input_shape": [
+            32,
+            256,
+            6,
+            6
+          ],
+          "output_shape": [
+            32,
+            256,
+            6,
+            6
+          ],
+          "flops": 0
+        },
+        {
+          "source_model": "alexnet_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            256,
+            6,
+            6
+          ],
+          "output_shape": [
+            64,
+            256,
+            6,
+            6
+          ],
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Flatten",
+      "node_name": "/Flatten",
+      "fusion_desc": "Flatten",
+      "attributes": {
+        "axis": 1
+      },
+      "shapes": [
+        {
+          "source_model": "alexnet_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            256,
+            6,
+            6
+          ],
+          "output_shape": [
+            128,
+            9216
+          ],
+          "flops": 0
+        },
+        {
+          "source_model": "alexnet_bs32_224x224",
+          "batch_size": 32,
+          "input_size": 224,
+          "activation_input_shape": [
+            32,
+            256,
+            6,
+            6
+          ],
+          "output_shape": [
+            32,
+            9216
+          ],
+          "flops": 0
+        },
+        {
+          "source_model": "alexnet_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            256,
+            6,
+            6
+          ],
+          "output_shape": [
+            64,
+            9216
+          ],
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Gemm",
+      "node_name": "/classifier/classifier.1/Gemm",
+      "fusion_desc": "Gemm (fully connected)",
+      "attributes": {
+        "transA": 0,
+        "transB": 1
+      },
+      "shapes": [
+        {
+          "source_model": "alexnet_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            9216
+          ],
+          "output_shape": [
+            128,
+            4096
+          ],
+          "flops": 9663676416,
+          "weight_shape": [
+            4096,
+            9216
+          ],
+          "bias_shape": [
+            4096
+          ]
+        },
+        {
+          "source_model": "alexnet_bs32_224x224",
+          "batch_size": 32,
+          "input_size": 224,
+          "activation_input_shape": [
+            32,
+            9216
+          ],
+          "output_shape": [
+            32,
+            4096
+          ],
+          "flops": 2415919104,
+          "weight_shape": [
+            4096,
+            9216
+          ],
+          "bias_shape": [
+            4096
+          ]
+        },
+        {
+          "source_model": "alexnet_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            9216
+          ],
+          "output_shape": [
+            64,
+            4096
+          ],
+          "flops": 4831838208,
+          "weight_shape": [
+            4096,
+            9216
+          ],
+          "bias_shape": [
+            4096
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Relu",
+      "node_name": "/classifier/classifier.2/Relu",
+      "fusion_desc": "Relu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "alexnet_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            4096
+          ],
+          "output_shape": [
+            128,
+            4096
+          ],
+          "flops": 0
+        },
+        {
+          "source_model": "alexnet_bs32_224x224",
+          "batch_size": 32,
+          "input_size": 224,
+          "activation_input_shape": [
+            32,
+            4096
+          ],
+          "output_shape": [
+            32,
+            4096
+          ],
+          "flops": 0
+        },
+        {
+          "source_model": "alexnet_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            4096
+          ],
+          "output_shape": [
+            64,
+            4096
+          ],
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Gemm",
+      "node_name": "/classifier/classifier.4/Gemm",
+      "fusion_desc": "Gemm (fully connected)",
+      "attributes": {
+        "transA": 0,
+        "transB": 1
+      },
+      "shapes": [
+        {
+          "source_model": "alexnet_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            4096
+          ],
+          "output_shape": [
+            128,
+            4096
+          ],
+          "flops": 4294967296,
+          "weight_shape": [
+            4096,
+            4096
+          ],
+          "bias_shape": [
+            4096
+          ]
+        },
+        {
+          "source_model": "alexnet_bs32_224x224",
+          "batch_size": 32,
+          "input_size": 224,
+          "activation_input_shape": [
+            32,
+            4096
+          ],
+          "output_shape": [
+            32,
+            4096
+          ],
+          "flops": 1073741824,
+          "weight_shape": [
+            4096,
+            4096
+          ],
+          "bias_shape": [
+            4096
+          ]
+        },
+        {
+          "source_model": "alexnet_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            4096
+          ],
+          "output_shape": [
+            64,
+            4096
+          ],
+          "flops": 2147483648,
+          "weight_shape": [
+            4096,
+            4096
+          ],
+          "bias_shape": [
+            4096
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Relu",
+      "node_name": "/classifier/classifier.5/Relu",
+      "fusion_desc": "Relu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "alexnet_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            4096
+          ],
+          "output_shape": [
+            128,
+            4096
+          ],
+          "flops": 0
+        },
+        {
+          "source_model": "alexnet_bs32_224x224",
+          "batch_size": 32,
+          "input_size": 224,
+          "activation_input_shape": [
+            32,
+            4096
+          ],
+          "output_shape": [
+            32,
+            4096
+          ],
+          "flops": 0
+        },
+        {
+          "source_model": "alexnet_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            4096
+          ],
+          "output_shape": [
+            64,
+            4096
+          ],
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Gemm",
+      "node_name": "/classifier/classifier.6/Gemm",
+      "fusion_desc": "Gemm (fully connected)",
+      "attributes": {
+        "transA": 0,
+        "transB": 1
+      },
+      "shapes": [
+        {
+          "source_model": "alexnet_bs128_224x224",
+          "batch_size": 128,
+          "input_size": 224,
+          "activation_input_shape": [
+            128,
+            4096
+          ],
+          "output_shape": [
+            128,
+            1000
+          ],
+          "flops": 1048576000,
+          "weight_shape": [
+            1000,
+            4096
+          ],
+          "bias_shape": [
+            1000
+          ]
+        },
+        {
+          "source_model": "alexnet_bs32_224x224",
+          "batch_size": 32,
+          "input_size": 224,
+          "activation_input_shape": [
+            32,
+            4096
+          ],
+          "output_shape": [
+            32,
+            1000
+          ],
+          "flops": 262144000,
+          "weight_shape": [
+            1000,
+            4096
+          ],
+          "bias_shape": [
+            1000
+          ]
+        },
+        {
+          "source_model": "alexnet_bs64_224x224",
+          "batch_size": 64,
+          "input_size": 224,
+          "activation_input_shape": [
+            64,
+            4096
+          ],
+          "output_shape": [
+            64,
+            1000
+          ],
+          "flops": 524288000,
+          "weight_shape": [
+            1000,
+            4096
+          ],
+          "bias_shape": [
+            1000
+          ]
+        }
+      ]
+    }
+  ]
+}

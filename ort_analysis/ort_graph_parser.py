@@ -10,7 +10,9 @@ import math
 import argparse
 import tempfile
 
+import numpy as np
 import onnx
+from onnx import numpy_helper
 import onnxruntime as ort
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -120,12 +122,108 @@ def _build_initial_shape_map(model):
     return shape_map
 
 
-def _infer_node_output_shape(node, shape_map):
+def _build_initializer_value_map(model):
+    """从 initializer 读取常量值，供 shape 推导使用"""
+    value_map = {}
+    for init in model.graph.initializer:
+        try:
+            value_map[init.name] = numpy_helper.to_array(init)
+        except Exception:
+            continue
+    return value_map
+
+
+def _to_int_list(arr):
+    if arr is None:
+        return None
+    if isinstance(arr, np.ndarray):
+        arr = arr.flatten().tolist()
+    if not isinstance(arr, (list, tuple)):
+        return None
+    out = []
+    for v in arr:
+        try:
+            out.append(int(v))
+        except Exception:
+            return None
+    return out
+
+
+def _broadcast_shape(a_shape, b_shape):
+    """按 numpy 广播规则计算输出 shape"""
+    if not a_shape:
+        return b_shape
+    if not b_shape:
+        return a_shape
+
+    a = list(a_shape)
+    b = list(b_shape)
+    rank = max(len(a), len(b))
+    a = [1] * (rank - len(a)) + a
+    b = [1] * (rank - len(b)) + b
+    out = []
+
+    for da, db in zip(a, b):
+        if da == db:
+            out.append(da)
+        elif da == 1:
+            out.append(db)
+        elif db == 1:
+            out.append(da)
+        else:
+            return a_shape
+    return out
+
+
+def _infer_reshape_shape(x_shape, target_shape):
+    """推导 Reshape 输出 shape，支持 0 和 -1"""
+    if not x_shape or not target_shape:
+        return None
+
+    target = list(target_shape)
+    if any(not isinstance(d, int) for d in x_shape):
+        return None
+
+    in_size = 1
+    for d in x_shape:
+        in_size *= d
+
+    out = []
+    known = 1
+    infer_idx = None
+
+    for i, d in enumerate(target):
+        if d == 0:
+            if i >= len(x_shape):
+                return None
+            out.append(x_shape[i])
+            known *= x_shape[i]
+        elif d == -1:
+            if infer_idx is not None:
+                return None
+            out.append(-1)
+            infer_idx = i
+        else:
+            out.append(d)
+            known *= d
+
+    if infer_idx is not None and known != 0:
+        out[infer_idx] = int(in_size // known)
+    elif infer_idx is None and known != in_size:
+        return None
+
+    return out
+
+
+def _infer_node_output_shape(node, shape_map, const_map=None):
     """
     根据算子类型和已知输入 shape，推导节点输出 shape 并写入 shape_map。
     支持: Conv, FusedConv, MaxPool, GlobalAveragePool, Flatten, Gemm, Relu, Add, MatMul
     """
     op = node.op_type
+
+    if const_map is None:
+        const_map = {}
 
     if op in ("Conv", "FusedConv"):
         # 输入: X, W, [B], [Z (residual for FusedConv)]
@@ -143,11 +241,13 @@ def _infer_node_output_shape(node, shape_map):
             for o in node.output:
                 shape_map[o] = out_shape
 
-    elif op == "MaxPool":
+    elif op in ("MaxPool", "AveragePool"):
         x_shape = shape_map.get(node.input[0])
         if x_shape and len(x_shape) == 4:
             n, c, h_in, w_in = x_shape
             ks = _get_attr(node, "kernel_shape")
+            if not ks:
+                return
             strides = _get_attr(node, "strides", ks)
             pads = _get_attr(node, "pads", [0, 0, 0, 0])
             h_out, w_out = _conv_output_hw(h_in, w_in, ks, strides, pads, [1, 1])
@@ -181,20 +281,19 @@ def _infer_node_output_shape(node, shape_map):
             k_b = b_shape[1] if not trans_b else b_shape[0]
             shape_map[node.output[0]] = [m, k_b]
 
-    elif op in ("Relu", "BatchNormalization", "Dropout", "Identity"):
+    elif op in ("Relu", "BatchNormalization", "Dropout", "Identity",
+                "Clip", "Sigmoid", "HardSigmoid", "QuickGelu", "Softmax"):
         x_shape = shape_map.get(node.input[0])
         if x_shape:
             for o in node.output:
                 shape_map[o] = list(x_shape)
 
-    elif op == "Add":
+    elif op in ("Add", "Mul", "Div", "Sub"):
         a_shape = shape_map.get(node.input[0])
         b_shape = shape_map.get(node.input[1])
-        # element-wise add 输出与较长的输入 shape 相同
-        if a_shape:
-            shape_map[node.output[0]] = list(a_shape)
-        elif b_shape:
-            shape_map[node.output[0]] = list(b_shape)
+        out = _broadcast_shape(a_shape, b_shape)
+        if out:
+            shape_map[node.output[0]] = list(out)
 
     elif op == "MatMul":
         a_shape = shape_map.get(node.input[0])
@@ -202,11 +301,140 @@ def _infer_node_output_shape(node, shape_map):
         if a_shape and b_shape:
             shape_map[node.output[0]] = list(a_shape[:-1]) + [b_shape[-1]]
 
+    elif op == "Transpose":
+        x_shape = shape_map.get(node.input[0])
+        if x_shape:
+            perm = _get_attr(node, "perm")
+            if not perm:
+                perm = list(range(len(x_shape) - 1, -1, -1))
+            if len(perm) == len(x_shape):
+                shape_map[node.output[0]] = [x_shape[i] for i in perm]
+
+    elif op == "Concat":
+        axis = _get_attr(node, "axis", 0)
+        in_shapes = [shape_map.get(name) for name in node.input if shape_map.get(name)]
+        if in_shapes:
+            base = list(in_shapes[0])
+            if axis < 0:
+                axis += len(base)
+            if 0 <= axis < len(base):
+                axis_sum = 0
+                for s in in_shapes:
+                    if len(s) != len(base):
+                        return
+                    axis_sum += s[axis]
+                base[axis] = axis_sum
+                shape_map[node.output[0]] = base
+
+    elif op == "Split":
+        x_shape = shape_map.get(node.input[0])
+        if x_shape:
+            axis = _get_attr(node, "axis", 0)
+            if axis < 0:
+                axis += len(x_shape)
+            if axis < 0 or axis >= len(x_shape):
+                return
+
+            split = _get_attr(node, "split")
+            if split is None and len(node.input) > 1:
+                split = _to_int_list(const_map.get(node.input[1]))
+
+            out_num = len(node.output)
+            if split is None:
+                if x_shape[axis] % out_num == 0:
+                    each = x_shape[axis] // out_num
+                    split = [each] * out_num
+                else:
+                    return
+            if len(split) != out_num:
+                return
+
+            for i, o in enumerate(node.output):
+                s = list(x_shape)
+                s[axis] = split[i]
+                shape_map[o] = s
+
+    elif op == "Slice":
+        x_shape = shape_map.get(node.input[0])
+        if not x_shape:
+            return
+
+        starts = ends = axes = steps = None
+        if len(node.input) > 1:
+            starts = _to_int_list(const_map.get(node.input[1]))
+        if len(node.input) > 2:
+            ends = _to_int_list(const_map.get(node.input[2]))
+        if len(node.input) > 3:
+            axes = _to_int_list(const_map.get(node.input[3]))
+        if len(node.input) > 4:
+            steps = _to_int_list(const_map.get(node.input[4]))
+
+        if starts is None or ends is None:
+            shape_map[node.output[0]] = list(x_shape)
+            return
+
+        if axes is None:
+            axes = list(range(len(starts)))
+        if steps is None:
+            steps = [1] * len(starts)
+
+        out = list(x_shape)
+        for st, ed, ax, sp in zip(starts, ends, axes, steps):
+            if ax < 0:
+                ax += len(out)
+            if ax < 0 or ax >= len(out) or sp == 0:
+                continue
+            dim = out[ax]
+            s = st + dim if st < 0 else st
+            e = ed + dim if ed < 0 else ed
+            s = max(0, min(s, dim))
+            e = max(0, min(e, dim))
+            length = max(0, int(math.ceil((e - s) / float(sp))))
+            out[ax] = length
+        shape_map[node.output[0]] = out
+
     elif op == "Reshape":
-        # 'shape' 输入一般是常量 initializer
-        shape_val = shape_map.get(node.input[1]) if len(node.input) > 1 else None
-        # 这里无法完整推断，留 None
-        pass
+        x_shape = shape_map.get(node.input[0])
+        target = _to_int_list(const_map.get(node.input[1])) if len(node.input) > 1 else None
+        out = _infer_reshape_shape(x_shape, target)
+        if out:
+            shape_map[node.output[0]] = out
+
+    elif op == "Pad":
+        x_shape = shape_map.get(node.input[0])
+        if not x_shape:
+            return
+        pads = _get_attr(node, "pads")
+        if pads is None and len(node.input) > 1:
+            pads = _to_int_list(const_map.get(node.input[1]))
+        if not pads or len(pads) != 2 * len(x_shape):
+            shape_map[node.output[0]] = list(x_shape)
+            return
+        out = []
+        r = len(x_shape)
+        for i in range(r):
+            out.append(x_shape[i] + pads[i] + pads[i + r])
+        shape_map[node.output[0]] = out
+
+    elif op == "Resize":
+        x_shape = shape_map.get(node.input[0])
+        if not x_shape:
+            return
+        out = None
+        if len(node.input) > 3:
+            sizes = _to_int_list(const_map.get(node.input[3]))
+            if sizes and len(sizes) == len(x_shape):
+                out = sizes
+        if out is None and len(node.input) > 2:
+            scales_arr = const_map.get(node.input[2])
+            if isinstance(scales_arr, np.ndarray):
+                scales = scales_arr.flatten().tolist()
+                if len(scales) == len(x_shape):
+                    out = [int(math.floor(d * float(s))) for d, s in zip(x_shape, scales)]
+        if out:
+            shape_map[node.output[0]] = out
+        else:
+            shape_map[node.output[0]] = list(x_shape)
 
     # 未知算子: shape_map 中不会有该输出，后续会显示 None
 
@@ -226,10 +454,11 @@ def parse_graph(model):
         list[dict]: 节点信息列表
     """
     shape_map = _build_initial_shape_map(model)
+    const_map = _build_initializer_value_map(model)
 
     # Forward propagation: 按图中节点顺序依次推导
     for node in model.graph.node:
-        _infer_node_output_shape(node, shape_map)
+        _infer_node_output_shape(node, shape_map, const_map)
 
     nodes_info = []
     for node in model.graph.node:

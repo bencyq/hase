@@ -48,3 +48,5 @@ docs/_build/
 *.onnx
 .vscode
 logs/
+*.pt
+.cursor
