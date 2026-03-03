@@ -73,8 +73,17 @@ def _get_attr(node, name, default=None):
     return default
 
 
+def _is_int_dim(val):
+    """判断维度是否为可参与算术的整数（排除 bool / 符号维度）"""
+    return isinstance(val, int) and not isinstance(val, bool)
+
+
 def _conv_output_hw(h_in, w_in, kernel_shape, strides, pads, dilations):
     """计算 Conv / MaxPool 的输出 H, W"""
+    values = [h_in, w_in] + list(kernel_shape) + list(strides) + list(pads) + list(dilations)
+    if not all(_is_int_dim(v) for v in values):
+        return None, None
+
     kh, kw = kernel_shape
     sh, sw = strides
     dh, dw = dilations if dilations else [1, 1]
@@ -139,6 +148,8 @@ def _infer_node_output_shape(node, shape_map):
             pads = _get_attr(node, "pads", [0, 0, 0, 0])
             dilations = _get_attr(node, "dilations", [1, 1])
             h_out, w_out = _conv_output_hw(h_in, w_in, ks, strides, pads, dilations)
+            if h_out is None or w_out is None:
+                return
             out_shape = [n, out_c, h_out, w_out]
             for o in node.output:
                 shape_map[o] = out_shape
@@ -151,6 +162,8 @@ def _infer_node_output_shape(node, shape_map):
             strides = _get_attr(node, "strides", ks)
             pads = _get_attr(node, "pads", [0, 0, 0, 0])
             h_out, w_out = _conv_output_hw(h_in, w_in, ks, strides, pads, [1, 1])
+            if h_out is None or w_out is None:
+                return
             shape_map[node.output[0]] = [n, c, h_out, w_out]
 
     elif op == "GlobalAveragePool":
@@ -162,6 +175,8 @@ def _infer_node_output_shape(node, shape_map):
         x_shape = shape_map.get(node.input[0])
         axis = _get_attr(node, "axis", 1)
         if x_shape:
+            if not all(_is_int_dim(d) for d in x_shape):
+                return
             left = 1
             for d in x_shape[:axis]:
                 left *= d

@@ -78,6 +78,11 @@ _ATTR_KEYS = {
 }
 
 
+def _all_int_dims(vals):
+    """维度是否全部为可计算的整数"""
+    return all(isinstance(v, int) and not isinstance(v, bool) for v in vals)
+
+
 def _extract_attributes(node):
     """提取节点的关键属性"""
     attrs = {}
@@ -97,9 +102,13 @@ def _estimate_flops(kernel_type, attrs, act_shape, weight_shape, out_shape):
     """
     if kernel_type in ("Conv", "Conv_Relu", "Conv_Add_Relu"):
         if out_shape and weight_shape and len(out_shape) == 4:
+            if not _all_int_dims(out_shape) or not _all_int_dims(weight_shape[:4]):
+                return 0
             n, c_out, h_out, w_out = out_shape
             c_in, kh, kw = weight_shape[1], weight_shape[2], weight_shape[3]
             group = attrs.get("group", 1)
+            if not isinstance(group, int) or group <= 0:
+                return 0
             flops = 2 * n * c_out * h_out * w_out * (c_in // group) * kh * kw
             flops += n * c_out * h_out * w_out          # bias
             if "Add" in kernel_type:
@@ -110,17 +119,25 @@ def _estimate_flops(kernel_type, attrs, act_shape, weight_shape, out_shape):
 
     elif kernel_type == "MaxPool":
         if out_shape and len(out_shape) == 4:
+            if not _all_int_dims(out_shape):
+                return 0
             n, c, h_out, w_out = out_shape
             ks = attrs.get("kernel_shape", [3, 3])
+            if not _all_int_dims(ks[:2]):
+                return 0
             return n * c * h_out * w_out * ks[0] * ks[1]
 
     elif kernel_type == "GlobalAveragePool":
         if act_shape and len(act_shape) == 4:
+            if not _all_int_dims(act_shape):
+                return 0
             n, c, h_in, w_in = act_shape
             return n * c * h_in * w_in
 
     elif kernel_type == "Gemm":
         if act_shape and weight_shape and len(act_shape) >= 2 and len(weight_shape) >= 2:
+            if not _all_int_dims([act_shape[0], act_shape[1], weight_shape[0], weight_shape[1]]):
+                return 0
             m, k = act_shape[0], act_shape[1]
             n_out = weight_shape[0] if attrs.get("transB", 0) else weight_shape[1]
             return 2 * m * k * n_out

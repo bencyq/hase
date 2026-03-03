@@ -13,12 +13,20 @@ import torch
 import torchvision.models as models
 import onnxruntime as ort
 import numpy as np
+import shutil
 
 # 将项目根目录加入 sys.path
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, PROJECT_ROOT)
 
 from utils.logger import get_logger
+
+try:
+    from ultralytics import YOLO
+    YOLO_IMPORT_ERROR = None
+except Exception as exc:
+    YOLO = None
+    YOLO_IMPORT_ERROR = exc
 
 logger = get_logger("torchvision_exporter")
 
@@ -31,10 +39,20 @@ OUTPUT_DIR = os.path.join(SCRIPT_DIR, "models")
 MODEL_REGISTRY = {
     "resnet18":  models.resnet18,
     "resnet50":  models.resnet50,
+    "resnet152": models.resnet152,
     "vgg11":     models.vgg11,
-    "vgg13":     models.vgg13,
+    "vgg16":     models.vgg16,
+    "vgg19":     models.vgg19,
+    "densenet121": models.densenet121,
+    "densenet169": models.densenet169,
+    "densenet201": models.densenet201,
+    "mobilenet_v2": models.mobilenet_v2,
+    # config.yaml 中使用 mobilenet_v3 作为统一名称，这里映射到 torchvision 的 large 版本
+    "mobilenet_v3": models.mobilenet_v3_large,
     "alexnet":   models.alexnet,
 }
+
+YOLO_MODELS = {"yolov8n", "yolov8m", "yolov8x"}
 
 
 def load_config(config_path=CONFIG_PATH):
@@ -70,7 +88,7 @@ def _optimize_onnx(raw_onnx_path, optimized_onnx_path):
     _ = ort.InferenceSession(
         raw_onnx_path,
         sess_options,
-        providers=["CUDAExecutionProvider", "CPUExecutionProvider"],
+        providers=["CUDAExecutionProvider"],
     )
     logger.info("ORT 优化完成: %s", optimized_onnx_path)
 
@@ -79,12 +97,43 @@ def _validate_onnx(optimized_onnx_path, batch_size, input_size):
     """使用 ONNX Runtime 验证优化后的模型可正常推理。"""
     session = ort.InferenceSession(
         optimized_onnx_path,
-        providers=["CUDAExecutionProvider", "CPUExecutionProvider"],
+        providers=["CUDAExecutionProvider"],
     )
     dummy = np.random.randn(batch_size, 3, input_size, input_size).astype(np.float32)
     outputs = session.run(None, {"input": dummy})
     logger.info("验证通过: %s  输出形状=%s", optimized_onnx_path, outputs[0].shape)
     return True
+
+
+def _resolve_yolo_weight(model_name):
+    """优先使用本地权重文件，否则交给 ultralytics 按名称处理。"""
+    local_path = os.path.join(PROJECT_ROOT, "{}.pt".format(model_name))
+    if os.path.exists(local_path):
+        return local_path
+    return "{}.pt".format(model_name)
+
+
+def _export_yolo_raw_onnx(model_name, batch_size, input_size, raw_onnx_path):
+    """导出 YOLOv8 为 ONNX 原始文件。"""
+    if YOLO is None:
+        raise RuntimeError("ultralytics 不可用: {}".format(YOLO_IMPORT_ERROR))
+
+    yolo_name = model_name.lower()
+    weights = _resolve_yolo_weight(yolo_name)
+    yolo = YOLO(weights)
+    exported_path = yolo.export(
+        format="onnx",
+        imgsz=input_size,
+        batch=batch_size,
+        opset=13,
+        simplify=False,
+        dynamic=False,
+        device=0 if torch.cuda.is_available() else "cpu",
+    )
+    if not isinstance(exported_path, str) or not os.path.exists(exported_path):
+        raise RuntimeError("YOLO 导出后未找到 ONNX 文件: {}".format(exported_path))
+    shutil.move(exported_path, raw_onnx_path)
+    logger.info("导出 YOLO 原始 ONNX: %s", raw_onnx_path)
 
 
 def export_model(model_name, config_path=CONFIG_PATH):
@@ -96,18 +145,25 @@ def export_model(model_name, config_path=CONFIG_PATH):
                     (resnet18 / resnet50 / vgg11 / vgg13 / alexnet ...)
         config_path: config.yaml 路径，默认使用同目录下的配置
     """
-    if model_name not in MODEL_REGISTRY:
+    normalized_name = model_name.lower()
+    is_torchvision = model_name in MODEL_REGISTRY
+    is_yolo = normalized_name in YOLO_MODELS
+    if not is_torchvision and not is_yolo:
         raise ValueError(
             f"未注册的模型: {model_name}，"
-            f"可用模型: {list(MODEL_REGISTRY.keys())}"
+            f"可用模型: {list(MODEL_REGISTRY.keys()) + sorted(YOLO_MODELS)}"
         )
 
     cfg = load_config(config_path)
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-    model = MODEL_REGISTRY[model_name](weights=None)
-    model.eval()
-    logger.info("已加载模型: %s", model_name)
+    model = None
+    if is_torchvision:
+        model = MODEL_REGISTRY[model_name](weights=None)
+        model.eval()
+        logger.info("已加载 torchvision 模型: %s", model_name)
+    else:
+        logger.info("已加载 YOLO 导出配置: %s", normalized_name)
 
     for bs in cfg["batch_sizes"]:
         for size in cfg["input_sizes"]:
@@ -117,7 +173,10 @@ def export_model(model_name, config_path=CONFIG_PATH):
 
             try:
                 # 1. 导出原始 ONNX
-                _export_onnx(model, bs, size, raw_path)
+                if is_torchvision:
+                    _export_onnx(model, bs, size, raw_path)
+                else:
+                    _export_yolo_raw_onnx(normalized_name, bs, size, raw_path)
 
                 # 2. ORT 优化
                 _optimize_onnx(raw_path, opt_path)

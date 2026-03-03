@@ -3,6 +3,10 @@
 # batch_sizes: 导出模型时使用的 batch size 列表
 # input_sizes: 输入张量的空间尺寸列表 (H=W)
 
-models: [resnet18, resnet50, vgg11, vgg13, alexnet]
-batch_sizes: [16, 64, 128]
-input_sizes: [224, 320, 512]
+# models: [alexnet,resnet18, resnet50, resnet152,vgg11, vgg16,vgg19,densenet121,densenet169,densenet201,YOLOv8n,YOLOv8m,YOLOv8x,mobilenet_v2,mobilenet_v3]
+# batch_sizes: [32, 64, 128]
+# input_sizes: [224]
+
+models: [resnet18, resnet50, resnet152,vgg11, vgg16,vgg19,densenet121,densenet169,densenet201]
+batch_sizes: [32, 64, 128]
+input_sizes: [448]

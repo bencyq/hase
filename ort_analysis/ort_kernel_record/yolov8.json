@@ -1,0 +1,7797 @@
+{
+  "model_name": "yolov8",
+  "total_kernels": 320,
+  "kernel_types": [
+    "Add",
+    "Cast",
+    "Concat",
+    "ConstantOfShape",
+    "Conv",
+    "Div",
+    "Expand",
+    "Gather",
+    "MaxPool",
+    "Mul",
+    "QuickGelu",
+    "Range",
+    "Reshape",
+    "Resize",
+    "Shape",
+    "Sigmoid",
+    "Slice",
+    "Softmax",
+    "Split",
+    "Sub",
+    "Transpose",
+    "Unsqueeze"
+  ],
+  "kernels": [
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.0/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          2,
+          2
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": [
+            "batch",
+            3,
+            "height",
+            "width"
+          ],
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            48,
+            3,
+            3,
+            3
+          ],
+          "bias_shape": [
+            48
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.1/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          2,
+          2
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            96,
+            48,
+            3,
+            3
+          ],
+          "bias_shape": [
+            96
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_0",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.2/cv1/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            96,
+            96,
+            1,
+            1
+          ],
+          "bias_shape": [
+            96
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_1",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Split",
+      "node_name": "/model.2/Split",
+      "fusion_desc": "Split",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.2/m.0/cv1/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            48,
+            48,
+            3,
+            3
+          ],
+          "bias_shape": [
+            48
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_2",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.2/m.0/cv2/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            48,
+            48,
+            3,
+            3
+          ],
+          "bias_shape": [
+            48
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_3",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Add",
+      "node_name": "/model.2/m.0/Add",
+      "fusion_desc": "Add",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.2/m.1/cv1/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            48,
+            48,
+            3,
+            3
+          ],
+          "bias_shape": [
+            48
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_4",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.2/m.1/cv2/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            48,
+            48,
+            3,
+            3
+          ],
+          "bias_shape": [
+            48
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_5",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Add",
+      "node_name": "/model.2/m.1/Add",
+      "fusion_desc": "Add",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Concat",
+      "node_name": "/model.2/Concat",
+      "fusion_desc": "Concat",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.2/cv2/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            96,
+            192,
+            1,
+            1
+          ],
+          "bias_shape": [
+            96
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_6",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.3/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          2,
+          2
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            192,
+            96,
+            3,
+            3
+          ],
+          "bias_shape": [
+            192
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_7",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.4/cv1/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            192,
+            192,
+            1,
+            1
+          ],
+          "bias_shape": [
+            192
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_8",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Split",
+      "node_name": "/model.4/Split",
+      "fusion_desc": "Split",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.4/m.0/cv1/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            96,
+            96,
+            3,
+            3
+          ],
+          "bias_shape": [
+            96
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_9",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.4/m.0/cv2/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            96,
+            96,
+            3,
+            3
+          ],
+          "bias_shape": [
+            96
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_10",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Add",
+      "node_name": "/model.4/m.0/Add",
+      "fusion_desc": "Add",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.4/m.1/cv1/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            96,
+            96,
+            3,
+            3
+          ],
+          "bias_shape": [
+            96
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_11",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.4/m.1/cv2/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            96,
+            96,
+            3,
+            3
+          ],
+          "bias_shape": [
+            96
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_12",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Add",
+      "node_name": "/model.4/m.1/Add",
+      "fusion_desc": "Add",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.4/m.2/cv1/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            96,
+            96,
+            3,
+            3
+          ],
+          "bias_shape": [
+            96
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_13",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.4/m.2/cv2/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            96,
+            96,
+            3,
+            3
+          ],
+          "bias_shape": [
+            96
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_14",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Add",
+      "node_name": "/model.4/m.2/Add",
+      "fusion_desc": "Add",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.4/m.3/cv1/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            96,
+            96,
+            3,
+            3
+          ],
+          "bias_shape": [
+            96
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_15",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.4/m.3/cv2/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            96,
+            96,
+            3,
+            3
+          ],
+          "bias_shape": [
+            96
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_16",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Add",
+      "node_name": "/model.4/m.3/Add",
+      "fusion_desc": "Add",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Concat",
+      "node_name": "/model.4/Concat",
+      "fusion_desc": "Concat",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.4/cv2/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            192,
+            576,
+            1,
+            1
+          ],
+          "bias_shape": [
+            192
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_17",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.5/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          2,
+          2
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            384,
+            192,
+            3,
+            3
+          ],
+          "bias_shape": [
+            384
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_18",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.6/cv1/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            384,
+            384,
+            1,
+            1
+          ],
+          "bias_shape": [
+            384
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_19",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Split",
+      "node_name": "/model.6/Split",
+      "fusion_desc": "Split",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.6/m.0/cv1/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            192,
+            192,
+            3,
+            3
+          ],
+          "bias_shape": [
+            192
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_20",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.6/m.0/cv2/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            192,
+            192,
+            3,
+            3
+          ],
+          "bias_shape": [
+            192
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_21",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Add",
+      "node_name": "/model.6/m.0/Add",
+      "fusion_desc": "Add",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.6/m.1/cv1/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            192,
+            192,
+            3,
+            3
+          ],
+          "bias_shape": [
+            192
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_22",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.6/m.1/cv2/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            192,
+            192,
+            3,
+            3
+          ],
+          "bias_shape": [
+            192
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_23",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Add",
+      "node_name": "/model.6/m.1/Add",
+      "fusion_desc": "Add",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.6/m.2/cv1/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            192,
+            192,
+            3,
+            3
+          ],
+          "bias_shape": [
+            192
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_24",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.6/m.2/cv2/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            192,
+            192,
+            3,
+            3
+          ],
+          "bias_shape": [
+            192
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_25",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Add",
+      "node_name": "/model.6/m.2/Add",
+      "fusion_desc": "Add",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.6/m.3/cv1/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            192,
+            192,
+            3,
+            3
+          ],
+          "bias_shape": [
+            192
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_26",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.6/m.3/cv2/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            192,
+            192,
+            3,
+            3
+          ],
+          "bias_shape": [
+            192
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_27",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Add",
+      "node_name": "/model.6/m.3/Add",
+      "fusion_desc": "Add",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Concat",
+      "node_name": "/model.6/Concat",
+      "fusion_desc": "Concat",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.6/cv2/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            384,
+            1152,
+            1,
+            1
+          ],
+          "bias_shape": [
+            384
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_28",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.7/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          2,
+          2
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            576,
+            384,
+            3,
+            3
+          ],
+          "bias_shape": [
+            576
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_29",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.8/cv1/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            576,
+            576,
+            1,
+            1
+          ],
+          "bias_shape": [
+            576
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_30",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Split",
+      "node_name": "/model.8/Split",
+      "fusion_desc": "Split",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.8/m.0/cv1/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            288,
+            288,
+            3,
+            3
+          ],
+          "bias_shape": [
+            288
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_31",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.8/m.0/cv2/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            288,
+            288,
+            3,
+            3
+          ],
+          "bias_shape": [
+            288
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_32",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Add",
+      "node_name": "/model.8/m.0/Add",
+      "fusion_desc": "Add",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.8/m.1/cv1/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            288,
+            288,
+            3,
+            3
+          ],
+          "bias_shape": [
+            288
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_33",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.8/m.1/cv2/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            288,
+            288,
+            3,
+            3
+          ],
+          "bias_shape": [
+            288
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_34",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Add",
+      "node_name": "/model.8/m.1/Add",
+      "fusion_desc": "Add",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Concat",
+      "node_name": "/model.8/Concat",
+      "fusion_desc": "Concat",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.8/cv2/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            576,
+            1152,
+            1,
+            1
+          ],
+          "bias_shape": [
+            576
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_35",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.9/cv1/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            288,
+            576,
+            1,
+            1
+          ],
+          "bias_shape": [
+            288
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_36",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "MaxPool",
+      "node_name": "/model.9/m/MaxPool",
+      "fusion_desc": "MaxPool",
+      "attributes": {
+        "kernel_shape": [
+          5,
+          5
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "ceil_mode": 0
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "MaxPool",
+      "node_name": "/model.9/m_1/MaxPool",
+      "fusion_desc": "MaxPool",
+      "attributes": {
+        "kernel_shape": [
+          5,
+          5
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "ceil_mode": 0
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "MaxPool",
+      "node_name": "/model.9/m_2/MaxPool",
+      "fusion_desc": "MaxPool",
+      "attributes": {
+        "kernel_shape": [
+          5,
+          5
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "ceil_mode": 0
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Concat",
+      "node_name": "/model.9/Concat",
+      "fusion_desc": "Concat",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.9/cv2/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            576,
+            1152,
+            1,
+            1
+          ],
+          "bias_shape": [
+            576
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_37",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Resize",
+      "node_name": "/model.10/Resize",
+      "fusion_desc": "Resize",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            4
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Concat",
+      "node_name": "/model.11/Concat",
+      "fusion_desc": "Concat",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.12/cv1/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            384,
+            960,
+            1,
+            1
+          ],
+          "bias_shape": [
+            384
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_38",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Split",
+      "node_name": "/model.12/Split",
+      "fusion_desc": "Split",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.12/m.0/cv1/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            192,
+            192,
+            3,
+            3
+          ],
+          "bias_shape": [
+            192
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_39",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.12/m.0/cv2/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            192,
+            192,
+            3,
+            3
+          ],
+          "bias_shape": [
+            192
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_40",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.12/m.1/cv1/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            192,
+            192,
+            3,
+            3
+          ],
+          "bias_shape": [
+            192
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_41",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.12/m.1/cv2/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            192,
+            192,
+            3,
+            3
+          ],
+          "bias_shape": [
+            192
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_42",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Concat",
+      "node_name": "/model.12/Concat",
+      "fusion_desc": "Concat",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.12/cv2/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            384,
+            768,
+            1,
+            1
+          ],
+          "bias_shape": [
+            384
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_43",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Resize",
+      "node_name": "/model.13/Resize",
+      "fusion_desc": "Resize",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            4
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Concat",
+      "node_name": "/model.14/Concat",
+      "fusion_desc": "Concat",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.15/cv1/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            192,
+            576,
+            1,
+            1
+          ],
+          "bias_shape": [
+            192
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_44",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Split",
+      "node_name": "/model.15/Split",
+      "fusion_desc": "Split",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.15/m.0/cv1/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            96,
+            96,
+            3,
+            3
+          ],
+          "bias_shape": [
+            96
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_45",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.15/m.0/cv2/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            96,
+            96,
+            3,
+            3
+          ],
+          "bias_shape": [
+            96
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_46",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.15/m.1/cv1/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            96,
+            96,
+            3,
+            3
+          ],
+          "bias_shape": [
+            96
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_47",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.15/m.1/cv2/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            96,
+            96,
+            3,
+            3
+          ],
+          "bias_shape": [
+            96
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_48",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Concat",
+      "node_name": "/model.15/Concat",
+      "fusion_desc": "Concat",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.15/cv2/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            192,
+            384,
+            1,
+            1
+          ],
+          "bias_shape": [
+            192
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_49",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.16/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          2,
+          2
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            192,
+            192,
+            3,
+            3
+          ],
+          "bias_shape": [
+            192
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_50",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Concat",
+      "node_name": "/model.17/Concat",
+      "fusion_desc": "Concat",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.18/cv1/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            384,
+            576,
+            1,
+            1
+          ],
+          "bias_shape": [
+            384
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_51",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Split",
+      "node_name": "/model.18/Split",
+      "fusion_desc": "Split",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.18/m.0/cv1/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            192,
+            192,
+            3,
+            3
+          ],
+          "bias_shape": [
+            192
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_52",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.18/m.0/cv2/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            192,
+            192,
+            3,
+            3
+          ],
+          "bias_shape": [
+            192
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_53",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.18/m.1/cv1/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            192,
+            192,
+            3,
+            3
+          ],
+          "bias_shape": [
+            192
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_54",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.18/m.1/cv2/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            192,
+            192,
+            3,
+            3
+          ],
+          "bias_shape": [
+            192
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_55",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Concat",
+      "node_name": "/model.18/Concat",
+      "fusion_desc": "Concat",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.18/cv2/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            384,
+            768,
+            1,
+            1
+          ],
+          "bias_shape": [
+            384
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_56",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.19/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          2,
+          2
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            384,
+            384,
+            3,
+            3
+          ],
+          "bias_shape": [
+            384
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_57",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Concat",
+      "node_name": "/model.20/Concat",
+      "fusion_desc": "Concat",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.21/cv1/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            576,
+            960,
+            1,
+            1
+          ],
+          "bias_shape": [
+            576
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_58",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Split",
+      "node_name": "/model.21/Split",
+      "fusion_desc": "Split",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.21/m.0/cv1/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            288,
+            288,
+            3,
+            3
+          ],
+          "bias_shape": [
+            288
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_59",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.21/m.0/cv2/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            288,
+            288,
+            3,
+            3
+          ],
+          "bias_shape": [
+            288
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_60",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.21/m.1/cv1/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            288,
+            288,
+            3,
+            3
+          ],
+          "bias_shape": [
+            288
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_61",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.21/m.1/cv2/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            288,
+            288,
+            3,
+            3
+          ],
+          "bias_shape": [
+            288
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_62",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Concat",
+      "node_name": "/model.21/Concat",
+      "fusion_desc": "Concat",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.21/cv2/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            576,
+            1152,
+            1,
+            1
+          ],
+          "bias_shape": [
+            576
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_63",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.22/cv3.2/cv3.2.0/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            192,
+            576,
+            3,
+            3
+          ],
+          "bias_shape": [
+            192
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_64",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.22/cv3.2/cv3.2.1/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            192,
+            192,
+            3,
+            3
+          ],
+          "bias_shape": [
+            192
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_65",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.22/cv3.2/cv3.2.2/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            80,
+            192,
+            1,
+            1
+          ],
+          "bias_shape": [
+            80
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Shape",
+      "node_name": "/model.22/Shape",
+      "fusion_desc": "Shape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Gather",
+      "node_name": "/model.22/Gather",
+      "fusion_desc": "Gather",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Unsqueeze",
+      "node_name": "/model.22/Unsqueeze_5",
+      "fusion_desc": "Unsqueeze",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Concat",
+      "node_name": "/model.22/Concat_6",
+      "fusion_desc": "Concat",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Reshape",
+      "node_name": "/model.22/Reshape_5",
+      "fusion_desc": "Reshape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.22/cv3.1/cv3.1.0/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            192,
+            384,
+            3,
+            3
+          ],
+          "bias_shape": [
+            192
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_66",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.22/cv3.1/cv3.1.1/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            192,
+            192,
+            3,
+            3
+          ],
+          "bias_shape": [
+            192
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_67",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.22/cv3.1/cv3.1.2/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            80,
+            192,
+            1,
+            1
+          ],
+          "bias_shape": [
+            80
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Reshape",
+      "node_name": "/model.22/Reshape_4",
+      "fusion_desc": "Reshape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.22/cv3.0/cv3.0.0/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            192,
+            192,
+            3,
+            3
+          ],
+          "bias_shape": [
+            192
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_68",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.22/cv3.0/cv3.0.1/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            192,
+            192,
+            3,
+            3
+          ],
+          "bias_shape": [
+            192
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_69",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.22/cv3.0/cv3.0.2/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            80,
+            192,
+            1,
+            1
+          ],
+          "bias_shape": [
+            80
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Reshape",
+      "node_name": "/model.22/Reshape_3",
+      "fusion_desc": "Reshape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Concat",
+      "node_name": "/model.22/Concat_7",
+      "fusion_desc": "Concat",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Sigmoid",
+      "node_name": "/model.22/Sigmoid",
+      "fusion_desc": "Sigmoid",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.22/cv2.2/cv2.2.0/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            64,
+            576,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_70",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.22/cv2.2/cv2.2.1/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_71",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.22/cv2.2/cv2.2.2/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            64,
+            64,
+            1,
+            1
+          ],
+          "bias_shape": [
+            64
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Concat",
+      "node_name": "/model.22/Concat_2",
+      "fusion_desc": "Concat",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Reshape",
+      "node_name": "/model.22/Reshape_2",
+      "fusion_desc": "Reshape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.22/cv2.1/cv2.1.0/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            64,
+            384,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_72",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.22/cv2.1/cv2.1.1/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_73",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.22/cv2.1/cv2.1.2/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            64,
+            64,
+            1,
+            1
+          ],
+          "bias_shape": [
+            64
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Reshape",
+      "node_name": "/model.22/Reshape_1",
+      "fusion_desc": "Reshape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.22/cv2.0/cv2.0.0/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            64,
+            192,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_74",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.22/cv2.0/cv2.0.1/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "bias_shape": [
+            64
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "QuickGelu",
+      "node_name": "QuickGelu_token_75",
+      "fusion_desc": "QuickGelu",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.22/cv2.0/cv2.0.2/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            64,
+            64,
+            1,
+            1
+          ],
+          "bias_shape": [
+            64
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Reshape",
+      "node_name": "/model.22/Reshape",
+      "fusion_desc": "Reshape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Concat",
+      "node_name": "/model.22/Concat_3",
+      "fusion_desc": "Concat",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Shape",
+      "node_name": "/model.22/dfl/Shape_1",
+      "fusion_desc": "Shape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Gather",
+      "node_name": "/model.22/dfl/Gather_1",
+      "fusion_desc": "Gather",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Unsqueeze",
+      "node_name": "/model.22/dfl/Unsqueeze_3",
+      "fusion_desc": "Unsqueeze",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Gather",
+      "node_name": "/model.22/dfl/Gather",
+      "fusion_desc": "Gather",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Unsqueeze",
+      "node_name": "/model.22/dfl/Unsqueeze_2",
+      "fusion_desc": "Unsqueeze",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Concat",
+      "node_name": "/model.22/dfl/Concat_1",
+      "fusion_desc": "Concat",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Reshape",
+      "node_name": "/model.22/dfl/Reshape",
+      "fusion_desc": "Reshape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            4
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Transpose",
+      "node_name": "/model.22/dfl/Transpose",
+      "fusion_desc": "Transpose",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Softmax",
+      "node_name": "/model.22/dfl/Softmax",
+      "fusion_desc": "Softmax",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Conv",
+      "node_name": "/model.22/dfl/conv/Conv",
+      "fusion_desc": "Conv + Bias",
+      "attributes": {
+        "kernel_shape": [
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1
+      },
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "weight_shape": [
+            1,
+            16,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Reshape",
+      "node_name": "/model.22/dfl/Reshape_1",
+      "fusion_desc": "Reshape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Shape",
+      "node_name": "/model.22/Shape_13",
+      "fusion_desc": "Shape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Gather",
+      "node_name": "/model.22/Gather_7",
+      "fusion_desc": "Gather",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Add",
+      "node_name": "/model.22/Add_6",
+      "fusion_desc": "Add",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": [
+            1
+          ],
+          "flops": 0,
+          "bias_shape": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Div",
+      "node_name": "/model.22/Div",
+      "fusion_desc": "Div",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": [
+            1
+          ],
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Mul",
+      "node_name": "/model.22/Mul_4",
+      "fusion_desc": "Mul",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Slice",
+      "node_name": "/model.22/Slice_1",
+      "fusion_desc": "Slice",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Shape",
+      "node_name": "/model.22/Shape_9",
+      "fusion_desc": "Shape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Gather",
+      "node_name": "/model.22/Gather_5",
+      "fusion_desc": "Gather",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Cast",
+      "node_name": "/model.22/Cast_5",
+      "fusion_desc": "Cast",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Range",
+      "node_name": "/model.22/Range_5",
+      "fusion_desc": "Range",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Add",
+      "node_name": "/model.22/Add_5",
+      "fusion_desc": "Add",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Reshape",
+      "node_name": "/model.22/Reshape_16",
+      "fusion_desc": "Reshape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Reshape",
+      "node_name": "/model.22/Reshape_18",
+      "fusion_desc": "Reshape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Gather",
+      "node_name": "/model.22/Gather_6",
+      "fusion_desc": "Gather",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Cast",
+      "node_name": "/model.22/Cast_4",
+      "fusion_desc": "Cast",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Range",
+      "node_name": "/model.22/Range_4",
+      "fusion_desc": "Range",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Add",
+      "node_name": "/model.22/Add_4",
+      "fusion_desc": "Add",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Reshape",
+      "node_name": "/model.22/Reshape_17",
+      "fusion_desc": "Reshape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Shape",
+      "node_name": "/model.22/Shape_12",
+      "fusion_desc": "Shape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Shape",
+      "node_name": "/model.22/Shape_11",
+      "fusion_desc": "Shape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Concat",
+      "node_name": "/model.22/Concat_18",
+      "fusion_desc": "Concat",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Expand",
+      "node_name": "/model.22/Expand_4",
+      "fusion_desc": "Expand",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Unsqueeze",
+      "node_name": "/model.22/Unsqueeze_13",
+      "fusion_desc": "Unsqueeze",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Reshape",
+      "node_name": "/model.22/Reshape_19",
+      "fusion_desc": "Reshape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Expand",
+      "node_name": "/model.22/Expand_5",
+      "fusion_desc": "Expand",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Unsqueeze",
+      "node_name": "/model.22/Unsqueeze_12",
+      "fusion_desc": "Unsqueeze",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Concat",
+      "node_name": "/model.22/Concat_21",
+      "fusion_desc": "Concat",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Reshape",
+      "node_name": "/model.22/Reshape_20",
+      "fusion_desc": "Reshape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Shape",
+      "node_name": "/model.22/Shape_5",
+      "fusion_desc": "Shape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Gather",
+      "node_name": "/model.22/Gather_3",
+      "fusion_desc": "Gather",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Cast",
+      "node_name": "/model.22/Cast_3",
+      "fusion_desc": "Cast",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Range",
+      "node_name": "/model.22/Range_3",
+      "fusion_desc": "Range",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Add",
+      "node_name": "/model.22/Add_3",
+      "fusion_desc": "Add",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Reshape",
+      "node_name": "/model.22/Reshape_11",
+      "fusion_desc": "Reshape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Reshape",
+      "node_name": "/model.22/Reshape_13",
+      "fusion_desc": "Reshape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Gather",
+      "node_name": "/model.22/Gather_4",
+      "fusion_desc": "Gather",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Cast",
+      "node_name": "/model.22/Cast_2",
+      "fusion_desc": "Cast",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Range",
+      "node_name": "/model.22/Range_2",
+      "fusion_desc": "Range",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Add",
+      "node_name": "/model.22/Add_2",
+      "fusion_desc": "Add",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Reshape",
+      "node_name": "/model.22/Reshape_12",
+      "fusion_desc": "Reshape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Shape",
+      "node_name": "/model.22/Shape_8",
+      "fusion_desc": "Shape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Shape",
+      "node_name": "/model.22/Shape_7",
+      "fusion_desc": "Shape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Concat",
+      "node_name": "/model.22/Concat_13",
+      "fusion_desc": "Concat",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Expand",
+      "node_name": "/model.22/Expand_2",
+      "fusion_desc": "Expand",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Unsqueeze",
+      "node_name": "/model.22/Unsqueeze_10",
+      "fusion_desc": "Unsqueeze",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Reshape",
+      "node_name": "/model.22/Reshape_14",
+      "fusion_desc": "Reshape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Expand",
+      "node_name": "/model.22/Expand_3",
+      "fusion_desc": "Expand",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Unsqueeze",
+      "node_name": "/model.22/Unsqueeze_9",
+      "fusion_desc": "Unsqueeze",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Concat",
+      "node_name": "/model.22/Concat_16",
+      "fusion_desc": "Concat",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Reshape",
+      "node_name": "/model.22/Reshape_15",
+      "fusion_desc": "Reshape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Gather",
+      "node_name": "/model.22/Gather_1",
+      "fusion_desc": "Gather",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Cast",
+      "node_name": "/model.22/Cast_1",
+      "fusion_desc": "Cast",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Range",
+      "node_name": "/model.22/Range_1",
+      "fusion_desc": "Range",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Add",
+      "node_name": "/model.22/Add_1",
+      "fusion_desc": "Add",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Reshape",
+      "node_name": "/model.22/Reshape_6",
+      "fusion_desc": "Reshape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Reshape",
+      "node_name": "/model.22/Reshape_8",
+      "fusion_desc": "Reshape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Gather",
+      "node_name": "/model.22/Gather_2",
+      "fusion_desc": "Gather",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Cast",
+      "node_name": "/model.22/Cast",
+      "fusion_desc": "Cast",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Range",
+      "node_name": "/model.22/Range",
+      "fusion_desc": "Range",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Add",
+      "node_name": "/model.22/Add",
+      "fusion_desc": "Add",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Reshape",
+      "node_name": "/model.22/Reshape_7",
+      "fusion_desc": "Reshape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Shape",
+      "node_name": "/model.22/Shape_4",
+      "fusion_desc": "Shape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Shape",
+      "node_name": "/model.22/Shape_3",
+      "fusion_desc": "Shape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Concat",
+      "node_name": "/model.22/Concat_8",
+      "fusion_desc": "Concat",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Expand",
+      "node_name": "/model.22/Expand",
+      "fusion_desc": "Expand",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Unsqueeze",
+      "node_name": "/model.22/Unsqueeze_7",
+      "fusion_desc": "Unsqueeze",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Reshape",
+      "node_name": "/model.22/Reshape_9",
+      "fusion_desc": "Reshape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Expand",
+      "node_name": "/model.22/Expand_1",
+      "fusion_desc": "Expand",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Unsqueeze",
+      "node_name": "/model.22/Unsqueeze_6",
+      "fusion_desc": "Unsqueeze",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Concat",
+      "node_name": "/model.22/Concat_11",
+      "fusion_desc": "Concat",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Reshape",
+      "node_name": "/model.22/Reshape_10",
+      "fusion_desc": "Reshape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Concat",
+      "node_name": "/model.22/Concat_23",
+      "fusion_desc": "Concat",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Transpose",
+      "node_name": "/model.22/Transpose",
+      "fusion_desc": "Transpose",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Unsqueeze",
+      "node_name": "/model.22/Unsqueeze_15",
+      "fusion_desc": "Unsqueeze",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Add",
+      "node_name": "/model.22/Add_7",
+      "fusion_desc": "Add",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Slice",
+      "node_name": "/model.22/Slice",
+      "fusion_desc": "Slice",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Sub",
+      "node_name": "/model.22/Sub",
+      "fusion_desc": "Sub",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Sub",
+      "node_name": "/model.22/Sub_1",
+      "fusion_desc": "Sub",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Add",
+      "node_name": "/model.22/Add_8",
+      "fusion_desc": "Add",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Div",
+      "node_name": "/model.22/Div_1",
+      "fusion_desc": "Div",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Concat",
+      "node_name": "/model.22/Concat_25",
+      "fusion_desc": "Concat",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Mul",
+      "node_name": "/model.22/Mul_2",
+      "fusion_desc": "Mul",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Unsqueeze",
+      "node_name": "/model.22/Unsqueeze_14",
+      "fusion_desc": "Unsqueeze",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Concat",
+      "node_name": "/model.22/Concat_22",
+      "fusion_desc": "Concat",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "ConstantOfShape",
+      "node_name": "/model.22/ConstantOfShape_2",
+      "fusion_desc": "ConstantOfShape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Mul",
+      "node_name": "/model.22/Mul_1",
+      "fusion_desc": "Mul",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Unsqueeze",
+      "node_name": "/model.22/Unsqueeze_11",
+      "fusion_desc": "Unsqueeze",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Concat",
+      "node_name": "/model.22/Concat_17",
+      "fusion_desc": "Concat",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "ConstantOfShape",
+      "node_name": "/model.22/ConstantOfShape_1",
+      "fusion_desc": "ConstantOfShape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Mul",
+      "node_name": "/model.22/Mul",
+      "fusion_desc": "Mul",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Unsqueeze",
+      "node_name": "/model.22/Unsqueeze_8",
+      "fusion_desc": "Unsqueeze",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "Concat",
+      "node_name": "/model.22/Concat_12",
+      "fusion_desc": "Concat",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0,
+          "bias_shape": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "kernel_type": "ConstantOfShape",
+      "node_name": "/model.22/ConstantOfShape",
+      "fusion_desc": "ConstantOfShape",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Concat",
+      "node_name": "/model.22/Concat_24",
+      "fusion_desc": "Concat",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Transpose",
+      "node_name": "/model.22/Transpose_1",
+      "fusion_desc": "Transpose",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Mul",
+      "node_name": "/model.22/Mul_5",
+      "fusion_desc": "Mul",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": null,
+          "flops": 0
+        }
+      ]
+    },
+    {
+      "kernel_type": "Concat",
+      "node_name": "/model.22/Concat_26",
+      "fusion_desc": "Concat",
+      "attributes": {},
+      "shapes": [
+        {
+          "source_model": "yolov8m_224x224",
+          "batch_size": null,
+          "input_size": 224,
+          "activation_input_shape": null,
+          "output_shape": [
+            "batch",
+            "Concatoutput0_dim_1",
+            "anchors"
+          ],
+          "flops": 0
+        }
+      ]
+    }
+  ]
+}
