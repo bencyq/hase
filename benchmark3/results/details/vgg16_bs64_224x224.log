@@ -1,0 +1,33 @@
+Model: /cyq/hase/model_zoo/models/vgg16_bs64_224x224.onnx
+Kernel Count: 25
+Execution Order:
+[01] /features/features.0/Conv | Conv_Relu | 665.119010 ms
+[02] /features/features.2/Conv | Conv_Relu | 747.251307 ms
+[03] /features/features.4/MaxPool | MaxPool | 239.953713 ms
+[04] /features/features.5/Conv | Conv_Relu | 347.607947 ms
+[05] /features/features.7/Conv | Conv_Relu | 371.625966 ms
+[06] /features/features.9/MaxPool | MaxPool | 124.294061 ms
+[07] /features/features.10/Conv | Conv_Relu | 175.560457 ms
+[08] /features/features.12/Conv | Conv_Relu | 189.438802 ms
+[09] /features/features.14/Conv | Conv_Relu | 187.797508 ms
+[10] /features/features.16/MaxPool | MaxPool | 57.643558 ms
+[11] /features/features.17/Conv | Conv_Relu | 86.860185 ms
+[12] /features/features.19/Conv | Conv_Relu | 91.984857 ms
+[13] /features/features.21/Conv | Conv_Relu | 92.170868 ms
+[14] /features/features.23/MaxPool | MaxPool | 16.318354 ms
+[15] /features/features.24/Conv | Conv_Relu | 10.264497 ms
+[16] /features/features.26/Conv | Conv_Relu | 10.375005 ms
+[17] /features/features.28/Conv | Conv_Relu | 10.153264 ms
+[18] /features/features.30/MaxPool | MaxPool | 3.366384 ms
+[19] /avgpool/AveragePool | AveragePool | 0.772624 ms
+[20] /Flatten | Flatten | 1.797482 ms
+[21] /classifier/classifier.0/Gemm | Gemm | 1.409158 ms
+[22] /classifier/classifier.1/Relu | Relu | 0.408421 ms
+[23] /classifier/classifier.3/Gemm | Gemm | 0.544204 ms
+[24] /classifier/classifier.4/Relu | Relu | 0.539908 ms
+[25] /classifier/classifier.6/Gemm | Gemm | 0.539886 ms
+Total Kernel Latency(ms): 3433.797427
+Direct Model Latency(ms): 50.168124
+KernelSum - Model(ms): 3383.629303
+KernelSum / Model: 68.445801
+Saved: /cyq/hase/benchmark3/results/details/vgg16_bs64_224x224.json

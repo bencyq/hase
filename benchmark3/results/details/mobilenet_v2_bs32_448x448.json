@@ -1,0 +1,913 @@
+{
+  "model_path": "/cyq/hase/model_zoo/models/mobilenet_v2_bs32_448x448.onnx",
+  "record_json": "/cyq/hase/ort_analysis/ort_kernel_record/mobilenet_v2.json",
+  "kernel_onnx_dir": "/cyq/hase/kernel_model/kernel_onnx",
+  "warmup": 20,
+  "loops": 20,
+  "total_kernel_latency_ms": 5406.368316523731,
+  "direct_model_latency_ms": 39.65455889701843,
+  "kernel_minus_model_ms": 5366.713757626712,
+  "kernel_over_model_ratio": 136.33661467686198,
+  "kernels": [
+    {
+      "index": 1,
+      "node_name": "/features/features.0/features.0.0/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_3c448x448_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_3c448x448_k3x3.onnx",
+      "input_shape": "32x3x448x448",
+      "latency_ms": 263.3685888722539
+    },
+    {
+      "index": 2,
+      "node_name": "/features/features.0/features.0.2/Clip",
+      "kernel_type": "Clip",
+      "kernel_id": "Clip_bs32_32c224x224",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Clip_bs32_32c224x224.onnx",
+      "input_shape": "32x32x224x224",
+      "latency_ms": 183.3328489214182
+    },
+    {
+      "index": 3,
+      "node_name": "/features/features.1/conv/conv.0/conv.0.0/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_32c224x224_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_32c224x224_k3x3.onnx",
+      "input_shape": "32x32x224x224",
+      "latency_ms": 188.77705838531256
+    },
+    {
+      "index": 4,
+      "node_name": "/features/features.1/conv/conv.0/conv.0.2/Clip",
+      "kernel_type": "Clip",
+      "kernel_id": "Clip_bs32_32c224x224",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Clip_bs32_32c224x224.onnx",
+      "input_shape": "32x32x224x224",
+      "latency_ms": 181.49753082543612
+    },
+    {
+      "index": 5,
+      "node_name": "/features/features.1/conv/conv.1/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_32c224x224_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_32c224x224_k1x1.onnx",
+      "input_shape": "32x32x224x224",
+      "latency_ms": 102.88750566542149
+    },
+    {
+      "index": 6,
+      "node_name": "/features/features.2/conv/conv.0/conv.0.0/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_16c224x224_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_16c224x224_k1x1.onnx",
+      "input_shape": "32x16x224x224",
+      "latency_ms": 483.8131606578827
+    },
+    {
+      "index": 7,
+      "node_name": "/features/features.2/conv/conv.0/conv.0.2/Clip",
+      "kernel_type": "Clip",
+      "kernel_id": "Clip_bs32_96c224x224",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Clip_bs32_96c224x224.onnx",
+      "input_shape": "32x96x224x224",
+      "latency_ms": 566.6815798729658
+    },
+    {
+      "index": 8,
+      "node_name": "/features/features.2/conv/conv.1/conv.1.0/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_96c224x224_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_96c224x224_k3x3.onnx",
+      "input_shape": "32x96x224x224",
+      "latency_ms": 178.61850429326296
+    },
+    {
+      "index": 9,
+      "node_name": "/features/features.2/conv/conv.1/conv.1.2/Clip",
+      "kernel_type": "Clip",
+      "kernel_id": "Clip_bs32_96c112x112",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Clip_bs32_96c112x112.onnx",
+      "input_shape": "32x96x112x112",
+      "latency_ms": 139.37735371291637
+    },
+    {
+      "index": 10,
+      "node_name": "/features/features.2/conv/conv.2/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_96c112x112_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_96c112x112_k1x1.onnx",
+      "input_shape": "32x96x112x112",
+      "latency_ms": 140.39902463555336
+    },
+    {
+      "index": 11,
+      "node_name": "/features/features.3/conv/conv.0/conv.0.0/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_24c112x112_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_24c112x112_k1x1.onnx",
+      "input_shape": "32x24x112x112",
+      "latency_ms": 189.2652429640293
+    },
+    {
+      "index": 12,
+      "node_name": "/features/features.3/conv/conv.0/conv.0.2/Clip",
+      "kernel_type": "Clip",
+      "kernel_id": "Clip_bs32_144c112x112",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Clip_bs32_144c112x112.onnx",
+      "input_shape": "32x144x112x112",
+      "latency_ms": 212.9214446991682
+    },
+    {
+      "index": 13,
+      "node_name": "/features/features.3/conv/conv.1/conv.1.0/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_144c112x112_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_144c112x112_k3x3.onnx",
+      "input_shape": "32x144x112x112",
+      "latency_ms": 213.26650511473417
+    },
+    {
+      "index": 14,
+      "node_name": "/features/features.3/conv/conv.1/conv.1.2/Clip",
+      "kernel_type": "Clip",
+      "kernel_id": "Clip_bs32_144c112x112",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Clip_bs32_144c112x112.onnx",
+      "input_shape": "32x144x112x112",
+      "latency_ms": 208.90100430697203
+    },
+    {
+      "index": 15,
+      "node_name": "/features/features.3/conv/conv.2/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_144c112x112_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_144c112x112_k1x1.onnx",
+      "input_shape": "32x144x112x112",
+      "latency_ms": 32.35263042151928
+    },
+    {
+      "index": 16,
+      "node_name": "/features/features.3/Add",
+      "kernel_type": "Add",
+      "kernel_id": "Add_bs32_24c112x112",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Add_bs32_24c112x112.onnx",
+      "input_shape": "32x24x112x112",
+      "latency_ms": 30.489006265997887
+    },
+    {
+      "index": 17,
+      "node_name": "/features/features.4/conv/conv.0/conv.0.0/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_24c112x112_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_24c112x112_k1x1.onnx",
+      "input_shape": "32x24x112x112",
+      "latency_ms": 188.35011068731546
+    },
+    {
+      "index": 18,
+      "node_name": "/features/features.4/conv/conv.0/conv.0.2/Clip",
+      "kernel_type": "Clip",
+      "kernel_id": "Clip_bs32_144c112x112",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Clip_bs32_144c112x112.onnx",
+      "input_shape": "32x144x112x112",
+      "latency_ms": 205.89465014636517
+    },
+    {
+      "index": 19,
+      "node_name": "/features/features.4/conv/conv.1/conv.1.0/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_144c112x112_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_144c112x112_k3x3.onnx",
+      "input_shape": "32x144x112x112",
+      "latency_ms": 210.06291955709457
+    },
+    {
+      "index": 20,
+      "node_name": "/features/features.4/conv/conv.1/conv.1.2/Clip",
+      "kernel_type": "Clip",
+      "kernel_id": "Clip_bs32_144c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Clip_bs32_144c56x56.onnx",
+      "input_shape": "32x144x56x56",
+      "latency_ms": 50.20944755524397
+    },
+    {
+      "index": 21,
+      "node_name": "/features/features.4/conv/conv.2/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_144c56x56_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_144c56x56_k1x1.onnx",
+      "input_shape": "32x144x56x56",
+      "latency_ms": 9.333115071058273
+    },
+    {
+      "index": 22,
+      "node_name": "/features/features.5/conv/conv.0/conv.0.0/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_32c56x56_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_32c56x56_k1x1.onnx",
+      "input_shape": "32x32x56x56",
+      "latency_ms": 3.750329837203026
+    },
+    {
+      "index": 23,
+      "node_name": "/features/features.5/conv/conv.0/conv.0.2/Clip",
+      "kernel_type": "Clip",
+      "kernel_id": "Clip_bs32_192c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Clip_bs32_192c56x56.onnx",
+      "input_shape": "32x192x56x56",
+      "latency_ms": 68.30704659223557
+    },
+    {
+      "index": 24,
+      "node_name": "/features/features.5/conv/conv.1/conv.1.0/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_192c56x56_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_192c56x56_k3x3.onnx",
+      "input_shape": "32x192x56x56",
+      "latency_ms": 18.999123387038708
+    },
+    {
+      "index": 25,
+      "node_name": "/features/features.5/conv/conv.1/conv.1.2/Clip",
+      "kernel_type": "Clip",
+      "kernel_id": "Clip_bs32_192c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Clip_bs32_192c56x56.onnx",
+      "input_shape": "32x192x56x56",
+      "latency_ms": 68.29492747783661
+    },
+    {
+      "index": 26,
+      "node_name": "/features/features.5/conv/conv.2/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_192c56x56_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_192c56x56_k1x1.onnx",
+      "input_shape": "32x192x56x56",
+      "latency_ms": 18.525049649178982
+    },
+    {
+      "index": 27,
+      "node_name": "/features/features.5/Add",
+      "kernel_type": "Add",
+      "kernel_id": "Add_bs32_32c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Add_bs32_32c56x56.onnx",
+      "input_shape": "32x32x56x56",
+      "latency_ms": 3.7004122510552406
+    },
+    {
+      "index": 28,
+      "node_name": "/features/features.6/conv/conv.0/conv.0.0/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_32c56x56_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_32c56x56_k1x1.onnx",
+      "input_shape": "32x32x56x56",
+      "latency_ms": 3.729269653558731
+    },
+    {
+      "index": 29,
+      "node_name": "/features/features.6/conv/conv.0/conv.0.2/Clip",
+      "kernel_type": "Clip",
+      "kernel_id": "Clip_bs32_192c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Clip_bs32_192c56x56.onnx",
+      "input_shape": "32x192x56x56",
+      "latency_ms": 67.80142560601234
+    },
+    {
+      "index": 30,
+      "node_name": "/features/features.6/conv/conv.1/conv.1.0/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_192c56x56_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_192c56x56_k3x3.onnx",
+      "input_shape": "32x192x56x56",
+      "latency_ms": 18.412579409778118
+    },
+    {
+      "index": 31,
+      "node_name": "/features/features.6/conv/conv.1/conv.1.2/Clip",
+      "kernel_type": "Clip",
+      "kernel_id": "Clip_bs32_192c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Clip_bs32_192c56x56.onnx",
+      "input_shape": "32x192x56x56",
+      "latency_ms": 66.69346820563078
+    },
+    {
+      "index": 32,
+      "node_name": "/features/features.6/conv/conv.2/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_192c56x56_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_192c56x56_k1x1.onnx",
+      "input_shape": "32x192x56x56",
+      "latency_ms": 17.878660932183266
+    },
+    {
+      "index": 33,
+      "node_name": "/features/features.6/Add",
+      "kernel_type": "Add",
+      "kernel_id": "Add_bs32_32c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Add_bs32_32c56x56.onnx",
+      "input_shape": "32x32x56x56",
+      "latency_ms": 3.7055926397442818
+    },
+    {
+      "index": 34,
+      "node_name": "/features/features.7/conv/conv.0/conv.0.0/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_32c56x56_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_32c56x56_k1x1.onnx",
+      "input_shape": "32x32x56x56",
+      "latency_ms": 3.779647685587406
+    },
+    {
+      "index": 35,
+      "node_name": "/features/features.7/conv/conv.0/conv.0.2/Clip",
+      "kernel_type": "Clip",
+      "kernel_id": "Clip_bs32_192c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Clip_bs32_192c56x56.onnx",
+      "input_shape": "32x192x56x56",
+      "latency_ms": 67.9656695574522
+    },
+    {
+      "index": 36,
+      "node_name": "/features/features.7/conv/conv.1/conv.1.0/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_192c56x56_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_192c56x56_k3x3.onnx",
+      "input_shape": "32x192x56x56",
+      "latency_ms": 18.69644857943058
+    },
+    {
+      "index": 37,
+      "node_name": "/features/features.7/conv/conv.1/conv.1.2/Clip",
+      "kernel_type": "Clip",
+      "kernel_id": "Clip_bs32_192c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Clip_bs32_192c28x28.onnx",
+      "input_shape": "32x192x28x28",
+      "latency_ms": 6.220313534140587
+    },
+    {
+      "index": 38,
+      "node_name": "/features/features.7/conv/conv.2/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_192c28x28_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_192c28x28_k1x1.onnx",
+      "input_shape": "32x192x28x28",
+      "latency_ms": 6.791291944682598
+    },
+    {
+      "index": 39,
+      "node_name": "/features/features.8/conv/conv.0/conv.0.0/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_64c28x28_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_64c28x28_k1x1.onnx",
+      "input_shape": "32x64x28x28",
+      "latency_ms": 1.8691586330533028
+    },
+    {
+      "index": 40,
+      "node_name": "/features/features.8/conv/conv.0/conv.0.2/Clip",
+      "kernel_type": "Clip",
+      "kernel_id": "Clip_bs32_384c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Clip_bs32_384c28x28.onnx",
+      "input_shape": "32x384x28x28",
+      "latency_ms": 30.10164462029934
+    },
+    {
+      "index": 41,
+      "node_name": "/features/features.8/conv/conv.1/conv.1.0/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_384c28x28_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_384c28x28_k3x3.onnx",
+      "input_shape": "32x384x28x28",
+      "latency_ms": 7.430967688560486
+    },
+    {
+      "index": 42,
+      "node_name": "/features/features.8/conv/conv.1/conv.1.2/Clip",
+      "kernel_type": "Clip",
+      "kernel_id": "Clip_bs32_384c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Clip_bs32_384c28x28.onnx",
+      "input_shape": "32x384x28x28",
+      "latency_ms": 30.27911353856325
+    },
+    {
+      "index": 43,
+      "node_name": "/features/features.8/conv/conv.2/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_384c28x28_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_384c28x28_k1x1.onnx",
+      "input_shape": "32x384x28x28",
+      "latency_ms": 30.3768340498209
+    },
+    {
+      "index": 44,
+      "node_name": "/features/features.8/Add",
+      "kernel_type": "Add",
+      "kernel_id": "Add_bs32_64c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Add_bs32_64c28x28.onnx",
+      "input_shape": "32x64x28x28",
+      "latency_ms": 1.9776318222284317
+    },
+    {
+      "index": 45,
+      "node_name": "/features/features.9/conv/conv.0/conv.0.0/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_64c28x28_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_64c28x28_k1x1.onnx",
+      "input_shape": "32x64x28x28",
+      "latency_ms": 2.031148783862591
+    },
+    {
+      "index": 46,
+      "node_name": "/features/features.9/conv/conv.0/conv.0.2/Clip",
+      "kernel_type": "Clip",
+      "kernel_id": "Clip_bs32_384c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Clip_bs32_384c28x28.onnx",
+      "input_shape": "32x384x28x28",
+      "latency_ms": 30.155536346137524
+    },
+    {
+      "index": 47,
+      "node_name": "/features/features.9/conv/conv.1/conv.1.0/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_384c28x28_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_384c28x28_k3x3.onnx",
+      "input_shape": "32x384x28x28",
+      "latency_ms": 7.512511685490608
+    },
+    {
+      "index": 48,
+      "node_name": "/features/features.9/conv/conv.1/conv.1.2/Clip",
+      "kernel_type": "Clip",
+      "kernel_id": "Clip_bs32_384c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Clip_bs32_384c28x28.onnx",
+      "input_shape": "32x384x28x28",
+      "latency_ms": 31.02277684956789
+    },
+    {
+      "index": 49,
+      "node_name": "/features/features.9/conv/conv.2/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_384c28x28_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_384c28x28_k1x1.onnx",
+      "input_shape": "32x384x28x28",
+      "latency_ms": 30.99096156656742
+    },
+    {
+      "index": 50,
+      "node_name": "/features/features.9/Add",
+      "kernel_type": "Add",
+      "kernel_id": "Add_bs32_64c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Add_bs32_64c28x28.onnx",
+      "input_shape": "32x64x28x28",
+      "latency_ms": 1.9698396325111391
+    },
+    {
+      "index": 51,
+      "node_name": "/features/features.10/conv/conv.0/conv.0.0/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_64c28x28_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_64c28x28_k1x1.onnx",
+      "input_shape": "32x64x28x28",
+      "latency_ms": 2.0286990329623222
+    },
+    {
+      "index": 52,
+      "node_name": "/features/features.10/conv/conv.0/conv.0.2/Clip",
+      "kernel_type": "Clip",
+      "kernel_id": "Clip_bs32_384c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Clip_bs32_384c28x28.onnx",
+      "input_shape": "32x384x28x28",
+      "latency_ms": 30.094885639846325
+    },
+    {
+      "index": 53,
+      "node_name": "/features/features.10/conv/conv.1/conv.1.0/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_384c28x28_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_384c28x28_k3x3.onnx",
+      "input_shape": "32x384x28x28",
+      "latency_ms": 7.514677755534649
+    },
+    {
+      "index": 54,
+      "node_name": "/features/features.10/conv/conv.1/conv.1.2/Clip",
+      "kernel_type": "Clip",
+      "kernel_id": "Clip_bs32_384c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Clip_bs32_384c28x28.onnx",
+      "input_shape": "32x384x28x28",
+      "latency_ms": 29.020683839917183
+    },
+    {
+      "index": 55,
+      "node_name": "/features/features.10/conv/conv.2/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_384c28x28_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_384c28x28_k1x1.onnx",
+      "input_shape": "32x384x28x28",
+      "latency_ms": 30.65946400165558
+    },
+    {
+      "index": 56,
+      "node_name": "/features/features.10/Add",
+      "kernel_type": "Add",
+      "kernel_id": "Add_bs32_64c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Add_bs32_64c28x28.onnx",
+      "input_shape": "32x64x28x28",
+      "latency_ms": 1.9979098811745644
+    },
+    {
+      "index": 57,
+      "node_name": "/features/features.11/conv/conv.0/conv.0.0/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_64c28x28_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_64c28x28_k1x1.onnx",
+      "input_shape": "32x64x28x28",
+      "latency_ms": 2.05292496830225
+    },
+    {
+      "index": 58,
+      "node_name": "/features/features.11/conv/conv.0/conv.0.2/Clip",
+      "kernel_type": "Clip",
+      "kernel_id": "Clip_bs32_384c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Clip_bs32_384c28x28.onnx",
+      "input_shape": "32x384x28x28",
+      "latency_ms": 30.247604846954346
+    },
+    {
+      "index": 59,
+      "node_name": "/features/features.11/conv/conv.1/conv.1.0/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_384c28x28_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_384c28x28_k3x3.onnx",
+      "input_shape": "32x384x28x28",
+      "latency_ms": 7.5662655755877495
+    },
+    {
+      "index": 60,
+      "node_name": "/features/features.11/conv/conv.1/conv.1.2/Clip",
+      "kernel_type": "Clip",
+      "kernel_id": "Clip_bs32_384c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Clip_bs32_384c28x28.onnx",
+      "input_shape": "32x384x28x28",
+      "latency_ms": 29.949145950376987
+    },
+    {
+      "index": 61,
+      "node_name": "/features/features.11/conv/conv.2/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_384c28x28_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_384c28x28_k1x1.onnx",
+      "input_shape": "32x384x28x28",
+      "latency_ms": 30.442084185779095
+    },
+    {
+      "index": 62,
+      "node_name": "/features/features.12/conv/conv.0/conv.0.0/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_96c28x28_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_96c28x28_k1x1.onnx",
+      "input_shape": "32x96x28x28",
+      "latency_ms": 2.0408205687999725
+    },
+    {
+      "index": 63,
+      "node_name": "/features/features.12/conv/conv.0/conv.0.2/Clip",
+      "kernel_type": "Clip",
+      "kernel_id": "Clip_bs32_576c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Clip_bs32_576c28x28.onnx",
+      "input_shape": "32x576x28x28",
+      "latency_ms": 49.65362995862961
+    },
+    {
+      "index": 64,
+      "node_name": "/features/features.12/conv/conv.1/conv.1.0/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_576c28x28_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_576c28x28_k3x3.onnx",
+      "input_shape": "32x576x28x28",
+      "latency_ms": 49.916043505072594
+    },
+    {
+      "index": 65,
+      "node_name": "/features/features.12/conv/conv.1/conv.1.2/Clip",
+      "kernel_type": "Clip",
+      "kernel_id": "Clip_bs32_576c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Clip_bs32_576c28x28.onnx",
+      "input_shape": "32x576x28x28",
+      "latency_ms": 49.48221072554588
+    },
+    {
+      "index": 66,
+      "node_name": "/features/features.12/conv/conv.2/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_576c28x28_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_576c28x28_k1x1.onnx",
+      "input_shape": "32x576x28x28",
+      "latency_ms": 10.156166926026344
+    },
+    {
+      "index": 67,
+      "node_name": "/features/features.12/Add",
+      "kernel_type": "Add",
+      "kernel_id": "Add_bs32_96c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Add_bs32_96c28x28.onnx",
+      "input_shape": "32x96x28x28",
+      "latency_ms": 2.6034243404865265
+    },
+    {
+      "index": 68,
+      "node_name": "/features/features.13/conv/conv.0/conv.0.0/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_96c28x28_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_96c28x28_k1x1.onnx",
+      "input_shape": "32x96x28x28",
+      "latency_ms": 2.0277073606848717
+    },
+    {
+      "index": 69,
+      "node_name": "/features/features.13/conv/conv.0/conv.0.2/Clip",
+      "kernel_type": "Clip",
+      "kernel_id": "Clip_bs32_576c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Clip_bs32_576c28x28.onnx",
+      "input_shape": "32x576x28x28",
+      "latency_ms": 50.05825627595186
+    },
+    {
+      "index": 70,
+      "node_name": "/features/features.13/conv/conv.1/conv.1.0/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_576c28x28_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_576c28x28_k3x3.onnx",
+      "input_shape": "32x576x28x28",
+      "latency_ms": 49.370722472667694
+    },
+    {
+      "index": 71,
+      "node_name": "/features/features.13/conv/conv.1/conv.1.2/Clip",
+      "kernel_type": "Clip",
+      "kernel_id": "Clip_bs32_576c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Clip_bs32_576c28x28.onnx",
+      "input_shape": "32x576x28x28",
+      "latency_ms": 49.95705559849739
+    },
+    {
+      "index": 72,
+      "node_name": "/features/features.13/conv/conv.2/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_576c28x28_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_576c28x28_k1x1.onnx",
+      "input_shape": "32x576x28x28",
+      "latency_ms": 10.368837416172028
+    },
+    {
+      "index": 73,
+      "node_name": "/features/features.13/Add",
+      "kernel_type": "Add",
+      "kernel_id": "Add_bs32_96c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Add_bs32_96c28x28.onnx",
+      "input_shape": "32x96x28x28",
+      "latency_ms": 2.751702070236206
+    },
+    {
+      "index": 74,
+      "node_name": "/features/features.14/conv/conv.0/conv.0.0/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_96c28x28_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_96c28x28_k1x1.onnx",
+      "input_shape": "32x96x28x28",
+      "latency_ms": 2.0792940631508827
+    },
+    {
+      "index": 75,
+      "node_name": "/features/features.14/conv/conv.0/conv.0.2/Clip",
+      "kernel_type": "Clip",
+      "kernel_id": "Clip_bs32_576c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Clip_bs32_576c28x28.onnx",
+      "input_shape": "32x576x28x28",
+      "latency_ms": 50.296880677342415
+    },
+    {
+      "index": 76,
+      "node_name": "/features/features.14/conv/conv.1/conv.1.0/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_576c28x28_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_576c28x28_k3x3.onnx",
+      "input_shape": "32x576x28x28",
+      "latency_ms": 50.90071242302656
+    },
+    {
+      "index": 77,
+      "node_name": "/features/features.14/conv/conv.1/conv.1.2/Clip",
+      "kernel_type": "Clip",
+      "kernel_id": "Clip_bs32_576c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Clip_bs32_576c14x14.onnx",
+      "input_shape": "32x576x14x14",
+      "latency_ms": 4.238084331154823
+    },
+    {
+      "index": 78,
+      "node_name": "/features/features.14/conv/conv.2/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_576c14x14_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_576c14x14_k1x1.onnx",
+      "input_shape": "32x576x14x14",
+      "latency_ms": 4.458803683519363
+    },
+    {
+      "index": 79,
+      "node_name": "/features/features.15/conv/conv.0/conv.0.0/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_160c14x14_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_160c14x14_k1x1.onnx",
+      "input_shape": "32x160x14x14",
+      "latency_ms": 5.409738793969154
+    },
+    {
+      "index": 80,
+      "node_name": "/features/features.15/conv/conv.0/conv.0.2/Clip",
+      "kernel_type": "Clip",
+      "kernel_id": "Clip_bs32_960c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Clip_bs32_960c14x14.onnx",
+      "input_shape": "32x960x14x14",
+      "latency_ms": 7.18925204128027
+    },
+    {
+      "index": 81,
+      "node_name": "/features/features.15/conv/conv.1/conv.1.0/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_960c14x14_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_960c14x14_k3x3.onnx",
+      "input_shape": "32x960x14x14",
+      "latency_ms": 8.413800597190857
+    },
+    {
+      "index": 82,
+      "node_name": "/features/features.15/conv/conv.1/conv.1.2/Clip",
+      "kernel_type": "Clip",
+      "kernel_id": "Clip_bs32_960c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Clip_bs32_960c14x14.onnx",
+      "input_shape": "32x960x14x14",
+      "latency_ms": 7.273748144507408
+    },
+    {
+      "index": 83,
+      "node_name": "/features/features.15/conv/conv.2/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_960c14x14_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_960c14x14_k1x1.onnx",
+      "input_shape": "32x960x14x14",
+      "latency_ms": 4.126469604671001
+    },
+    {
+      "index": 84,
+      "node_name": "/features/features.15/Add",
+      "kernel_type": "Add",
+      "kernel_id": "Add_bs32_160c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Add_bs32_160c14x14.onnx",
+      "input_shape": "32x160x14x14",
+      "latency_ms": 1.145593449473381
+    },
+    {
+      "index": 85,
+      "node_name": "/features/features.16/conv/conv.0/conv.0.0/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_160c14x14_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_160c14x14_k1x1.onnx",
+      "input_shape": "32x160x14x14",
+      "latency_ms": 5.3197212517261505
+    },
+    {
+      "index": 86,
+      "node_name": "/features/features.16/conv/conv.0/conv.0.2/Clip",
+      "kernel_type": "Clip",
+      "kernel_id": "Clip_bs32_960c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Clip_bs32_960c14x14.onnx",
+      "input_shape": "32x960x14x14",
+      "latency_ms": 7.2104427963495255
+    },
+    {
+      "index": 87,
+      "node_name": "/features/features.16/conv/conv.1/conv.1.0/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_960c14x14_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_960c14x14_k3x3.onnx",
+      "input_shape": "32x960x14x14",
+      "latency_ms": 8.456503041088581
+    },
+    {
+      "index": 88,
+      "node_name": "/features/features.16/conv/conv.1/conv.1.2/Clip",
+      "kernel_type": "Clip",
+      "kernel_id": "Clip_bs32_960c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Clip_bs32_960c14x14.onnx",
+      "input_shape": "32x960x14x14",
+      "latency_ms": 7.493708468973637
+    },
+    {
+      "index": 89,
+      "node_name": "/features/features.16/conv/conv.2/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_960c14x14_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_960c14x14_k1x1.onnx",
+      "input_shape": "32x960x14x14",
+      "latency_ms": 4.1367728263139725
+    },
+    {
+      "index": 90,
+      "node_name": "/features/features.16/Add",
+      "kernel_type": "Add",
+      "kernel_id": "Add_bs32_160c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Add_bs32_160c14x14.onnx",
+      "input_shape": "32x160x14x14",
+      "latency_ms": 1.1922499164938927
+    },
+    {
+      "index": 91,
+      "node_name": "/features/features.17/conv/conv.0/conv.0.0/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_160c14x14_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_160c14x14_k1x1.onnx",
+      "input_shape": "32x160x14x14",
+      "latency_ms": 5.380474589765072
+    },
+    {
+      "index": 92,
+      "node_name": "/features/features.17/conv/conv.0/conv.0.2/Clip",
+      "kernel_type": "Clip",
+      "kernel_id": "Clip_bs32_960c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Clip_bs32_960c14x14.onnx",
+      "input_shape": "32x960x14x14",
+      "latency_ms": 7.373884506523609
+    },
+    {
+      "index": 93,
+      "node_name": "/features/features.17/conv/conv.1/conv.1.0/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_960c14x14_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_960c14x14_k3x3.onnx",
+      "input_shape": "32x960x14x14",
+      "latency_ms": 8.460897020995617
+    },
+    {
+      "index": 94,
+      "node_name": "/features/features.17/conv/conv.1/conv.1.2/Clip",
+      "kernel_type": "Clip",
+      "kernel_id": "Clip_bs32_960c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Clip_bs32_960c14x14.onnx",
+      "input_shape": "32x960x14x14",
+      "latency_ms": 7.249626144766808
+    },
+    {
+      "index": 95,
+      "node_name": "/features/features.17/conv/conv.2/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_960c14x14_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_960c14x14_k1x1.onnx",
+      "input_shape": "32x960x14x14",
+      "latency_ms": 4.161280766129494
+    },
+    {
+      "index": 96,
+      "node_name": "/features/features.18/features.18.0/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs32_320c14x14_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs32_320c14x14_k1x1.onnx",
+      "input_shape": "32x320x14x14",
+      "latency_ms": 1.1155474931001663
+    },
+    {
+      "index": 97,
+      "node_name": "/features/features.18/features.18.2/Clip",
+      "kernel_type": "Clip",
+      "kernel_id": "Clip_bs32_1280c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Clip_bs32_1280c14x14.onnx",
+      "input_shape": "32x1280x14x14",
+      "latency_ms": 11.360438540577888
+    },
+    {
+      "index": 98,
+      "node_name": "/GlobalAveragePool",
+      "kernel_type": "GlobalAveragePool",
+      "kernel_id": "GlobalAveragePool_bs32_1280c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/GlobalAveragePool_bs32_1280c14x14.onnx",
+      "input_shape": "32x1280x14x14",
+      "latency_ms": 2.3537540808320045
+    },
+    {
+      "index": 99,
+      "node_name": "/Flatten",
+      "kernel_type": "Flatten",
+      "kernel_id": "Flatten_bs32_1280c1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Flatten_bs32_1280c1x1.onnx",
+      "input_shape": "32x1280x1x1",
+      "latency_ms": 0.7380343973636627
+    },
+    {
+      "index": 100,
+      "node_name": "/classifier/classifier.1/Gemm",
+      "kernel_type": "Gemm",
+      "kernel_id": "Gemm_bs32_1280",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Gemm_bs32_1280.onnx",
+      "input_shape": "32x1280",
+      "latency_ms": 0.10306518524885178
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+2026-03-03 06:14:09.475108681 [W:onnxruntime:, graph.cc:108 MergeShapeInfo] Error merging shape info for output. 'Y' source:{64,512,3,3} target:{64,512,7,7}. Falling back to lenient merge.
+2026-03-03 06:14:51.142196776 [W:onnxruntime:, graph.cc:108 MergeShapeInfo] Error merging shape info for output. 'Y' source:{64,96,112,112} target:{64,48,112,112}. Falling back to lenient merge.
+2026-03-03 06:15:20.025702478 [W:onnxruntime:, graph.cc:108 MergeShapeInfo] Error merging shape info for output. 'Y' source:{64,96,112,112} target:{64,192,112,112}. Falling back to lenient merge.
+2026-03-03 06:15:48.961649469 [W:onnxruntime:, graph.cc:108 MergeShapeInfo] Error merging shape info for output. 'Y' source:{64,192,56,56} target:{64,96,56,56}. Falling back to lenient merge.
+2026-03-03 06:16:16.309537987 [W:onnxruntime:, graph.cc:108 MergeShapeInfo] Error merging shape info for output. 'Y' source:{64,192,56,56} target:{64,576,56,56}. Falling back to lenient merge.
+2026-03-03 06:16:33.440502643 [W:onnxruntime:, graph.cc:108 MergeShapeInfo] Error merging shape info for output. 'Y' source:{64,384,28,28} target:{64,192,28,28}. Falling back to lenient merge.
+2026-03-03 06:16:46.979842967 [W:onnxruntime:, graph.cc:108 MergeShapeInfo] Error merging shape info for output. 'Y' source:{64,384,28,28} target:{64,1152,28,28}. Falling back to lenient merge.
+2026-03-03 06:16:55.156322370 [W:onnxruntime:, graph.cc:108 MergeShapeInfo] Error merging shape info for output. 'Y' source:{64,576,14,14} target:{64,288,14,14}. Falling back to lenient merge.
+2026-03-03 06:16:57.961052346 [W:onnxruntime:, graph.cc:108 MergeShapeInfo] Error merging shape info for output. 'Y' source:{64,576,14,14} target:{64,1152,14,14}. Falling back to lenient merge.
+2026-03-03 06:17:00.997772188 [W:onnxruntime:, graph.cc:108 MergeShapeInfo] Error merging shape info for output. 'Y' source:{64,576,14,14} target:{64,1152,14,14}. Falling back to lenient merge.
+2026-03-03 06:17:03.297653613 [W:onnxruntime:, graph.cc:108 MergeShapeInfo] Error merging shape info for output. 'Y' source:{64,1152,28,28} target:{64,960,28,28}. Falling back to lenient merge.
+2026-03-03 06:17:10.446125289 [W:onnxruntime:, graph.cc:108 MergeShapeInfo] Error merging shape info for output. 'Y' source:{64,384,28,28} target:{64,192,28,28}. Falling back to lenient merge.
+2026-03-03 06:17:16.472825763 [W:onnxruntime:, graph.cc:108 MergeShapeInfo] Error merging shape info for output. 'Y' source:{64,384,28,28} target:{64,1152,28,28}. Falling back to lenient merge.
+2026-03-03 06:17:22.607927263 [W:onnxruntime:, graph.cc:108 MergeShapeInfo] Error merging shape info for output. 'Y' source:{64,768,56,56} target:{64,576,56,56}. Falling back to lenient merge.
+2026-03-03 06:17:40.751157197 [W:onnxruntime:, graph.cc:108 MergeShapeInfo] Error merging shape info for output. 'Y' source:{64,192,56,56} target:{64,96,56,56}. Falling back to lenient merge.
+2026-03-03 06:17:52.292976207 [W:onnxruntime:, graph.cc:108 MergeShapeInfo] Error merging shape info for output. 'Y' source:{64,192,56,56} target:{64,576,56,56}. Falling back to lenient merge.
+2026-03-03 06:18:04.037231479 [W:onnxruntime:, graph.cc:108 MergeShapeInfo] Error merging shape info for output. 'Y' source:{64,384,28,28} target:{64,1152,28,28}. Falling back to lenient merge.
+2026-03-03 06:18:08.093817858 [W:onnxruntime:, graph.cc:108 MergeShapeInfo] Error merging shape info for output. 'Y' source:{64,384,28,28} target:{64,192,28,28}. Falling back to lenient merge.
+2026-03-03 06:18:14.340872204 [W:onnxruntime:, graph.cc:108 MergeShapeInfo] Error merging shape info for output. 'Y' source:{64,384,28,28} target:{64,1152,28,28}. Falling back to lenient merge.
+2026-03-03 06:18:20.088994865 [W:onnxruntime:, graph.cc:108 MergeShapeInfo] Error merging shape info for output. 'Y' source:{64,768,14,14} target:{64,960,14,14}. Falling back to lenient merge.
+2026-03-03 06:18:21.715452084 [W:onnxruntime:, graph.cc:108 MergeShapeInfo] Error merging shape info for output. 'Y' source:{64,576,14,14} target:{64,288,14,14}. Falling back to lenient merge.
+2026-03-03 06:18:24.104503497 [W:onnxruntime:, graph.cc:108 MergeShapeInfo] Error merging shape info for output. 'Y' source:{64,576,14,14} target:{64,1152,14,14}. Falling back to lenient merge.
+2026-03-03 06:18:42.922267389 [W:onnxruntime:, graph.cc:108 MergeShapeInfo] Error merging shape info for output. 'Y' source:{64,160,3136} target:{64,80,4116}. Falling back to lenient merge.
+2026-03-03 06:18:55.696310926 [W:onnxruntime:, graph.cc:108 MergeShapeInfo] Error merging shape info for output. 'Y' source:{64,128,3136} target:{64,64,4116}. Falling back to lenient merge.
+2026-03-03 06:19:01.932223040 [W:onnxruntime:, graph.cc:108 MergeShapeInfo] Error merging shape info for output. 'Y' source:{64,8,4116} target:{64,84,4116}. Falling back to lenient merge.
+[1/5] start: /cyq/hase/model_zoo/models/densenet121_bs32_224x224.onnx
+[1/5] done: T_model=39.625946 ms, T_kernel_sum=3128.491331 ms, Overhead=7795.057690%
+[2/5] start: /cyq/hase/model_zoo/models/mobilenet_v2_bs32_448x448.onnx
+[2/5] done: T_model=99.828333 ms, T_kernel_sum=5405.355852 ms, Overhead=5314.651039%
+[3/5] start: /cyq/hase/model_zoo/models/resnet18_bs64_224x224.onnx
+[3/5] done: T_model=30.265670 ms, T_kernel_sum=585.191026 ms, Overhead=1833.514180%
+[4/5] start: /cyq/hase/model_zoo/models/vgg16_bs64_224x224.onnx
+[4/5] done: T_model=66.421352 ms, T_kernel_sum=4004.769377 ms, Overhead=5929.340321%
+[5/5] start: /cyq/hase/model_zoo/models/YOLOv8m_bs64_448x448.onnx
+[5/5] done: T_model=296.120521 ms, T_kernel_sum=13605.159689 ms, Overhead=4494.467029%
+Benchmark3 completed, models=5
+CSV: /cyq/hase/benchmark3/results/benchmark3_summary.csv
+Report: /cyq/hase/benchmark3/results/acceptance_report.md

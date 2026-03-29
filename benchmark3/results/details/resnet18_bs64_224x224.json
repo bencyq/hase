@@ -1,0 +1,229 @@
+{
+  "model_path": "/cyq/hase/model_zoo/models/resnet18_bs64_224x224.onnx",
+  "record_json": "/cyq/hase/ort_analysis/ort_kernel_record/resnet18.json",
+  "kernel_onnx_dir": "/cyq/hase/kernel_model/kernel_onnx",
+  "warmup": 20,
+  "loops": 20,
+  "total_kernel_latency_ms": 536.2980164587498,
+  "direct_model_latency_ms": 12.444931268692017,
+  "kernel_minus_model_ms": 523.8530851900578,
+  "kernel_over_model_ratio": 43.09369050578257,
+  "kernels": [
+    {
+      "index": 1,
+      "node_name": "/conv1/Conv",
+      "kernel_type": "Conv_Relu",
+      "kernel_id": "Conv_Relu_bs64_3c224x224_k7x7",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_Relu_bs64_3c224x224_k7x7.onnx",
+      "input_shape": "64x3x224x224",
+      "latency_ms": 168.93915869295597
+    },
+    {
+      "index": 2,
+      "node_name": "/maxpool/MaxPool",
+      "kernel_type": "MaxPool",
+      "kernel_id": "MaxPool_bs64_64c112x112_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/MaxPool_bs64_64c112x112_k3x3.onnx",
+      "input_shape": "64x64x112x112",
+      "latency_ms": 58.63508582115173
+    },
+    {
+      "index": 3,
+      "node_name": "/layer1/layer1.0/conv1/Conv",
+      "kernel_type": "Conv_Relu",
+      "kernel_id": "Conv_Relu_bs64_64c56x56_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_Relu_bs64_64c56x56_k3x3.onnx",
+      "input_shape": "64x64x56x56",
+      "latency_ms": 41.45344719290733
+    },
+    {
+      "index": 4,
+      "node_name": "/layer1/layer1.0/conv2/Conv",
+      "kernel_type": "Conv_Add_Relu",
+      "kernel_id": "Conv_Add_Relu_bs64_64c56x56_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_Add_Relu_bs64_64c56x56_k3x3.onnx",
+      "input_shape": "64x64x56x56",
+      "latency_ms": 47.423688881099224
+    },
+    {
+      "index": 5,
+      "node_name": "/layer1/layer1.1/conv1/Conv",
+      "kernel_type": "Conv_Relu",
+      "kernel_id": "Conv_Relu_bs64_64c56x56_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_Relu_bs64_64c56x56_k3x3.onnx",
+      "input_shape": "64x64x56x56",
+      "latency_ms": 42.00248122215271
+    },
+    {
+      "index": 6,
+      "node_name": "/layer1/layer1.1/conv2/Conv",
+      "kernel_type": "Conv_Add_Relu",
+      "kernel_id": "Conv_Add_Relu_bs64_64c56x56_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_Add_Relu_bs64_64c56x56_k3x3.onnx",
+      "input_shape": "64x64x56x56",
+      "latency_ms": 47.41272795945406
+    },
+    {
+      "index": 7,
+      "node_name": "/layer2/layer2.0/conv1/Conv",
+      "kernel_type": "Conv_Relu",
+      "kernel_id": "Conv_Relu_bs64_64c56x56_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_Relu_bs64_64c56x56_k3x3.onnx",
+      "input_shape": "64x64x56x56",
+      "latency_ms": 41.54139794409275
+    },
+    {
+      "index": 8,
+      "node_name": "/layer2/layer2.0/conv2/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_128c28x28_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_128c28x28_k3x3.onnx",
+      "input_shape": "64x128x28x28",
+      "latency_ms": 9.505019709467888
+    },
+    {
+      "index": 9,
+      "node_name": "/layer2/layer2.0/downsample/downsample.0/Conv",
+      "kernel_type": "Conv_Add_Relu",
+      "kernel_id": "Conv_Add_Relu_bs64_64c56x56_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_Add_Relu_bs64_64c56x56_k1x1.onnx",
+      "input_shape": "64x64x56x56",
+      "latency_ms": 14.631929062306881
+    },
+    {
+      "index": 10,
+      "node_name": "/layer2/layer2.1/conv1/Conv",
+      "kernel_type": "Conv_Relu",
+      "kernel_id": "Conv_Relu_bs64_128c28x28_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_Relu_bs64_128c28x28_k3x3.onnx",
+      "input_shape": "64x128x28x28",
+      "latency_ms": 9.4400554895401
+    },
+    {
+      "index": 11,
+      "node_name": "/layer2/layer2.1/conv2/Conv",
+      "kernel_type": "Conv_Add_Relu",
+      "kernel_id": "Conv_Add_Relu_bs64_128c28x28_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_Add_Relu_bs64_128c28x28_k3x3.onnx",
+      "input_shape": "64x128x28x28",
+      "latency_ms": 11.020665615797043
+    },
+    {
+      "index": 12,
+      "node_name": "/layer3/layer3.0/conv1/Conv",
+      "kernel_type": "Conv_Relu",
+      "kernel_id": "Conv_Relu_bs64_128c28x28_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_Relu_bs64_128c28x28_k3x3.onnx",
+      "input_shape": "64x128x28x28",
+      "latency_ms": 9.40650999546051
+    },
+    {
+      "index": 13,
+      "node_name": "/layer3/layer3.0/conv2/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_256c14x14_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_256c14x14_k3x3.onnx",
+      "input_shape": "64x256x14x14",
+      "latency_ms": 3.9631048217415814
+    },
+    {
+      "index": 14,
+      "node_name": "/layer3/layer3.0/downsample/downsample.0/Conv",
+      "kernel_type": "Conv_Add_Relu",
+      "kernel_id": "Conv_Add_Relu_bs64_128c28x28_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_Add_Relu_bs64_128c28x28_k1x1.onnx",
+      "input_shape": "64x128x28x28",
+      "latency_ms": 6.707437336444855
+    },
+    {
+      "index": 15,
+      "node_name": "/layer3/layer3.1/conv1/Conv",
+      "kernel_type": "Conv_Relu",
+      "kernel_id": "Conv_Relu_bs64_256c14x14_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_Relu_bs64_256c14x14_k3x3.onnx",
+      "input_shape": "64x256x14x14",
+      "latency_ms": 4.09401822835207
+    },
+    {
+      "index": 16,
+      "node_name": "/layer3/layer3.1/conv2/Conv",
+      "kernel_type": "Conv_Add_Relu",
+      "kernel_id": "Conv_Add_Relu_bs64_256c14x14_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_Add_Relu_bs64_256c14x14_k3x3.onnx",
+      "input_shape": "64x256x14x14",
+      "latency_ms": 5.511119961738586
+    },
+    {
+      "index": 17,
+      "node_name": "/layer4/layer4.0/conv1/Conv",
+      "kernel_type": "Conv_Relu",
+      "kernel_id": "Conv_Relu_bs64_256c14x14_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_Relu_bs64_256c14x14_k3x3.onnx",
+      "input_shape": "64x256x14x14",
+      "latency_ms": 3.84379830211401
+    },
+    {
+      "index": 18,
+      "node_name": "/layer4/layer4.0/conv2/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_512c7x7_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_512c7x7_k3x3.onnx",
+      "input_shape": "64x512x7x7",
+      "latency_ms": 2.130494825541973
+    },
+    {
+      "index": 19,
+      "node_name": "/layer4/layer4.0/downsample/downsample.0/Conv",
+      "kernel_type": "Conv_Add_Relu",
+      "kernel_id": "Conv_Add_Relu_bs64_256c14x14_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_Add_Relu_bs64_256c14x14_k1x1.onnx",
+      "input_shape": "64x256x14x14",
+      "latency_ms": 2.956751734018326
+    },
+    {
+      "index": 20,
+      "node_name": "/layer4/layer4.1/conv1/Conv",
+      "kernel_type": "Conv_Relu",
+      "kernel_id": "Conv_Relu_bs64_512c7x7_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_Relu_bs64_512c7x7_k3x3.onnx",
+      "input_shape": "64x512x7x7",
+      "latency_ms": 2.247379347681999
+    },
+    {
+      "index": 21,
+      "node_name": "/layer4/layer4.1/conv2/Conv",
+      "kernel_type": "Conv_Add_Relu",
+      "kernel_id": "Conv_Add_Relu_bs64_512c7x7_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_Add_Relu_bs64_512c7x7_k3x3.onnx",
+      "input_shape": "64x512x7x7",
+      "latency_ms": 2.693817764520645
+    },
+    {
+      "index": 22,
+      "node_name": "/avgpool/GlobalAveragePool",
+      "kernel_type": "GlobalAveragePool",
+      "kernel_id": "GlobalAveragePool_bs64_512c7x7",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/GlobalAveragePool_bs64_512c7x7.onnx",
+      "input_shape": "64x512x7x7",
+      "latency_ms": 0.5069402977824211
+    },
+    {
+      "index": 23,
+      "node_name": "/Flatten",
+      "kernel_type": "Flatten",
+      "kernel_id": "Flatten_bs64_512c1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Flatten_bs64_512c1x1.onnx",
+      "input_shape": "64x512x1x1",
+      "latency_ms": 0.09679459035396576
+    },
+    {
+      "index": 24,
+      "node_name": "/fc/Gemm",
+      "kernel_type": "Gemm",
+      "kernel_id": "Gemm_bs64_512",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Gemm_bs64_512.onnx",
+      "input_shape": "64x512",
+      "latency_ms": 0.13419166207313538
+    }
+  ]
+}

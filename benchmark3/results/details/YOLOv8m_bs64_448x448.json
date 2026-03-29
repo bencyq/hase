@@ -1,0 +1,2011 @@
+{
+  "model_path": "/cyq/hase/model_zoo/models/YOLOv8m_bs64_448x448.onnx",
+  "record_json": "/cyq/hase/ort_analysis/ort_kernel_record/YOLOv8m.json",
+  "kernel_onnx_dir": "/cyq/hase/kernel_model/kernel_onnx",
+  "warmup": 20,
+  "loops": 20,
+  "total_kernel_latency_ms": 13062.43630386889,
+  "direct_model_latency_ms": 221.5174589306116,
+  "kernel_minus_model_ms": 12840.918844938278,
+  "kernel_over_model_ratio": 58.967976460765485,
+  "kernels": [
+    {
+      "index": 1,
+      "node_name": "/model.0/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_3c448x448_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_3c448x448_k3x3.onnx",
+      "input_shape": "64x3x448x448",
+      "latency_ms": 519.9587700888515
+    },
+    {
+      "index": 2,
+      "node_name": "QuickGelu",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_48c224x224",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_48c224x224.onnx",
+      "input_shape": "64x48x224x224",
+      "latency_ms": 553.9387308061123
+    },
+    {
+      "index": 3,
+      "node_name": "/model.1/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_48c224x224_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_48c224x224_k3x3.onnx",
+      "input_shape": "64x48x224x224",
+      "latency_ms": 315.8548094332218
+    },
+    {
+      "index": 4,
+      "node_name": "QuickGelu_token_1",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_96c112x112",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_96c112x112.onnx",
+      "input_shape": "64x96x112x112",
+      "latency_ms": 278.1597953289747
+    },
+    {
+      "index": 5,
+      "node_name": "/model.2/cv1/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_96c112x112_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_96c112x112_k1x1.onnx",
+      "input_shape": "64x96x112x112",
+      "latency_ms": 279.6796599403024
+    },
+    {
+      "index": 6,
+      "node_name": "QuickGelu_token_2",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_96c112x112",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_96c112x112.onnx",
+      "input_shape": "64x96x112x112",
+      "latency_ms": 275.80701038241386
+    },
+    {
+      "index": 7,
+      "node_name": "/model.2/Split",
+      "kernel_type": "Split",
+      "kernel_id": "Split_bs64_96c112x112",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Split_bs64_96c112x112.onnx",
+      "input_shape": "64x96x112x112",
+      "latency_ms": 281.9833502173424
+    },
+    {
+      "index": 8,
+      "node_name": "/model.2/m.0/cv1/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_48c112x112_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_48c112x112_k3x3.onnx",
+      "input_shape": "64x48x112x112",
+      "latency_ms": 76.40549410134554
+    },
+    {
+      "index": 9,
+      "node_name": "QuickGelu_token_3",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_48c112x112",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_48c112x112.onnx",
+      "input_shape": "64x48x112x112",
+      "latency_ms": 138.21818474680185
+    },
+    {
+      "index": 10,
+      "node_name": "/model.2/m.0/cv2/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_48c112x112_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_48c112x112_k3x3.onnx",
+      "input_shape": "64x48x112x112",
+      "latency_ms": 78.74798122793436
+    },
+    {
+      "index": 11,
+      "node_name": "QuickGelu_token_4",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_48c112x112",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_48c112x112.onnx",
+      "input_shape": "64x48x112x112",
+      "latency_ms": 126.19434054940939
+    },
+    {
+      "index": 12,
+      "node_name": "/model.2/m.0/Add",
+      "kernel_type": "Add",
+      "kernel_id": "Add_bs64_48c112x112",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Add_bs64_48c112x112.onnx",
+      "input_shape": "64x48x112x112",
+      "latency_ms": 127.44449395686388
+    },
+    {
+      "index": 13,
+      "node_name": "/model.2/m.1/cv1/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_48c112x112_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_48c112x112_k3x3.onnx",
+      "input_shape": "64x48x112x112",
+      "latency_ms": 77.32467576861382
+    },
+    {
+      "index": 14,
+      "node_name": "QuickGelu_token_5",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_48c112x112",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_48c112x112.onnx",
+      "input_shape": "64x48x112x112",
+      "latency_ms": 145.1549308374524
+    },
+    {
+      "index": 15,
+      "node_name": "/model.2/m.1/cv2/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_48c112x112_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_48c112x112_k3x3.onnx",
+      "input_shape": "64x48x112x112",
+      "latency_ms": 78.76811474561691
+    },
+    {
+      "index": 16,
+      "node_name": "QuickGelu_token_6",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_48c112x112",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_48c112x112.onnx",
+      "input_shape": "64x48x112x112",
+      "latency_ms": 140.91907665133476
+    },
+    {
+      "index": 17,
+      "node_name": "/model.2/m.1/Add",
+      "kernel_type": "Add",
+      "kernel_id": "Add_bs64_48c112x112",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Add_bs64_48c112x112.onnx",
+      "input_shape": "64x48x112x112",
+      "latency_ms": 135.72564721107483
+    },
+    {
+      "index": 18,
+      "node_name": "/model.2/Concat",
+      "kernel_type": "Concat",
+      "kernel_id": "Concat_bs64_48c112x112",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Concat_bs64_48c112x112.onnx",
+      "input_shape": "64x48x112x112",
+      "latency_ms": 270.21843772381544
+    },
+    {
+      "index": 19,
+      "node_name": "/model.2/cv2/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_192c112x112_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_192c112x112_k1x1.onnx",
+      "input_shape": "64x192x112x112",
+      "latency_ms": 326.5704147517681
+    },
+    {
+      "index": 20,
+      "node_name": "QuickGelu_token_7",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_96c112x112",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_96c112x112.onnx",
+      "input_shape": "64x96x112x112",
+      "latency_ms": 283.11050571501255
+    },
+    {
+      "index": 21,
+      "node_name": "/model.3/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_96c112x112_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_96c112x112_k3x3.onnx",
+      "input_shape": "64x96x112x112",
+      "latency_ms": 152.00845021754503
+    },
+    {
+      "index": 22,
+      "node_name": "QuickGelu_token_8",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_192c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_192c56x56.onnx",
+      "input_shape": "64x192x56x56",
+      "latency_ms": 139.23506010323763
+    },
+    {
+      "index": 23,
+      "node_name": "/model.4/cv1/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_192c56x56_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_192c56x56_k1x1.onnx",
+      "input_shape": "64x192x56x56",
+      "latency_ms": 74.80657026171684
+    },
+    {
+      "index": 24,
+      "node_name": "QuickGelu_token_9",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_192c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_192c56x56.onnx",
+      "input_shape": "64x192x56x56",
+      "latency_ms": 139.06348142772913
+    },
+    {
+      "index": 25,
+      "node_name": "/model.4/Split",
+      "kernel_type": "Split",
+      "kernel_id": "Split_bs64_192c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Split_bs64_192c56x56.onnx",
+      "input_shape": "64x192x56x56",
+      "latency_ms": 136.8498247116804
+    },
+    {
+      "index": 26,
+      "node_name": "/model.4/m.0/cv1/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_96c56x56_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_96c56x56_k3x3.onnx",
+      "input_shape": "64x96x56x56",
+      "latency_ms": 18.536100536584854
+    },
+    {
+      "index": 27,
+      "node_name": "QuickGelu_token_10",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_96c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_96c56x56.onnx",
+      "input_shape": "64x96x56x56",
+      "latency_ms": 65.88672418147326
+    },
+    {
+      "index": 28,
+      "node_name": "/model.4/m.0/cv2/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_96c56x56_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_96c56x56_k3x3.onnx",
+      "input_shape": "64x96x56x56",
+      "latency_ms": 18.11574548482895
+    },
+    {
+      "index": 29,
+      "node_name": "QuickGelu_token_11",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_96c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_96c56x56.onnx",
+      "input_shape": "64x96x56x56",
+      "latency_ms": 66.2634352222085
+    },
+    {
+      "index": 30,
+      "node_name": "/model.4/m.0/Add",
+      "kernel_type": "Add",
+      "kernel_id": "Add_bs64_96c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Add_bs64_96c56x56.onnx",
+      "input_shape": "64x96x56x56",
+      "latency_ms": 66.42596777528524
+    },
+    {
+      "index": 31,
+      "node_name": "/model.4/m.1/cv1/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_96c56x56_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_96c56x56_k3x3.onnx",
+      "input_shape": "64x96x56x56",
+      "latency_ms": 18.121465854346752
+    },
+    {
+      "index": 32,
+      "node_name": "QuickGelu_token_12",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_96c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_96c56x56.onnx",
+      "input_shape": "64x96x56x56",
+      "latency_ms": 66.31295960396528
+    },
+    {
+      "index": 33,
+      "node_name": "/model.4/m.1/cv2/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_96c56x56_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_96c56x56_k3x3.onnx",
+      "input_shape": "64x96x56x56",
+      "latency_ms": 18.32138802856207
+    },
+    {
+      "index": 34,
+      "node_name": "QuickGelu_token_13",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_96c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_96c56x56.onnx",
+      "input_shape": "64x96x56x56",
+      "latency_ms": 66.89392626285553
+    },
+    {
+      "index": 35,
+      "node_name": "/model.4/m.1/Add",
+      "kernel_type": "Add",
+      "kernel_id": "Add_bs64_96c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Add_bs64_96c56x56.onnx",
+      "input_shape": "64x96x56x56",
+      "latency_ms": 68.33797711879015
+    },
+    {
+      "index": 36,
+      "node_name": "/model.4/m.2/cv1/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_96c56x56_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_96c56x56_k3x3.onnx",
+      "input_shape": "64x96x56x56",
+      "latency_ms": 18.857548758387566
+    },
+    {
+      "index": 37,
+      "node_name": "QuickGelu_token_14",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_96c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_96c56x56.onnx",
+      "input_shape": "64x96x56x56",
+      "latency_ms": 68.20226889103651
+    },
+    {
+      "index": 38,
+      "node_name": "/model.4/m.2/cv2/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_96c56x56_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_96c56x56_k3x3.onnx",
+      "input_shape": "64x96x56x56",
+      "latency_ms": 18.15361324697733
+    },
+    {
+      "index": 39,
+      "node_name": "QuickGelu_token_15",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_96c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_96c56x56.onnx",
+      "input_shape": "64x96x56x56",
+      "latency_ms": 66.34406205266714
+    },
+    {
+      "index": 40,
+      "node_name": "/model.4/m.2/Add",
+      "kernel_type": "Add",
+      "kernel_id": "Add_bs64_96c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Add_bs64_96c56x56.onnx",
+      "input_shape": "64x96x56x56",
+      "latency_ms": 67.1591442078352
+    },
+    {
+      "index": 41,
+      "node_name": "/model.4/m.3/cv1/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_96c56x56_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_96c56x56_k3x3.onnx",
+      "input_shape": "64x96x56x56",
+      "latency_ms": 18.51865090429783
+    },
+    {
+      "index": 42,
+      "node_name": "QuickGelu_token_16",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_96c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_96c56x56.onnx",
+      "input_shape": "64x96x56x56",
+      "latency_ms": 67.36869029700756
+    },
+    {
+      "index": 43,
+      "node_name": "/model.4/m.3/cv2/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_96c56x56_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_96c56x56_k3x3.onnx",
+      "input_shape": "64x96x56x56",
+      "latency_ms": 18.505246751010418
+    },
+    {
+      "index": 44,
+      "node_name": "QuickGelu_token_17",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_96c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_96c56x56.onnx",
+      "input_shape": "64x96x56x56",
+      "latency_ms": 67.47254151850939
+    },
+    {
+      "index": 45,
+      "node_name": "/model.4/m.3/Add",
+      "kernel_type": "Add",
+      "kernel_id": "Add_bs64_96c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Add_bs64_96c56x56.onnx",
+      "input_shape": "64x96x56x56",
+      "latency_ms": 66.65862612426281
+    },
+    {
+      "index": 46,
+      "node_name": "/model.4/Concat",
+      "kernel_type": "Concat",
+      "kernel_id": "Concat_bs64_96c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Concat_bs64_96c56x56.onnx",
+      "input_shape": "64x96x56x56",
+      "latency_ms": 133.7904779240489
+    },
+    {
+      "index": 47,
+      "node_name": "/model.4/cv2/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_576c56x56_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_576c56x56_k1x1.onnx",
+      "input_shape": "64x576x56x56",
+      "latency_ms": 175.18556136637926
+    },
+    {
+      "index": 48,
+      "node_name": "QuickGelu_token_18",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_192c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_192c56x56.onnx",
+      "input_shape": "64x192x56x56",
+      "latency_ms": 137.86203637719154
+    },
+    {
+      "index": 49,
+      "node_name": "/model.5/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_192c56x56_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_192c56x56_k3x3.onnx",
+      "input_shape": "64x192x56x56",
+      "latency_ms": 77.47652400285006
+    },
+    {
+      "index": 50,
+      "node_name": "QuickGelu_token_19",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_384c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_384c28x28.onnx",
+      "input_shape": "64x384x28x28",
+      "latency_ms": 67.52210538834333
+    },
+    {
+      "index": 51,
+      "node_name": "/model.6/cv1/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_384c28x28_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_384c28x28_k1x1.onnx",
+      "input_shape": "64x384x28x28",
+      "latency_ms": 68.38725749403238
+    },
+    {
+      "index": 52,
+      "node_name": "QuickGelu_token_20",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_384c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_384c28x28.onnx",
+      "input_shape": "64x384x28x28",
+      "latency_ms": 66.81329850107431
+    },
+    {
+      "index": 53,
+      "node_name": "/model.6/Split",
+      "kernel_type": "Split",
+      "kernel_id": "Split_bs64_384c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Split_bs64_384c28x28.onnx",
+      "input_shape": "64x384x28x28",
+      "latency_ms": 66.27826392650604
+    },
+    {
+      "index": 54,
+      "node_name": "/model.6/m.0/cv1/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_192c28x28_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_192c28x28_k3x3.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 9.061323665082455
+    },
+    {
+      "index": 55,
+      "node_name": "QuickGelu_token_21",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_192c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_192c28x28.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 30.207018181681633
+    },
+    {
+      "index": 56,
+      "node_name": "/model.6/m.0/cv2/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_192c28x28_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_192c28x28_k3x3.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 9.459612146019936
+    },
+    {
+      "index": 57,
+      "node_name": "QuickGelu_token_22",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_192c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_192c28x28.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 30.40940035134554
+    },
+    {
+      "index": 58,
+      "node_name": "/model.6/m.0/Add",
+      "kernel_type": "Add",
+      "kernel_id": "Add_bs64_192c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Add_bs64_192c28x28.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 30.25044370442629
+    },
+    {
+      "index": 59,
+      "node_name": "/model.6/m.1/cv1/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_192c28x28_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_192c28x28_k3x3.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 9.45506040006876
+    },
+    {
+      "index": 60,
+      "node_name": "QuickGelu_token_23",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_192c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_192c28x28.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 30.552315525710583
+    },
+    {
+      "index": 61,
+      "node_name": "/model.6/m.1/cv2/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_192c28x28_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_192c28x28_k3x3.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 9.11235474050045
+    },
+    {
+      "index": 62,
+      "node_name": "QuickGelu_token_24",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_192c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_192c28x28.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 30.506875924766064
+    },
+    {
+      "index": 63,
+      "node_name": "/model.6/m.1/Add",
+      "kernel_type": "Add",
+      "kernel_id": "Add_bs64_192c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Add_bs64_192c28x28.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 30.005156248807907
+    },
+    {
+      "index": 64,
+      "node_name": "/model.6/m.2/cv1/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_192c28x28_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_192c28x28_k3x3.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 9.111316688358784
+    },
+    {
+      "index": 65,
+      "node_name": "QuickGelu_token_25",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_192c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_192c28x28.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 30.033999867737293
+    },
+    {
+      "index": 66,
+      "node_name": "/model.6/m.2/cv2/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_192c28x28_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_192c28x28_k3x3.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 9.015087969601154
+    },
+    {
+      "index": 67,
+      "node_name": "QuickGelu_token_26",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_192c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_192c28x28.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 29.69152368605137
+    },
+    {
+      "index": 68,
+      "node_name": "/model.6/m.2/Add",
+      "kernel_type": "Add",
+      "kernel_id": "Add_bs64_192c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Add_bs64_192c28x28.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 30.53779322654009
+    },
+    {
+      "index": 69,
+      "node_name": "/model.6/m.3/cv1/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_192c28x28_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_192c28x28_k3x3.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 10.266885720193386
+    },
+    {
+      "index": 70,
+      "node_name": "QuickGelu_token_27",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_192c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_192c28x28.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 29.655796661973
+    },
+    {
+      "index": 71,
+      "node_name": "/model.6/m.3/cv2/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_192c28x28_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_192c28x28_k3x3.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 9.124397300183773
+    },
+    {
+      "index": 72,
+      "node_name": "QuickGelu_token_28",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_192c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_192c28x28.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 29.95231654495001
+    },
+    {
+      "index": 73,
+      "node_name": "/model.6/m.3/Add",
+      "kernel_type": "Add",
+      "kernel_id": "Add_bs64_192c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Add_bs64_192c28x28.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 30.18802460283041
+    },
+    {
+      "index": 74,
+      "node_name": "/model.6/Concat",
+      "kernel_type": "Concat",
+      "kernel_id": "Concat_bs64_192c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Concat_bs64_192c28x28.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 66.32875930517912
+    },
+    {
+      "index": 75,
+      "node_name": "/model.6/cv2/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_1152c28x28_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_1152c28x28_k1x1.onnx",
+      "input_shape": "64x1152x28x28",
+      "latency_ms": 85.53920201957226
+    },
+    {
+      "index": 76,
+      "node_name": "QuickGelu_token_29",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_384c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_384c28x28.onnx",
+      "input_shape": "64x384x28x28",
+      "latency_ms": 67.70340632647276
+    },
+    {
+      "index": 77,
+      "node_name": "/model.7/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_384c28x28_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_384c28x28_k3x3.onnx",
+      "input_shape": "64x384x28x28",
+      "latency_ms": 15.617401339113712
+    },
+    {
+      "index": 78,
+      "node_name": "QuickGelu_token_30",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_576c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_576c14x14.onnx",
+      "input_shape": "64x576x14x14",
+      "latency_ms": 10.118274204432964
+    },
+    {
+      "index": 79,
+      "node_name": "/model.8/cv1/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_576c14x14_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_576c14x14_k1x1.onnx",
+      "input_shape": "64x576x14x14",
+      "latency_ms": 9.188835322856903
+    },
+    {
+      "index": 80,
+      "node_name": "QuickGelu_token_31",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_576c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_576c14x14.onnx",
+      "input_shape": "64x576x14x14",
+      "latency_ms": 10.038765706121922
+    },
+    {
+      "index": 81,
+      "node_name": "/model.8/Split",
+      "kernel_type": "Split",
+      "kernel_id": "Split_bs64_576c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Split_bs64_576c14x14.onnx",
+      "input_shape": "64x576x14x14",
+      "latency_ms": 8.882205374538898
+    },
+    {
+      "index": 82,
+      "node_name": "/model.8/m.0/cv1/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_288c14x14_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_288c14x14_k3x3.onnx",
+      "input_shape": "64x288x14x14",
+      "latency_ms": 4.481900855898857
+    },
+    {
+      "index": 83,
+      "node_name": "QuickGelu_token_32",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_288c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_288c14x14.onnx",
+      "input_shape": "64x288x14x14",
+      "latency_ms": 3.978872671723366
+    },
+    {
+      "index": 84,
+      "node_name": "/model.8/m.0/cv2/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_288c14x14_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_288c14x14_k3x3.onnx",
+      "input_shape": "64x288x14x14",
+      "latency_ms": 4.473028518259525
+    },
+    {
+      "index": 85,
+      "node_name": "QuickGelu_token_33",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_288c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_288c14x14.onnx",
+      "input_shape": "64x288x14x14",
+      "latency_ms": 3.9697974920272823
+    },
+    {
+      "index": 86,
+      "node_name": "/model.8/m.0/Add",
+      "kernel_type": "Add",
+      "kernel_id": "Add_bs64_288c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Add_bs64_288c14x14.onnx",
+      "input_shape": "64x288x14x14",
+      "latency_ms": 4.069960117340088
+    },
+    {
+      "index": 87,
+      "node_name": "/model.8/m.1/cv1/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_288c14x14_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_288c14x14_k3x3.onnx",
+      "input_shape": "64x288x14x14",
+      "latency_ms": 4.482593201100826
+    },
+    {
+      "index": 88,
+      "node_name": "QuickGelu_token_34",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_288c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_288c14x14.onnx",
+      "input_shape": "64x288x14x14",
+      "latency_ms": 3.978030197322369
+    },
+    {
+      "index": 89,
+      "node_name": "/model.8/m.1/cv2/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_288c14x14_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_288c14x14_k3x3.onnx",
+      "input_shape": "64x288x14x14",
+      "latency_ms": 4.5813048258423805
+    },
+    {
+      "index": 90,
+      "node_name": "QuickGelu_token_35",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_288c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_288c14x14.onnx",
+      "input_shape": "64x288x14x14",
+      "latency_ms": 4.085079953074455
+    },
+    {
+      "index": 91,
+      "node_name": "/model.8/m.1/Add",
+      "kernel_type": "Add",
+      "kernel_id": "Add_bs64_288c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Add_bs64_288c14x14.onnx",
+      "input_shape": "64x288x14x14",
+      "latency_ms": 4.169212095439434
+    },
+    {
+      "index": 92,
+      "node_name": "/model.8/Concat",
+      "kernel_type": "Concat",
+      "kernel_id": "Concat_bs64_288c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Concat_bs64_288c14x14.onnx",
+      "input_shape": "64x288x14x14",
+      "latency_ms": 10.267623886466026
+    },
+    {
+      "index": 93,
+      "node_name": "/model.8/cv2/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_1152c14x14_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_1152c14x14_k1x1.onnx",
+      "input_shape": "64x1152x14x14",
+      "latency_ms": 11.40488050878048
+    },
+    {
+      "index": 94,
+      "node_name": "QuickGelu_token_36",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_576c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_576c14x14.onnx",
+      "input_shape": "64x576x14x14",
+      "latency_ms": 10.529221594333649
+    },
+    {
+      "index": 95,
+      "node_name": "/model.9/cv1/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_576c14x14_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_576c14x14_k1x1.onnx",
+      "input_shape": "64x576x14x14",
+      "latency_ms": 9.333725087344646
+    },
+    {
+      "index": 96,
+      "node_name": "QuickGelu_token_37",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_288c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_288c14x14.onnx",
+      "input_shape": "64x288x14x14",
+      "latency_ms": 3.9719598367810254
+    },
+    {
+      "index": 97,
+      "node_name": "/model.9/m/MaxPool",
+      "kernel_type": "MaxPool",
+      "kernel_id": "MaxPool_bs64_288c14x14_k5x5",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/MaxPool_bs64_288c14x14_k5x5.onnx",
+      "input_shape": "64x288x14x14",
+      "latency_ms": 4.084511660039425
+    },
+    {
+      "index": 98,
+      "node_name": "/model.9/m_1/MaxPool",
+      "kernel_type": "MaxPool",
+      "kernel_id": "MaxPool_bs64_288c14x14_k5x5",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/MaxPool_bs64_288c14x14_k5x5.onnx",
+      "input_shape": "64x288x14x14",
+      "latency_ms": 4.09835297614336
+    },
+    {
+      "index": 99,
+      "node_name": "/model.9/m_2/MaxPool",
+      "kernel_type": "MaxPool",
+      "kernel_id": "MaxPool_bs64_288c14x14_k5x5",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/MaxPool_bs64_288c14x14_k5x5.onnx",
+      "input_shape": "64x288x14x14",
+      "latency_ms": 4.080663062632084
+    },
+    {
+      "index": 100,
+      "node_name": "/model.9/Concat",
+      "kernel_type": "Concat",
+      "kernel_id": "Concat_bs64_288c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Concat_bs64_288c14x14.onnx",
+      "input_shape": "64x288x14x14",
+      "latency_ms": 10.214312188327312
+    },
+    {
+      "index": 101,
+      "node_name": "/model.9/cv2/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_1152c14x14_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_1152c14x14_k1x1.onnx",
+      "input_shape": "64x1152x14x14",
+      "latency_ms": 10.961425304412842
+    },
+    {
+      "index": 102,
+      "node_name": "QuickGelu_token_38",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_576c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_576c14x14.onnx",
+      "input_shape": "64x576x14x14",
+      "latency_ms": 10.074430331587791
+    },
+    {
+      "index": 103,
+      "node_name": "/model.10/Resize",
+      "kernel_type": "Resize",
+      "kernel_id": "Resize_bs64_576c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Resize_bs64_576c14x14.onnx",
+      "input_shape": "64x576x14x14",
+      "latency_ms": 86.79483979940414
+    },
+    {
+      "index": 104,
+      "node_name": "/model.11/Concat",
+      "kernel_type": "Concat",
+      "kernel_id": "Concat_bs64_576c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Concat_bs64_576c28x28.onnx",
+      "input_shape": "64x576x28x28",
+      "latency_ms": 207.71810840815306
+    },
+    {
+      "index": 105,
+      "node_name": "/model.12/cv1/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_960c28x28_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_960c28x28_k1x1.onnx",
+      "input_shape": "64x960x28x28",
+      "latency_ms": 82.48394634574652
+    },
+    {
+      "index": 106,
+      "node_name": "QuickGelu_token_39",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_384c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_384c28x28.onnx",
+      "input_shape": "64x384x28x28",
+      "latency_ms": 66.54262207448483
+    },
+    {
+      "index": 107,
+      "node_name": "/model.12/Split",
+      "kernel_type": "Split",
+      "kernel_id": "Split_bs64_384c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Split_bs64_384c28x28.onnx",
+      "input_shape": "64x384x28x28",
+      "latency_ms": 66.41902662813663
+    },
+    {
+      "index": 108,
+      "node_name": "/model.12/m.0/cv1/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_192c28x28_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_192c28x28_k3x3.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 9.163770079612732
+    },
+    {
+      "index": 109,
+      "node_name": "QuickGelu_token_40",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_192c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_192c28x28.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 29.858707450330257
+    },
+    {
+      "index": 110,
+      "node_name": "/model.12/m.0/cv2/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_192c28x28_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_192c28x28_k3x3.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 9.065434522926807
+    },
+    {
+      "index": 111,
+      "node_name": "QuickGelu_token_41",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_192c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_192c28x28.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 30.035683326423168
+    },
+    {
+      "index": 112,
+      "node_name": "/model.12/m.1/cv1/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_192c28x28_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_192c28x28_k3x3.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 9.168276935815811
+    },
+    {
+      "index": 113,
+      "node_name": "QuickGelu_token_42",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_192c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_192c28x28.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 29.940912500023842
+    },
+    {
+      "index": 114,
+      "node_name": "/model.12/m.1/cv2/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_192c28x28_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_192c28x28_k3x3.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 9.393569454550743
+    },
+    {
+      "index": 115,
+      "node_name": "QuickGelu_token_43",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_192c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_192c28x28.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 30.550071969628334
+    },
+    {
+      "index": 116,
+      "node_name": "/model.12/Concat",
+      "kernel_type": "Concat",
+      "kernel_id": "Concat_bs64_192c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Concat_bs64_192c28x28.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 66.77789408713579
+    },
+    {
+      "index": 117,
+      "node_name": "/model.12/cv2/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_768c28x28_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_768c28x28_k1x1.onnx",
+      "input_shape": "64x768x28x28",
+      "latency_ms": 76.02630965411663
+    },
+    {
+      "index": 118,
+      "node_name": "QuickGelu_token_44",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_384c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_384c28x28.onnx",
+      "input_shape": "64x384x28x28",
+      "latency_ms": 67.32896585017443
+    },
+    {
+      "index": 119,
+      "node_name": "/model.13/Resize",
+      "kernel_type": "Resize",
+      "kernel_id": "Resize_bs64_384c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Resize_bs64_384c28x28.onnx",
+      "input_shape": "64x384x28x28",
+      "latency_ms": 253.0719731003046
+    },
+    {
+      "index": 120,
+      "node_name": "/model.14/Concat",
+      "kernel_type": "Concat",
+      "kernel_id": "Concat_bs64_384c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Concat_bs64_384c56x56.onnx",
+      "input_shape": "64x384x56x56",
+      "latency_ms": 546.9391399994493
+    },
+    {
+      "index": 121,
+      "node_name": "/model.15/cv1/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_576c56x56_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_576c56x56_k1x1.onnx",
+      "input_shape": "64x576x56x56",
+      "latency_ms": 170.43517362326384
+    },
+    {
+      "index": 122,
+      "node_name": "QuickGelu_token_45",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_192c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_192c56x56.onnx",
+      "input_shape": "64x192x56x56",
+      "latency_ms": 139.2186164855957
+    },
+    {
+      "index": 123,
+      "node_name": "/model.15/Split",
+      "kernel_type": "Split",
+      "kernel_id": "Split_bs64_192c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Split_bs64_192c56x56.onnx",
+      "input_shape": "64x192x56x56",
+      "latency_ms": 142.31914319097996
+    },
+    {
+      "index": 124,
+      "node_name": "/model.15/m.0/cv1/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_96c56x56_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_96c56x56_k3x3.onnx",
+      "input_shape": "64x96x56x56",
+      "latency_ms": 35.63401438295841
+    },
+    {
+      "index": 125,
+      "node_name": "QuickGelu_token_46",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_96c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_96c56x56.onnx",
+      "input_shape": "64x96x56x56",
+      "latency_ms": 67.69091226160526
+    },
+    {
+      "index": 126,
+      "node_name": "/model.15/m.0/cv2/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_96c56x56_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_96c56x56_k3x3.onnx",
+      "input_shape": "64x96x56x56",
+      "latency_ms": 38.972861878573895
+    },
+    {
+      "index": 127,
+      "node_name": "QuickGelu_token_47",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_96c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_96c56x56.onnx",
+      "input_shape": "64x96x56x56",
+      "latency_ms": 67.6080858334899
+    },
+    {
+      "index": 128,
+      "node_name": "/model.15/m.1/cv1/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_96c56x56_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_96c56x56_k3x3.onnx",
+      "input_shape": "64x96x56x56",
+      "latency_ms": 34.8945377394557
+    },
+    {
+      "index": 129,
+      "node_name": "QuickGelu_token_48",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_96c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_96c56x56.onnx",
+      "input_shape": "64x96x56x56",
+      "latency_ms": 68.00450701266527
+    },
+    {
+      "index": 130,
+      "node_name": "/model.15/m.1/cv2/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_96c56x56_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_96c56x56_k3x3.onnx",
+      "input_shape": "64x96x56x56",
+      "latency_ms": 35.71579921990633
+    },
+    {
+      "index": 131,
+      "node_name": "QuickGelu_token_49",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_96c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_96c56x56.onnx",
+      "input_shape": "64x96x56x56",
+      "latency_ms": 68.30280311405659
+    },
+    {
+      "index": 132,
+      "node_name": "/model.15/Concat",
+      "kernel_type": "Concat",
+      "kernel_id": "Concat_bs64_96c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Concat_bs64_96c56x56.onnx",
+      "input_shape": "64x96x56x56",
+      "latency_ms": 137.74603120982647
+    },
+    {
+      "index": 133,
+      "node_name": "/model.15/cv2/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_384c56x56_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_384c56x56_k1x1.onnx",
+      "input_shape": "64x384x56x56",
+      "latency_ms": 151.040755584836
+    },
+    {
+      "index": 134,
+      "node_name": "QuickGelu_token_50",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_192c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_192c56x56.onnx",
+      "input_shape": "64x192x56x56",
+      "latency_ms": 138.68718575686216
+    },
+    {
+      "index": 135,
+      "node_name": "/model.16/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_192c56x56_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_192c56x56_k3x3.onnx",
+      "input_shape": "64x192x56x56",
+      "latency_ms": 75.72635095566511
+    },
+    {
+      "index": 136,
+      "node_name": "QuickGelu_token_51",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_192c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_192c28x28.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 29.704537987709045
+    },
+    {
+      "index": 137,
+      "node_name": "/model.17/Concat",
+      "kernel_type": "Concat",
+      "kernel_id": "Concat_bs64_192c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Concat_bs64_192c28x28.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 66.8172312900424
+    },
+    {
+      "index": 138,
+      "node_name": "/model.18/cv1/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_576c28x28_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_576c28x28_k1x1.onnx",
+      "input_shape": "64x576x28x28",
+      "latency_ms": 39.181142672896385
+    },
+    {
+      "index": 139,
+      "node_name": "QuickGelu_token_52",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_384c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_384c28x28.onnx",
+      "input_shape": "64x384x28x28",
+      "latency_ms": 66.99580643326044
+    },
+    {
+      "index": 140,
+      "node_name": "/model.18/Split",
+      "kernel_type": "Split",
+      "kernel_id": "Split_bs64_384c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Split_bs64_384c28x28.onnx",
+      "input_shape": "64x384x28x28",
+      "latency_ms": 67.28083677589893
+    },
+    {
+      "index": 141,
+      "node_name": "/model.18/m.0/cv1/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_192c28x28_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_192c28x28_k3x3.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 9.176985919475555
+    },
+    {
+      "index": 142,
+      "node_name": "QuickGelu_token_53",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_192c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_192c28x28.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 30.089206248521805
+    },
+    {
+      "index": 143,
+      "node_name": "/model.18/m.0/cv2/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_192c28x28_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_192c28x28_k3x3.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 9.192341938614845
+    },
+    {
+      "index": 144,
+      "node_name": "QuickGelu_token_54",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_192c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_192c28x28.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 30.125492252409458
+    },
+    {
+      "index": 145,
+      "node_name": "/model.18/m.1/cv1/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_192c28x28_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_192c28x28_k3x3.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 9.192818216979504
+    },
+    {
+      "index": 146,
+      "node_name": "QuickGelu_token_55",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_192c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_192c28x28.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 29.811683855950832
+    },
+    {
+      "index": 147,
+      "node_name": "/model.18/m.1/cv2/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_192c28x28_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_192c28x28_k3x3.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 9.100625663995743
+    },
+    {
+      "index": 148,
+      "node_name": "QuickGelu_token_56",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_192c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_192c28x28.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 30.18128238618374
+    },
+    {
+      "index": 149,
+      "node_name": "/model.18/Concat",
+      "kernel_type": "Concat",
+      "kernel_id": "Concat_bs64_192c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Concat_bs64_192c28x28.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 65.3791693970561
+    },
+    {
+      "index": 150,
+      "node_name": "/model.18/cv2/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_768c28x28_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_768c28x28_k1x1.onnx",
+      "input_shape": "64x768x28x28",
+      "latency_ms": 75.93335770070553
+    },
+    {
+      "index": 151,
+      "node_name": "QuickGelu_token_57",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_384c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_384c28x28.onnx",
+      "input_shape": "64x384x28x28",
+      "latency_ms": 66.44807867705822
+    },
+    {
+      "index": 152,
+      "node_name": "/model.19/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_384c28x28_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_384c28x28_k3x3.onnx",
+      "input_shape": "64x384x28x28",
+      "latency_ms": 16.292957961559296
+    },
+    {
+      "index": 153,
+      "node_name": "QuickGelu_token_58",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_384c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_384c14x14.onnx",
+      "input_shape": "64x384x14x14",
+      "latency_ms": 5.7192157953977585
+    },
+    {
+      "index": 154,
+      "node_name": "/model.20/Concat",
+      "kernel_type": "Concat",
+      "kernel_id": "Concat_bs64_384c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Concat_bs64_384c14x14.onnx",
+      "input_shape": "64x384x14x14",
+      "latency_ms": 30.064569041132927
+    },
+    {
+      "index": 155,
+      "node_name": "/model.21/cv1/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_960c14x14_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_960c14x14_k1x1.onnx",
+      "input_shape": "64x960x14x14",
+      "latency_ms": 9.304985404014587
+    },
+    {
+      "index": 156,
+      "node_name": "QuickGelu_token_59",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_576c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_576c14x14.onnx",
+      "input_shape": "64x576x14x14",
+      "latency_ms": 10.162477940320969
+    },
+    {
+      "index": 157,
+      "node_name": "/model.21/Split",
+      "kernel_type": "Split",
+      "kernel_id": "Split_bs64_576c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Split_bs64_576c14x14.onnx",
+      "input_shape": "64x576x14x14",
+      "latency_ms": 9.25194825977087
+    },
+    {
+      "index": 158,
+      "node_name": "/model.21/m.0/cv1/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_288c14x14_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_288c14x14_k3x3.onnx",
+      "input_shape": "64x288x14x14",
+      "latency_ms": 4.614495858550072
+    },
+    {
+      "index": 159,
+      "node_name": "QuickGelu_token_60",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_288c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_288c14x14.onnx",
+      "input_shape": "64x288x14x14",
+      "latency_ms": 4.114283062517643
+    },
+    {
+      "index": 160,
+      "node_name": "/model.21/m.0/cv2/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_288c14x14_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_288c14x14_k3x3.onnx",
+      "input_shape": "64x288x14x14",
+      "latency_ms": 4.646746255457401
+    },
+    {
+      "index": 161,
+      "node_name": "QuickGelu_token_61",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_288c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_288c14x14.onnx",
+      "input_shape": "64x288x14x14",
+      "latency_ms": 4.2053187265992165
+    },
+    {
+      "index": 162,
+      "node_name": "/model.21/m.1/cv1/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_288c14x14_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_288c14x14_k3x3.onnx",
+      "input_shape": "64x288x14x14",
+      "latency_ms": 4.670661315321922
+    },
+    {
+      "index": 163,
+      "node_name": "QuickGelu_token_62",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_288c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_288c14x14.onnx",
+      "input_shape": "64x288x14x14",
+      "latency_ms": 4.167347401380539
+    },
+    {
+      "index": 164,
+      "node_name": "/model.21/m.1/cv2/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_288c14x14_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_288c14x14_k3x3.onnx",
+      "input_shape": "64x288x14x14",
+      "latency_ms": 4.549765959382057
+    },
+    {
+      "index": 165,
+      "node_name": "QuickGelu_token_63",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_288c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_288c14x14.onnx",
+      "input_shape": "64x288x14x14",
+      "latency_ms": 4.198858141899109
+    },
+    {
+      "index": 166,
+      "node_name": "/model.21/Concat",
+      "kernel_type": "Concat",
+      "kernel_id": "Concat_bs64_288c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Concat_bs64_288c14x14.onnx",
+      "input_shape": "64x288x14x14",
+      "latency_ms": 10.492690652608871
+    },
+    {
+      "index": 167,
+      "node_name": "/model.21/cv2/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_1152c14x14_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_1152c14x14_k1x1.onnx",
+      "input_shape": "64x1152x14x14",
+      "latency_ms": 11.434698663651943
+    },
+    {
+      "index": 168,
+      "node_name": "QuickGelu_token_64",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_576c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_576c14x14.onnx",
+      "input_shape": "64x576x14x14",
+      "latency_ms": 10.474936291575432
+    },
+    {
+      "index": 169,
+      "node_name": "/model.22/cv3.2/cv3.2.0/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_576c14x14_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_576c14x14_k3x3.onnx",
+      "input_shape": "64x576x14x14",
+      "latency_ms": 5.376223102211952
+    },
+    {
+      "index": 170,
+      "node_name": "QuickGelu_token_65",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_192c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_192c14x14.onnx",
+      "input_shape": "64x192x14x14",
+      "latency_ms": 2.715112455189228
+    },
+    {
+      "index": 171,
+      "node_name": "/model.22/cv3.2/cv3.2.1/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_192c14x14_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_192c14x14_k3x3.onnx",
+      "input_shape": "64x192x14x14",
+      "latency_ms": 3.0087511986494064
+    },
+    {
+      "index": 172,
+      "node_name": "QuickGelu_token_66",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_192c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_192c14x14.onnx",
+      "input_shape": "64x192x14x14",
+      "latency_ms": 2.696509473025799
+    },
+    {
+      "index": 173,
+      "node_name": "/model.22/cv3.2/cv3.2.2/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_192c14x14_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_192c14x14_k1x1.onnx",
+      "input_shape": "64x192x14x14",
+      "latency_ms": 1.5755819156765938
+    },
+    {
+      "index": 174,
+      "node_name": "/model.22/Reshape_5",
+      "kernel_type": "Reshape",
+      "kernel_id": "Reshape_bs64_80c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Reshape_bs64_80c14x14.onnx",
+      "input_shape": "64x80x14x14",
+      "latency_ms": 1.15619245916605
+    },
+    {
+      "index": 175,
+      "node_name": "/model.22/cv3.1/cv3.1.0/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_384c28x28_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_384c28x28_k3x3.onnx",
+      "input_shape": "64x384x28x28",
+      "latency_ms": 15.152826346457005
+    },
+    {
+      "index": 176,
+      "node_name": "QuickGelu_token_67",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_192c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_192c28x28.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 29.98511102050543
+    },
+    {
+      "index": 177,
+      "node_name": "/model.22/cv3.1/cv3.1.1/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_192c28x28_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_192c28x28_k3x3.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 9.1584088280797
+    },
+    {
+      "index": 178,
+      "node_name": "QuickGelu_token_68",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_192c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_192c28x28.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 29.82183713465929
+    },
+    {
+      "index": 179,
+      "node_name": "/model.22/cv3.1/cv3.1.2/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_192c28x28_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_192c28x28_k1x1.onnx",
+      "input_shape": "64x192x28x28",
+      "latency_ms": 30.983887054026127
+    },
+    {
+      "index": 180,
+      "node_name": "/model.22/Reshape_4",
+      "kernel_type": "Reshape",
+      "kernel_id": "Reshape_bs64_80c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Reshape_bs64_80c28x28.onnx",
+      "input_shape": "64x80x28x28",
+      "latency_ms": 4.622241482138634
+    },
+    {
+      "index": 181,
+      "node_name": "/model.22/cv3.0/cv3.0.0/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_192c56x56_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_192c56x56_k3x3.onnx",
+      "input_shape": "64x192x56x56",
+      "latency_ms": 76.76990181207657
+    },
+    {
+      "index": 182,
+      "node_name": "QuickGelu_token_69",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_192c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_192c56x56.onnx",
+      "input_shape": "64x192x56x56",
+      "latency_ms": 135.76741199940443
+    },
+    {
+      "index": 183,
+      "node_name": "/model.22/cv3.0/cv3.0.1/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_192c56x56_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_192c56x56_k3x3.onnx",
+      "input_shape": "64x192x56x56",
+      "latency_ms": 75.54930821061134
+    },
+    {
+      "index": 184,
+      "node_name": "QuickGelu_token_70",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_192c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_192c56x56.onnx",
+      "input_shape": "64x192x56x56",
+      "latency_ms": 137.53290344029665
+    },
+    {
+      "index": 185,
+      "node_name": "/model.22/cv3.0/cv3.0.2/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_192c56x56_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_192c56x56_k1x1.onnx",
+      "input_shape": "64x192x56x56",
+      "latency_ms": 76.28364730626345
+    },
+    {
+      "index": 186,
+      "node_name": "/model.22/Reshape_3",
+      "kernel_type": "Reshape",
+      "kernel_id": "Reshape_bs64_80c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Reshape_bs64_80c56x56.onnx",
+      "input_shape": "64x80x56x56",
+      "latency_ms": 56.00186623632908
+    },
+    {
+      "index": 187,
+      "node_name": "/model.22/Concat_1",
+      "kernel_type": "Concat",
+      "kernel_id": "Concat_bs64_80x3136",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Concat_bs64_80x3136.onnx",
+      "input_shape": "64x80x3136",
+      "latency_ms": 114.74966835230589
+    },
+    {
+      "index": 188,
+      "node_name": "/model.22/Sigmoid",
+      "kernel_type": "Sigmoid",
+      "kernel_id": "Sigmoid_bs64_80x4116",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Sigmoid_bs64_80x4116.onnx",
+      "input_shape": "64x80x4116",
+      "latency_ms": 72.73162435740232
+    },
+    {
+      "index": 189,
+      "node_name": "/model.22/cv2.2/cv2.2.0/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_576c14x14_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_576c14x14_k3x3.onnx",
+      "input_shape": "64x576x14x14",
+      "latency_ms": 5.126896873116493
+    },
+    {
+      "index": 190,
+      "node_name": "QuickGelu_token_71",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_64c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_64c14x14.onnx",
+      "input_shape": "64x64x14x14",
+      "latency_ms": 1.0213788598775864
+    },
+    {
+      "index": 191,
+      "node_name": "/model.22/cv2.2/cv2.2.1/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_64c14x14_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_64c14x14_k3x3.onnx",
+      "input_shape": "64x64x14x14",
+      "latency_ms": 1.1052384972572327
+    },
+    {
+      "index": 192,
+      "node_name": "QuickGelu_token_72",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_64c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_64c14x14.onnx",
+      "input_shape": "64x64x14x14",
+      "latency_ms": 0.9414996951818466
+    },
+    {
+      "index": 193,
+      "node_name": "/model.22/cv2.2/cv2.2.2/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_64c14x14_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_64c14x14_k1x1.onnx",
+      "input_shape": "64x64x14x14",
+      "latency_ms": 0.9950019419193268
+    },
+    {
+      "index": 194,
+      "node_name": "/model.22/Reshape_2",
+      "kernel_type": "Reshape",
+      "kernel_id": "Reshape_bs64_64c14x14",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Reshape_bs64_64c14x14.onnx",
+      "input_shape": "64x64x14x14",
+      "latency_ms": 0.9414004161953926
+    },
+    {
+      "index": 195,
+      "node_name": "/model.22/cv2.1/cv2.1.0/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_384c28x28_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_384c28x28_k3x3.onnx",
+      "input_shape": "64x384x28x28",
+      "latency_ms": 15.023052506148815
+    },
+    {
+      "index": 196,
+      "node_name": "QuickGelu_token_73",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_64c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_64c28x28.onnx",
+      "input_shape": "64x64x28x28",
+      "latency_ms": 3.7751665338873863
+    },
+    {
+      "index": 197,
+      "node_name": "/model.22/cv2.1/cv2.1.1/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_64c28x28_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_64c28x28_k3x3.onnx",
+      "input_shape": "64x64x28x28",
+      "latency_ms": 3.9723930880427356
+    },
+    {
+      "index": 198,
+      "node_name": "QuickGelu_token_74",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_64c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_64c28x28.onnx",
+      "input_shape": "64x64x28x28",
+      "latency_ms": 3.6840077489614487
+    },
+    {
+      "index": 199,
+      "node_name": "/model.22/cv2.1/cv2.1.2/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_64c28x28_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_64c28x28_k1x1.onnx",
+      "input_shape": "64x64x28x28",
+      "latency_ms": 3.742046281695366
+    },
+    {
+      "index": 200,
+      "node_name": "/model.22/Reshape_1",
+      "kernel_type": "Reshape",
+      "kernel_id": "Reshape_bs64_64c28x28",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Reshape_bs64_64c28x28.onnx",
+      "input_shape": "64x64x28x28",
+      "latency_ms": 3.6368345841765404
+    },
+    {
+      "index": 201,
+      "node_name": "/model.22/cv2.0/cv2.0.0/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_192c56x56_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_192c56x56_k3x3.onnx",
+      "input_shape": "64x192x56x56",
+      "latency_ms": 72.84661959856749
+    },
+    {
+      "index": 202,
+      "node_name": "QuickGelu_token_75",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_64c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_64c56x56.onnx",
+      "input_shape": "64x64x56x56",
+      "latency_ms": 41.16374347358942
+    },
+    {
+      "index": 203,
+      "node_name": "/model.22/cv2.0/cv2.0.1/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_64c56x56_k3x3",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_64c56x56_k3x3.onnx",
+      "input_shape": "64x64x56x56",
+      "latency_ms": 41.62135478109121
+    },
+    {
+      "index": 204,
+      "node_name": "QuickGelu_token_76",
+      "kernel_type": "QuickGelu",
+      "kernel_id": "QuickGelu_bs64_64c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/QuickGelu_bs64_64c56x56.onnx",
+      "input_shape": "64x64x56x56",
+      "latency_ms": 41.36244785040617
+    },
+    {
+      "index": 205,
+      "node_name": "/model.22/cv2.0/cv2.0.2/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_64c56x56_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_64c56x56_k1x1.onnx",
+      "input_shape": "64x64x56x56",
+      "latency_ms": 41.18555448949337
+    },
+    {
+      "index": 206,
+      "node_name": "/model.22/Reshape",
+      "kernel_type": "Reshape",
+      "kernel_id": "Reshape_bs64_64c56x56",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Reshape_bs64_64c56x56.onnx",
+      "input_shape": "64x64x56x56",
+      "latency_ms": 43.06368790566921
+    },
+    {
+      "index": 207,
+      "node_name": "/model.22/Concat",
+      "kernel_type": "Concat",
+      "kernel_id": "Concat_bs64_64x3136",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Concat_bs64_64x3136.onnx",
+      "input_shape": "64x64x3136",
+      "latency_ms": 89.1384407877922
+    },
+    {
+      "index": 208,
+      "node_name": "/model.22/dfl/Reshape",
+      "kernel_type": "Reshape",
+      "kernel_id": "Reshape_bs64_64x4116",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Reshape_bs64_64x4116.onnx",
+      "input_shape": "64x64x4116",
+      "latency_ms": 58.80707409232855
+    },
+    {
+      "index": 209,
+      "node_name": "/model.22/dfl/Transpose",
+      "kernel_type": "Transpose",
+      "kernel_id": "Transpose_bs64_4c16x4116",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Transpose_bs64_4c16x4116.onnx",
+      "input_shape": "64x4x16x4116",
+      "latency_ms": 58.89133848249912
+    },
+    {
+      "index": 210,
+      "node_name": "/model.22/dfl/Softmax",
+      "kernel_type": "Softmax",
+      "kernel_id": "Softmax_bs64_16c4x4116",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Softmax_bs64_16c4x4116.onnx",
+      "input_shape": "64x16x4x4116",
+      "latency_ms": 59.20518897473812
+    },
+    {
+      "index": 211,
+      "node_name": "/model.22/dfl/conv/Conv",
+      "kernel_type": "Conv",
+      "kernel_id": "Conv_bs64_16c4x4116_k1x1",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Conv_bs64_16c4x4116_k1x1.onnx",
+      "input_shape": "64x16x4x4116",
+      "latency_ms": 8.934654481709003
+    },
+    {
+      "index": 212,
+      "node_name": "/model.22/dfl/Reshape_1",
+      "kernel_type": "Reshape",
+      "kernel_id": "Reshape_bs64_1c4x4116",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Reshape_bs64_1c4x4116.onnx",
+      "input_shape": "64x1x4x4116",
+      "latency_ms": 1.2147363275289536
+    },
+    {
+      "index": 213,
+      "node_name": "/model.22/Slice_1",
+      "kernel_type": "Slice",
+      "kernel_id": "Slice_bs64_4x4116",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Slice_bs64_4x4116.onnx",
+      "input_shape": "64x4x4116",
+      "latency_ms": 0.7995674386620522
+    },
+    {
+      "index": 214,
+      "node_name": "/model.22/Add_1",
+      "kernel_type": "Add",
+      "kernel_id": "Add_bs64_2x4116",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Add_bs64_2x4116.onnx",
+      "input_shape": "64x2x4116",
+      "latency_ms": 0.6805242970585823
+    },
+    {
+      "index": 215,
+      "node_name": "/model.22/Slice",
+      "kernel_type": "Slice",
+      "kernel_id": "Slice_bs64_4x4116",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Slice_bs64_4x4116.onnx",
+      "input_shape": "64x4x4116",
+      "latency_ms": 0.8510598912835121
+    },
+    {
+      "index": 216,
+      "node_name": "/model.22/Sub",
+      "kernel_type": "Sub",
+      "kernel_id": "Sub_bs64_2x4116",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Sub_bs64_2x4116.onnx",
+      "input_shape": "64x2x4116",
+      "latency_ms": 0.7230240851640701
+    },
+    {
+      "index": 217,
+      "node_name": "/model.22/Sub_1",
+      "kernel_type": "Sub",
+      "kernel_id": "Sub_bs64_2x4116",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Sub_bs64_2x4116.onnx",
+      "input_shape": "64x2x4116",
+      "latency_ms": 0.7123149931430817
+    },
+    {
+      "index": 218,
+      "node_name": "/model.22/Add_2",
+      "kernel_type": "Add",
+      "kernel_id": "Add_bs64_2x4116",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Add_bs64_2x4116.onnx",
+      "input_shape": "64x2x4116",
+      "latency_ms": 0.6747322157025337
+    },
+    {
+      "index": 219,
+      "node_name": "/model.22/Div_1",
+      "kernel_type": "Div",
+      "kernel_id": "Div_bs64_2x4116",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Div_bs64_2x4116.onnx",
+      "input_shape": "64x2x4116",
+      "latency_ms": 0.6779100745916367
+    },
+    {
+      "index": 220,
+      "node_name": "/model.22/Concat_2",
+      "kernel_type": "Concat",
+      "kernel_id": "Concat_bs64_2x4116",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Concat_bs64_2x4116.onnx",
+      "input_shape": "64x2x4116",
+      "latency_ms": 1.2738164514303207
+    },
+    {
+      "index": 221,
+      "node_name": "/model.22/Mul_2",
+      "kernel_type": "Mul",
+      "kernel_id": "Mul_bs64_4x4116",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Mul_bs64_4x4116.onnx",
+      "input_shape": "64x4x4116",
+      "latency_ms": 1.2152105569839478
+    },
+    {
+      "index": 222,
+      "node_name": "/model.22/Concat_3",
+      "kernel_type": "Concat",
+      "kernel_id": "Concat_bs64_4x4116",
+      "kernel_onnx": "/cyq/hase/kernel_model/kernel_onnx/Concat_bs64_4x4116.onnx",
+      "input_shape": "64x4x4116",
+      "latency_ms": 2.3129289969801903
+    }
+  ]
+}

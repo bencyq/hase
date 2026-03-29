@@ -1,0 +1,32 @@
+Model: /cyq/hase/model_zoo/models/resnet18_bs64_224x224.onnx
+Kernel Count: 24
+Execution Order:
+[01] /conv1/Conv | Conv_Relu | 168.939159 ms
+[02] /maxpool/MaxPool | MaxPool | 58.635086 ms
+[03] /layer1/layer1.0/conv1/Conv | Conv_Relu | 41.453447 ms
+[04] /layer1/layer1.0/conv2/Conv | Conv_Add_Relu | 47.423689 ms
+[05] /layer1/layer1.1/conv1/Conv | Conv_Relu | 42.002481 ms
+[06] /layer1/layer1.1/conv2/Conv | Conv_Add_Relu | 47.412728 ms
+[07] /layer2/layer2.0/conv1/Conv | Conv_Relu | 41.541398 ms
+[08] /layer2/layer2.0/conv2/Conv | Conv | 9.505020 ms
+[09] /layer2/layer2.0/downsample/downsample.0/Conv | Conv_Add_Relu | 14.631929 ms
+[10] /layer2/layer2.1/conv1/Conv | Conv_Relu | 9.440055 ms
+[11] /layer2/layer2.1/conv2/Conv | Conv_Add_Relu | 11.020666 ms
+[12] /layer3/layer3.0/conv1/Conv | Conv_Relu | 9.406510 ms
+[13] /layer3/layer3.0/conv2/Conv | Conv | 3.963105 ms
+[14] /layer3/layer3.0/downsample/downsample.0/Conv | Conv_Add_Relu | 6.707437 ms
+[15] /layer3/layer3.1/conv1/Conv | Conv_Relu | 4.094018 ms
+[16] /layer3/layer3.1/conv2/Conv | Conv_Add_Relu | 5.511120 ms
+[17] /layer4/layer4.0/conv1/Conv | Conv_Relu | 3.843798 ms
+[18] /layer4/layer4.0/conv2/Conv | Conv | 2.130495 ms
+[19] /layer4/layer4.0/downsample/downsample.0/Conv | Conv_Add_Relu | 2.956752 ms
+[20] /layer4/layer4.1/conv1/Conv | Conv_Relu | 2.247379 ms
+[21] /layer4/layer4.1/conv2/Conv | Conv_Add_Relu | 2.693818 ms
+[22] /avgpool/GlobalAveragePool | GlobalAveragePool | 0.506940 ms
+[23] /Flatten | Flatten | 0.096795 ms
+[24] /fc/Gemm | Gemm | 0.134192 ms
+Total Kernel Latency(ms): 536.298016
+Direct Model Latency(ms): 12.444931
+KernelSum - Model(ms): 523.853085
+KernelSum / Model: 43.093691
+Saved: /cyq/hase/benchmark3/results/details/resnet18_bs64_224x224.json
