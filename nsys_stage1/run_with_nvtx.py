@@ -16,8 +16,10 @@ sys.path.insert(0, PROJECT_ROOT)
 from utils.logger import get_logger
 
 logger = get_logger("nsys_stage1.run_with_nvtx")
-
-PROVIDERS = ["CUDAExecutionProvider", "CPUExecutionProvider"]
+PROVIDERS = [
+    ("CUDAExecutionProvider", {"cudnn_conv_algo_search": "HEURISTIC"}),
+    "CPUExecutionProvider",
+]
 
 
 def _to_numpy_dtype(ort_type):

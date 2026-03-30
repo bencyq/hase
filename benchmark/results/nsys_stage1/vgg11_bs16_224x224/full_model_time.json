@@ -1,0 +1,9 @@
+{
+  "loops": 50,
+  "nsys_rep_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/full_model.nsys-rep",
+  "sqlite_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/full_model.sqlite",
+  "gpu_kernel_time_sum_ns": 2322822206,
+  "pure_gpu_ms": 46.45644412,
+  "capture_range_name": "measure",
+  "gpu_name": "NVIDIA A100-SXM4-40GB"
+}

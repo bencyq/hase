@@ -1,0 +1,160 @@
+[
+  {
+    "model_name": "vgg11_bs16_224x224",
+    "kernel_type": "Conv_Relu",
+    "exec_count": 400,
+    "unique_node_count": 8,
+    "total_kernel_time_ms": 29.95100000000006,
+    "avg_kernel_time_ms": 0.07487750000000015,
+    "total_gpu_kernel_ms": 29.95100000000006,
+    "avg_gpu_kernel_ms": 0.07487750000000015,
+    "total_gpu_copy_ms": 0.0,
+    "avg_gpu_copy_ms": 0.0,
+    "total_node_span_ms": 32.44600000000005,
+    "avg_node_span_ms": 0.08111500000000012,
+    "total_dispatch_gap_ms": 0.6720000000000005,
+    "avg_dispatch_gap_ms": 0.0016800000000000012,
+    "node_names": [
+      "/features/features.0/Conv",
+      "/features/features.11/Conv",
+      "/features/features.13/Conv",
+      "/features/features.16/Conv",
+      "/features/features.18/Conv",
+      "/features/features.3/Conv",
+      "/features/features.6/Conv",
+      "/features/features.8/Conv"
+    ],
+    "signature_ids": [
+      "136b79ca73f9e89d",
+      "18f0cde3150ac269",
+      "1eebca7ae0b97a06",
+      "2d8060359826253c",
+      "35ae5d62f3fbb654",
+      "455ebf974f26fda9",
+      "54f6514b23db6d12"
+    ]
+  },
+  {
+    "model_name": "vgg11_bs16_224x224",
+    "kernel_type": "MaxPool",
+    "exec_count": 250,
+    "unique_node_count": 5,
+    "total_kernel_time_ms": 6.665999999999995,
+    "avg_kernel_time_ms": 0.02666399999999998,
+    "total_gpu_kernel_ms": 6.665999999999995,
+    "avg_gpu_kernel_ms": 0.02666399999999998,
+    "total_gpu_copy_ms": 0.0,
+    "avg_gpu_copy_ms": 0.0,
+    "total_node_span_ms": 7.960999999999998,
+    "avg_node_span_ms": 0.03184399999999999,
+    "total_dispatch_gap_ms": 0.8730000000000003,
+    "avg_dispatch_gap_ms": 0.003492000000000001,
+    "node_names": [
+      "/features/features.10/MaxPool",
+      "/features/features.15/MaxPool",
+      "/features/features.2/MaxPool",
+      "/features/features.20/MaxPool",
+      "/features/features.5/MaxPool"
+    ],
+    "signature_ids": [
+      "2b8f70e6609508a9",
+      "45919e1a405dbeea",
+      "6cea253e82ac84e7",
+      "91f604e4a30523ca",
+      "e74fd3ca10f89f49"
+    ]
+  },
+  {
+    "model_name": "vgg11_bs16_224x224",
+    "kernel_type": "Gemm",
+    "exec_count": 150,
+    "unique_node_count": 3,
+    "total_kernel_time_ms": 5.895999999999997,
+    "avg_kernel_time_ms": 0.03930666666666665,
+    "total_gpu_kernel_ms": 5.895999999999997,
+    "avg_gpu_kernel_ms": 0.03930666666666665,
+    "total_gpu_copy_ms": 0.0,
+    "avg_gpu_copy_ms": 0.0,
+    "total_node_span_ms": 6.616999999999995,
+    "avg_node_span_ms": 0.044113333333333296,
+    "total_dispatch_gap_ms": 0.25600000000000017,
+    "avg_dispatch_gap_ms": 0.0017066666666666677,
+    "node_names": [
+      "/classifier/classifier.0/Gemm",
+      "/classifier/classifier.3/Gemm",
+      "/classifier/classifier.6/Gemm"
+    ],
+    "signature_ids": [
+      "ae6ba9fda7aa64a2",
+      "c8b25fe80a3c266d",
+      "cd9fba9d4bfc568a"
+    ]
+  },
+  {
+    "model_name": "vgg11_bs16_224x224",
+    "kernel_type": "Relu",
+    "exec_count": 100,
+    "unique_node_count": 2,
+    "total_kernel_time_ms": 2.3349999999999977,
+    "avg_kernel_time_ms": 0.02334999999999998,
+    "total_gpu_kernel_ms": 2.3349999999999977,
+    "avg_gpu_kernel_ms": 0.02334999999999998,
+    "total_gpu_copy_ms": 0.0,
+    "avg_gpu_copy_ms": 0.0,
+    "total_node_span_ms": 2.8109999999999995,
+    "avg_node_span_ms": 0.028109999999999996,
+    "total_dispatch_gap_ms": 0.18700000000000014,
+    "avg_dispatch_gap_ms": 0.0018700000000000014,
+    "node_names": [
+      "/classifier/classifier.1/Relu",
+      "/classifier/classifier.4/Relu"
+    ],
+    "signature_ids": [
+      "5a3ed2b2d0ad2fcd"
+    ]
+  },
+  {
+    "model_name": "vgg11_bs16_224x224",
+    "kernel_type": "AveragePool",
+    "exec_count": 50,
+    "unique_node_count": 1,
+    "total_kernel_time_ms": 1.229,
+    "avg_kernel_time_ms": 0.02458,
+    "total_gpu_kernel_ms": 1.229,
+    "avg_gpu_kernel_ms": 0.02458,
+    "total_gpu_copy_ms": 0.0,
+    "avg_gpu_copy_ms": 0.0,
+    "total_node_span_ms": 1.4699999999999998,
+    "avg_node_span_ms": 0.029399999999999996,
+    "total_dispatch_gap_ms": 0.09300000000000007,
+    "avg_dispatch_gap_ms": 0.0018600000000000014,
+    "node_names": [
+      "/avgpool/AveragePool"
+    ],
+    "signature_ids": [
+      "1899229fc5e77600"
+    ]
+  },
+  {
+    "model_name": "vgg11_bs16_224x224",
+    "kernel_type": "Flatten",
+    "exec_count": 50,
+    "unique_node_count": 1,
+    "total_kernel_time_ms": 1.0030000000000006,
+    "avg_kernel_time_ms": 0.020060000000000012,
+    "total_gpu_kernel_ms": 1.0030000000000006,
+    "avg_gpu_kernel_ms": 0.020060000000000012,
+    "total_gpu_copy_ms": 0.0,
+    "avg_gpu_copy_ms": 0.0,
+    "total_node_span_ms": 1.242,
+    "avg_node_span_ms": 0.02484,
+    "total_dispatch_gap_ms": 0.09000000000000007,
+    "avg_dispatch_gap_ms": 0.0018000000000000013,
+    "node_names": [
+      "/Flatten"
+    ],
+    "signature_ids": [
+      "5af617c9ac9eae00"
+    ]
+  }
+]

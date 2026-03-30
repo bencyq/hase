@@ -1,0 +1,28 @@
+{
+  "stage": "A",
+  "model_name": "vgg11_bs16_224x224",
+  "model_path": "/cyq/hase/model_zoo/models/vgg11_bs16_224x224.onnx",
+  "output_dir": "/cyq/hase/benchmark/results/ort_stageA/vgg11_bs16_224x224",
+  "warmup": 20,
+  "loops": 50,
+  "device_id": 0,
+  "provider_options": {
+    "cudnn_conv_algo_search": "HEURISTIC"
+  },
+  "providers": [
+    [
+      "CUDAExecutionProvider",
+      {
+        "cudnn_conv_algo_search": "HEURISTIC",
+        "device_id": "0"
+      }
+    ],
+    "CPUExecutionProvider"
+  ],
+  "ort_version": "1.14.0",
+  "available_providers": [
+    "TensorrtExecutionProvider",
+    "CUDAExecutionProvider",
+    "CPUExecutionProvider"
+  ]
+}

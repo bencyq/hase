@@ -1,0 +1,1066 @@
+[
+  {
+    "kernel_type": "Conv_Relu",
+    "attributes": {
+      "kernel_shape": [
+        7,
+        7
+      ],
+      "strides": [
+        2,
+        2
+      ],
+      "pads": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "dilations": [
+        1,
+        1
+      ],
+      "group": 1,
+      "activation": "Relu"
+    },
+    "activation_input_shape": [
+      64,
+      3,
+      224,
+      224
+    ],
+    "weight_shape": [
+      64,
+      3,
+      7,
+      7
+    ],
+    "bias_shape": [
+      64
+    ],
+    "residual_shape": null,
+    "output_shape": [
+      64,
+      64,
+      112,
+      112
+    ],
+    "signature_id": "73d78ffdf6cd6111",
+    "instance_node_names": [
+      "/conv1/Conv"
+    ]
+  },
+  {
+    "kernel_type": "MaxPool",
+    "attributes": {
+      "kernel_shape": [
+        3,
+        3
+      ],
+      "strides": [
+        2,
+        2
+      ],
+      "pads": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "ceil_mode": 0
+    },
+    "activation_input_shape": [
+      64,
+      64,
+      112,
+      112
+    ],
+    "weight_shape": null,
+    "bias_shape": null,
+    "residual_shape": null,
+    "output_shape": [
+      64,
+      64,
+      56,
+      56
+    ],
+    "signature_id": "97cb638555ad771b",
+    "instance_node_names": [
+      "/maxpool/MaxPool"
+    ]
+  },
+  {
+    "kernel_type": "Conv_Relu",
+    "attributes": {
+      "kernel_shape": [
+        3,
+        3
+      ],
+      "strides": [
+        1,
+        1
+      ],
+      "pads": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "dilations": [
+        1,
+        1
+      ],
+      "group": 1,
+      "activation": "Relu"
+    },
+    "activation_input_shape": [
+      64,
+      64,
+      56,
+      56
+    ],
+    "weight_shape": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "bias_shape": [
+      64
+    ],
+    "residual_shape": null,
+    "output_shape": [
+      64,
+      64,
+      56,
+      56
+    ],
+    "signature_id": "31ab3d73ed5e01f5",
+    "instance_node_names": [
+      "/layer1/layer1.0/conv1/Conv",
+      "/layer1/layer1.1/conv1/Conv"
+    ]
+  },
+  {
+    "kernel_type": "Conv_Add_Relu",
+    "attributes": {
+      "kernel_shape": [
+        3,
+        3
+      ],
+      "strides": [
+        1,
+        1
+      ],
+      "pads": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "dilations": [
+        1,
+        1
+      ],
+      "group": 1,
+      "activation": "Relu"
+    },
+    "activation_input_shape": [
+      64,
+      64,
+      56,
+      56
+    ],
+    "weight_shape": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "bias_shape": [
+      64
+    ],
+    "residual_shape": [
+      64,
+      64,
+      56,
+      56
+    ],
+    "output_shape": [
+      64,
+      64,
+      56,
+      56
+    ],
+    "signature_id": "0d8ecc0210016c9a",
+    "instance_node_names": [
+      "/layer1/layer1.0/conv2/Conv",
+      "/layer1/layer1.1/conv2/Conv"
+    ]
+  },
+  {
+    "kernel_type": "Conv_Relu",
+    "attributes": {
+      "kernel_shape": [
+        3,
+        3
+      ],
+      "strides": [
+        2,
+        2
+      ],
+      "pads": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "dilations": [
+        1,
+        1
+      ],
+      "group": 1,
+      "activation": "Relu"
+    },
+    "activation_input_shape": [
+      64,
+      64,
+      56,
+      56
+    ],
+    "weight_shape": [
+      128,
+      64,
+      3,
+      3
+    ],
+    "bias_shape": [
+      128
+    ],
+    "residual_shape": null,
+    "output_shape": [
+      64,
+      128,
+      28,
+      28
+    ],
+    "signature_id": "fec098797bed9de4",
+    "instance_node_names": [
+      "/layer2/layer2.0/conv1/Conv"
+    ]
+  },
+  {
+    "kernel_type": "Conv",
+    "attributes": {
+      "kernel_shape": [
+        3,
+        3
+      ],
+      "strides": [
+        1,
+        1
+      ],
+      "pads": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "dilations": [
+        1,
+        1
+      ],
+      "group": 1
+    },
+    "activation_input_shape": [
+      64,
+      128,
+      28,
+      28
+    ],
+    "weight_shape": [
+      128,
+      128,
+      3,
+      3
+    ],
+    "bias_shape": [
+      128
+    ],
+    "residual_shape": null,
+    "output_shape": [
+      64,
+      128,
+      28,
+      28
+    ],
+    "signature_id": "62b72cff53fd36e8",
+    "instance_node_names": [
+      "/layer2/layer2.0/conv2/Conv"
+    ]
+  },
+  {
+    "kernel_type": "Conv_Add_Relu",
+    "attributes": {
+      "kernel_shape": [
+        1,
+        1
+      ],
+      "strides": [
+        2,
+        2
+      ],
+      "pads": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "dilations": [
+        1,
+        1
+      ],
+      "group": 1,
+      "activation": "Relu"
+    },
+    "activation_input_shape": [
+      64,
+      64,
+      56,
+      56
+    ],
+    "weight_shape": [
+      128,
+      64,
+      1,
+      1
+    ],
+    "bias_shape": [
+      128
+    ],
+    "residual_shape": [
+      64,
+      128,
+      28,
+      28
+    ],
+    "output_shape": [
+      64,
+      128,
+      28,
+      28
+    ],
+    "signature_id": "34b11f8f29b68706",
+    "instance_node_names": [
+      "/layer2/layer2.0/downsample/downsample.0/Conv"
+    ]
+  },
+  {
+    "kernel_type": "Conv_Relu",
+    "attributes": {
+      "kernel_shape": [
+        3,
+        3
+      ],
+      "strides": [
+        1,
+        1
+      ],
+      "pads": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "dilations": [
+        1,
+        1
+      ],
+      "group": 1,
+      "activation": "Relu"
+    },
+    "activation_input_shape": [
+      64,
+      128,
+      28,
+      28
+    ],
+    "weight_shape": [
+      128,
+      128,
+      3,
+      3
+    ],
+    "bias_shape": [
+      128
+    ],
+    "residual_shape": null,
+    "output_shape": [
+      64,
+      128,
+      28,
+      28
+    ],
+    "signature_id": "c0393682cfe0d425",
+    "instance_node_names": [
+      "/layer2/layer2.1/conv1/Conv"
+    ]
+  },
+  {
+    "kernel_type": "Conv_Add_Relu",
+    "attributes": {
+      "kernel_shape": [
+        3,
+        3
+      ],
+      "strides": [
+        1,
+        1
+      ],
+      "pads": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "dilations": [
+        1,
+        1
+      ],
+      "group": 1,
+      "activation": "Relu"
+    },
+    "activation_input_shape": [
+      64,
+      128,
+      28,
+      28
+    ],
+    "weight_shape": [
+      128,
+      128,
+      3,
+      3
+    ],
+    "bias_shape": [
+      128
+    ],
+    "residual_shape": [
+      64,
+      128,
+      28,
+      28
+    ],
+    "output_shape": [
+      64,
+      128,
+      28,
+      28
+    ],
+    "signature_id": "ceb8ff327ffeb3e0",
+    "instance_node_names": [
+      "/layer2/layer2.1/conv2/Conv"
+    ]
+  },
+  {
+    "kernel_type": "Conv_Relu",
+    "attributes": {
+      "kernel_shape": [
+        3,
+        3
+      ],
+      "strides": [
+        2,
+        2
+      ],
+      "pads": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "dilations": [
+        1,
+        1
+      ],
+      "group": 1,
+      "activation": "Relu"
+    },
+    "activation_input_shape": [
+      64,
+      128,
+      28,
+      28
+    ],
+    "weight_shape": [
+      256,
+      128,
+      3,
+      3
+    ],
+    "bias_shape": [
+      256
+    ],
+    "residual_shape": null,
+    "output_shape": [
+      64,
+      256,
+      14,
+      14
+    ],
+    "signature_id": "938d4b52c2d20bd8",
+    "instance_node_names": [
+      "/layer3/layer3.0/conv1/Conv"
+    ]
+  },
+  {
+    "kernel_type": "Conv",
+    "attributes": {
+      "kernel_shape": [
+        3,
+        3
+      ],
+      "strides": [
+        1,
+        1
+      ],
+      "pads": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "dilations": [
+        1,
+        1
+      ],
+      "group": 1
+    },
+    "activation_input_shape": [
+      64,
+      256,
+      14,
+      14
+    ],
+    "weight_shape": [
+      256,
+      256,
+      3,
+      3
+    ],
+    "bias_shape": [
+      256
+    ],
+    "residual_shape": null,
+    "output_shape": [
+      64,
+      256,
+      14,
+      14
+    ],
+    "signature_id": "9a96779632670574",
+    "instance_node_names": [
+      "/layer3/layer3.0/conv2/Conv"
+    ]
+  },
+  {
+    "kernel_type": "Conv_Add_Relu",
+    "attributes": {
+      "kernel_shape": [
+        1,
+        1
+      ],
+      "strides": [
+        2,
+        2
+      ],
+      "pads": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "dilations": [
+        1,
+        1
+      ],
+      "group": 1,
+      "activation": "Relu"
+    },
+    "activation_input_shape": [
+      64,
+      128,
+      28,
+      28
+    ],
+    "weight_shape": [
+      256,
+      128,
+      1,
+      1
+    ],
+    "bias_shape": [
+      256
+    ],
+    "residual_shape": [
+      64,
+      256,
+      14,
+      14
+    ],
+    "output_shape": [
+      64,
+      256,
+      14,
+      14
+    ],
+    "signature_id": "8d7ce11509b54dfe",
+    "instance_node_names": [
+      "/layer3/layer3.0/downsample/downsample.0/Conv"
+    ]
+  },
+  {
+    "kernel_type": "Conv_Relu",
+    "attributes": {
+      "kernel_shape": [
+        3,
+        3
+      ],
+      "strides": [
+        1,
+        1
+      ],
+      "pads": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "dilations": [
+        1,
+        1
+      ],
+      "group": 1,
+      "activation": "Relu"
+    },
+    "activation_input_shape": [
+      64,
+      256,
+      14,
+      14
+    ],
+    "weight_shape": [
+      256,
+      256,
+      3,
+      3
+    ],
+    "bias_shape": [
+      256
+    ],
+    "residual_shape": null,
+    "output_shape": [
+      64,
+      256,
+      14,
+      14
+    ],
+    "signature_id": "9e887fce89a1a2de",
+    "instance_node_names": [
+      "/layer3/layer3.1/conv1/Conv"
+    ]
+  },
+  {
+    "kernel_type": "Conv_Add_Relu",
+    "attributes": {
+      "kernel_shape": [
+        3,
+        3
+      ],
+      "strides": [
+        1,
+        1
+      ],
+      "pads": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "dilations": [
+        1,
+        1
+      ],
+      "group": 1,
+      "activation": "Relu"
+    },
+    "activation_input_shape": [
+      64,
+      256,
+      14,
+      14
+    ],
+    "weight_shape": [
+      256,
+      256,
+      3,
+      3
+    ],
+    "bias_shape": [
+      256
+    ],
+    "residual_shape": [
+      64,
+      256,
+      14,
+      14
+    ],
+    "output_shape": [
+      64,
+      256,
+      14,
+      14
+    ],
+    "signature_id": "f8d36a19ff5bc96e",
+    "instance_node_names": [
+      "/layer3/layer3.1/conv2/Conv"
+    ]
+  },
+  {
+    "kernel_type": "Conv_Relu",
+    "attributes": {
+      "kernel_shape": [
+        3,
+        3
+      ],
+      "strides": [
+        2,
+        2
+      ],
+      "pads": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "dilations": [
+        1,
+        1
+      ],
+      "group": 1,
+      "activation": "Relu"
+    },
+    "activation_input_shape": [
+      64,
+      256,
+      14,
+      14
+    ],
+    "weight_shape": [
+      512,
+      256,
+      3,
+      3
+    ],
+    "bias_shape": [
+      512
+    ],
+    "residual_shape": null,
+    "output_shape": [
+      64,
+      512,
+      7,
+      7
+    ],
+    "signature_id": "d551c9a0f88f08c5",
+    "instance_node_names": [
+      "/layer4/layer4.0/conv1/Conv"
+    ]
+  },
+  {
+    "kernel_type": "Conv",
+    "attributes": {
+      "kernel_shape": [
+        3,
+        3
+      ],
+      "strides": [
+        1,
+        1
+      ],
+      "pads": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "dilations": [
+        1,
+        1
+      ],
+      "group": 1
+    },
+    "activation_input_shape": [
+      64,
+      512,
+      7,
+      7
+    ],
+    "weight_shape": [
+      512,
+      512,
+      3,
+      3
+    ],
+    "bias_shape": [
+      512
+    ],
+    "residual_shape": null,
+    "output_shape": [
+      64,
+      512,
+      7,
+      7
+    ],
+    "signature_id": "a8757ea0f343ee95",
+    "instance_node_names": [
+      "/layer4/layer4.0/conv2/Conv"
+    ]
+  },
+  {
+    "kernel_type": "Conv_Add_Relu",
+    "attributes": {
+      "kernel_shape": [
+        1,
+        1
+      ],
+      "strides": [
+        2,
+        2
+      ],
+      "pads": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "dilations": [
+        1,
+        1
+      ],
+      "group": 1,
+      "activation": "Relu"
+    },
+    "activation_input_shape": [
+      64,
+      256,
+      14,
+      14
+    ],
+    "weight_shape": [
+      512,
+      256,
+      1,
+      1
+    ],
+    "bias_shape": [
+      512
+    ],
+    "residual_shape": [
+      64,
+      512,
+      7,
+      7
+    ],
+    "output_shape": [
+      64,
+      512,
+      7,
+      7
+    ],
+    "signature_id": "0f665cebec7e5105",
+    "instance_node_names": [
+      "/layer4/layer4.0/downsample/downsample.0/Conv"
+    ]
+  },
+  {
+    "kernel_type": "Conv_Relu",
+    "attributes": {
+      "kernel_shape": [
+        3,
+        3
+      ],
+      "strides": [
+        1,
+        1
+      ],
+      "pads": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "dilations": [
+        1,
+        1
+      ],
+      "group": 1,
+      "activation": "Relu"
+    },
+    "activation_input_shape": [
+      64,
+      512,
+      7,
+      7
+    ],
+    "weight_shape": [
+      512,
+      512,
+      3,
+      3
+    ],
+    "bias_shape": [
+      512
+    ],
+    "residual_shape": null,
+    "output_shape": [
+      64,
+      512,
+      7,
+      7
+    ],
+    "signature_id": "c4cd06dcbe55a64b",
+    "instance_node_names": [
+      "/layer4/layer4.1/conv1/Conv"
+    ]
+  },
+  {
+    "kernel_type": "Conv_Add_Relu",
+    "attributes": {
+      "kernel_shape": [
+        3,
+        3
+      ],
+      "strides": [
+        1,
+        1
+      ],
+      "pads": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "dilations": [
+        1,
+        1
+      ],
+      "group": 1,
+      "activation": "Relu"
+    },
+    "activation_input_shape": [
+      64,
+      512,
+      7,
+      7
+    ],
+    "weight_shape": [
+      512,
+      512,
+      3,
+      3
+    ],
+    "bias_shape": [
+      512
+    ],
+    "residual_shape": [
+      64,
+      512,
+      7,
+      7
+    ],
+    "output_shape": [
+      64,
+      512,
+      7,
+      7
+    ],
+    "signature_id": "a6078fb1b4dc4005",
+    "instance_node_names": [
+      "/layer4/layer4.1/conv2/Conv"
+    ]
+  },
+  {
+    "kernel_type": "GlobalAveragePool",
+    "attributes": {},
+    "activation_input_shape": [
+      64,
+      512,
+      7,
+      7
+    ],
+    "weight_shape": null,
+    "bias_shape": null,
+    "residual_shape": null,
+    "output_shape": [
+      64,
+      512,
+      1,
+      1
+    ],
+    "signature_id": "fde7fbc89b5a01f4",
+    "instance_node_names": [
+      "/avgpool/GlobalAveragePool"
+    ]
+  },
+  {
+    "kernel_type": "Flatten",
+    "attributes": {
+      "axis": 1
+    },
+    "activation_input_shape": [
+      64,
+      512,
+      1,
+      1
+    ],
+    "weight_shape": null,
+    "bias_shape": null,
+    "residual_shape": null,
+    "output_shape": [
+      64,
+      512
+    ],
+    "signature_id": "c4d0378851bc57e6",
+    "instance_node_names": [
+      "/Flatten"
+    ]
+  },
+  {
+    "kernel_type": "Gemm",
+    "attributes": {
+      "transA": 0,
+      "transB": 1
+    },
+    "activation_input_shape": [
+      64,
+      512
+    ],
+    "weight_shape": [
+      1000,
+      512
+    ],
+    "bias_shape": [
+      1000
+    ],
+    "residual_shape": null,
+    "output_shape": [
+      64,
+      1000
+    ],
+    "signature_id": "0bf98b3dfa6444fe",
+    "instance_node_names": [
+      "/fc/Gemm"
+    ]
+  }
+]

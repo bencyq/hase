@@ -1,0 +1,78 @@
+{
+  "stage": "A",
+  "optimized_node_count": 24,
+  "selected_iterations": 50,
+  "expected_node_exec_count": 1200,
+  "observed_node_exec_count": 1200,
+  "profile_overview": {
+    "category_counts": {
+      "Session": 142,
+      "Node": 5040
+    },
+    "session_event_counts": {
+      "model_loading_uri": 1,
+      "session_initialization": 1,
+      "SequentialExecutor::Execute": 70,
+      "model_run": 70
+    },
+    "node_suffix_counts": {
+      "fence_before": 1680,
+      "kernel_time": 1680,
+      "fence_after": 1680
+    },
+    "has_device_kernel_events": false,
+    "has_gpu_copy_events": false
+  },
+  "profile_stats": {
+    "selected_iterations": 50,
+    "total_profiled_model_runs": 70,
+    "total_profiled_sequential_executor": 70,
+    "warmup_iterations_ignored": 20,
+    "avg_profiled_model_run_ms": 9.185099999999998,
+    "avg_profiled_sequential_executor_ms": 1.8802000000000003
+  },
+  "join_report": {
+    "total_node_exec": 1200,
+    "joined_node_exec": 1200,
+    "failed_node_exec": 0,
+    "join_success_ratio": 1.0,
+    "failed_examples": []
+  },
+  "gap_breakdown": {
+    "avg_in_node_overhead_ms": 0.14985999999999997,
+    "avg_dispatch_gap_ms": 0.04848000000000001,
+    "avg_executor_unattributed_ms": 0.003319999999999996,
+    "avg_run_boundary_overhead_ms": 7.304900000000003,
+    "avg_model_run_head_gap_ms": 2.9569600000000005,
+    "avg_model_run_tail_gap_ms": 4.35126,
+    "avg_sequential_head_gap_ms": 0.001420000000000001,
+    "avg_sequential_tail_gap_ms": 0.001900000000000001,
+    "dominant_gap_component": "avg_run_boundary_overhead_ms",
+    "dominant_gap_value_ms": 7.304900000000003
+  },
+  "model_e2e_ms": 9.051469779806212,
+  "avg_profiled_model_run_ms": 9.185099999999998,
+  "avg_profiled_sequential_executor_ms": 1.8802000000000003,
+  "avg_kernel_time_ms": 1.6785399999999948,
+  "avg_node_span_ms": 1.8283999999999931,
+  "avg_dispatch_gap_ms": 0.048479999999999156,
+  "avg_gpu_copy_ms": 0.0,
+  "kernel_vs_model_diff_ratio": 0.8145560841682519,
+  "node_span_vs_model_diff_ratio": 0.7979996570193334,
+  "node_span_vs_profiled_model_run_diff_ratio": 0.8009384764455484,
+  "node_span_vs_profiled_sequential_executor_diff_ratio": 0.027550260610577155,
+  "complete_chain_count": 1200,
+  "node_span_ge_kernel_count": 1200,
+  "dispatch_gap_non_negative_count": 1200,
+  "all_complete_chain": true,
+  "all_node_span_ge_kernel": true,
+  "all_dispatch_gap_non_negative": true,
+  "observed_exec_matches_expected": true,
+  "acceptance": {
+    "complete_chain": true,
+    "node_span_ge_kernel": true,
+    "dispatch_gap_non_negative": true,
+    "node_span_vs_model_within_threshold": false
+  },
+  "passed": false
+}

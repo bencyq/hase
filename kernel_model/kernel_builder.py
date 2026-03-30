@@ -95,6 +95,23 @@ def _build_maxpool_model(attrs, act_shape, out_shape):
     return model
 
 
+def _build_averagepool_model(attrs, act_shape, out_shape):
+    """构建 AveragePool 独立 ONNX 模型"""
+    X = helper.make_tensor_value_info("X", TensorProto.FLOAT, act_shape)
+    Y = helper.make_tensor_value_info("Y", TensorProto.FLOAT, out_shape)
+    node = helper.make_node(
+        "AveragePool", inputs=["X"], outputs=["Y"],
+        kernel_shape=attrs["kernel_shape"],
+        strides=attrs.get("strides", attrs["kernel_shape"]),
+        pads=attrs.get("pads", [0, 0, 0, 0]),
+        ceil_mode=attrs.get("ceil_mode", 0),
+    )
+    graph = helper.make_graph([node], "kernel", [X], [Y])
+    model = helper.make_model(graph, opset_imports=[helper.make_opsetid("", 13)])
+    model.ir_version = 7
+    return model
+
+
 def _build_gap_model(act_shape, out_shape):
     """构建 GlobalAveragePool 独立 ONNX 模型"""
     X = helper.make_tensor_value_info("X", TensorProto.FLOAT, act_shape)
@@ -105,6 +122,16 @@ def _build_gap_model(act_shape, out_shape):
     model.ir_version = 7
     return model
 
+
+def _build_relu_model(act_shape, out_shape):
+    """构建 Relu 独立 ONNX 模型"""
+    X = helper.make_tensor_value_info("X", TensorProto.FLOAT, act_shape)
+    Y = helper.make_tensor_value_info("Y", TensorProto.FLOAT, out_shape)
+    node = helper.make_node("Relu", inputs=["X"], outputs=["Y"])
+    graph = helper.make_graph([node], "kernel", [X], [Y])
+    model = helper.make_model(graph, opset_imports=[helper.make_opsetid("", 13)])
+    model.ir_version = 7
+    return model
 
 def _build_flatten_model(attrs, act_shape, out_shape):
     """构建 Flatten 独立 ONNX 模型"""
@@ -144,17 +171,9 @@ def _build_gemm_model(attrs, act_shape, weight_shape, bias_shape, out_shape):
 # ──────────────────────────────────────────────
 # 2. 构建入口 & 文件命名
 # ──────────────────────────────────────────────
-
 def build_kernel_model(kernel_info, shape_info):
     """
     根据 kernel 元数据和 shape 信息构建独立 ONNX 模型。
-
-    Args:
-        kernel_info: kernel JSON 中的一个 kernel dict
-        shape_info:  kernel["shapes"] 中的一个 shape 变体
-
-    Returns:
-        onnx.ModelProto
     """
     kt = kernel_info["kernel_type"]
     attrs = kernel_info["attributes"]
@@ -173,13 +192,18 @@ def build_kernel_model(kernel_info, shape_info):
         return _build_conv_model(attrs, act, ws, bs, out)
     elif kt == "MaxPool":
         return _build_maxpool_model(attrs, act, out)
+    elif kt == "AveragePool":
+        return _build_averagepool_model(attrs, act, out)
     elif kt == "GlobalAveragePool":
         return _build_gap_model(act, out)
     elif kt == "Flatten":
         return _build_flatten_model(attrs, act, out)
+    elif kt == "Relu":
+        return _build_relu_model(act, out)
     elif kt == "Gemm":
         return _build_gemm_model(attrs, act, ws, bs, out)
     else:
+        raise ValueError("不支持的 kernel_type: {}".format(kt))
         raise ValueError("不支持的 kernel_type: {}".format(kt))
 
 

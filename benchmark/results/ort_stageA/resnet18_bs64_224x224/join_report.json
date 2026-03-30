@@ -1,0 +1,7 @@
+{
+  "total_node_exec": 1200,
+  "joined_node_exec": 1200,
+  "failed_node_exec": 0,
+  "join_success_ratio": 1.0,
+  "failed_examples": []
+}

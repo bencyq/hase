@@ -1,0 +1,112 @@
+[
+  {
+    "signature_id": "73d78ffdf6cd6111",
+    "kernel_type": "Conv_Relu",
+    "onnx_path": "/cyq/hase/kernel_model/kernel_onnx/nsys_stage1/resnet18_bs64_224x224/73d78ffdf6cd6111.onnx"
+  },
+  {
+    "signature_id": "97cb638555ad771b",
+    "kernel_type": "MaxPool",
+    "onnx_path": "/cyq/hase/kernel_model/kernel_onnx/nsys_stage1/resnet18_bs64_224x224/97cb638555ad771b.onnx"
+  },
+  {
+    "signature_id": "31ab3d73ed5e01f5",
+    "kernel_type": "Conv_Relu",
+    "onnx_path": "/cyq/hase/kernel_model/kernel_onnx/nsys_stage1/resnet18_bs64_224x224/31ab3d73ed5e01f5.onnx"
+  },
+  {
+    "signature_id": "0d8ecc0210016c9a",
+    "kernel_type": "Conv_Add_Relu",
+    "onnx_path": "/cyq/hase/kernel_model/kernel_onnx/nsys_stage1/resnet18_bs64_224x224/0d8ecc0210016c9a.onnx"
+  },
+  {
+    "signature_id": "fec098797bed9de4",
+    "kernel_type": "Conv_Relu",
+    "onnx_path": "/cyq/hase/kernel_model/kernel_onnx/nsys_stage1/resnet18_bs64_224x224/fec098797bed9de4.onnx"
+  },
+  {
+    "signature_id": "62b72cff53fd36e8",
+    "kernel_type": "Conv",
+    "onnx_path": "/cyq/hase/kernel_model/kernel_onnx/nsys_stage1/resnet18_bs64_224x224/62b72cff53fd36e8.onnx"
+  },
+  {
+    "signature_id": "34b11f8f29b68706",
+    "kernel_type": "Conv_Add_Relu",
+    "onnx_path": "/cyq/hase/kernel_model/kernel_onnx/nsys_stage1/resnet18_bs64_224x224/34b11f8f29b68706.onnx"
+  },
+  {
+    "signature_id": "c0393682cfe0d425",
+    "kernel_type": "Conv_Relu",
+    "onnx_path": "/cyq/hase/kernel_model/kernel_onnx/nsys_stage1/resnet18_bs64_224x224/c0393682cfe0d425.onnx"
+  },
+  {
+    "signature_id": "ceb8ff327ffeb3e0",
+    "kernel_type": "Conv_Add_Relu",
+    "onnx_path": "/cyq/hase/kernel_model/kernel_onnx/nsys_stage1/resnet18_bs64_224x224/ceb8ff327ffeb3e0.onnx"
+  },
+  {
+    "signature_id": "938d4b52c2d20bd8",
+    "kernel_type": "Conv_Relu",
+    "onnx_path": "/cyq/hase/kernel_model/kernel_onnx/nsys_stage1/resnet18_bs64_224x224/938d4b52c2d20bd8.onnx"
+  },
+  {
+    "signature_id": "9a96779632670574",
+    "kernel_type": "Conv",
+    "onnx_path": "/cyq/hase/kernel_model/kernel_onnx/nsys_stage1/resnet18_bs64_224x224/9a96779632670574.onnx"
+  },
+  {
+    "signature_id": "8d7ce11509b54dfe",
+    "kernel_type": "Conv_Add_Relu",
+    "onnx_path": "/cyq/hase/kernel_model/kernel_onnx/nsys_stage1/resnet18_bs64_224x224/8d7ce11509b54dfe.onnx"
+  },
+  {
+    "signature_id": "9e887fce89a1a2de",
+    "kernel_type": "Conv_Relu",
+    "onnx_path": "/cyq/hase/kernel_model/kernel_onnx/nsys_stage1/resnet18_bs64_224x224/9e887fce89a1a2de.onnx"
+  },
+  {
+    "signature_id": "f8d36a19ff5bc96e",
+    "kernel_type": "Conv_Add_Relu",
+    "onnx_path": "/cyq/hase/kernel_model/kernel_onnx/nsys_stage1/resnet18_bs64_224x224/f8d36a19ff5bc96e.onnx"
+  },
+  {
+    "signature_id": "d551c9a0f88f08c5",
+    "kernel_type": "Conv_Relu",
+    "onnx_path": "/cyq/hase/kernel_model/kernel_onnx/nsys_stage1/resnet18_bs64_224x224/d551c9a0f88f08c5.onnx"
+  },
+  {
+    "signature_id": "a8757ea0f343ee95",
+    "kernel_type": "Conv",
+    "onnx_path": "/cyq/hase/kernel_model/kernel_onnx/nsys_stage1/resnet18_bs64_224x224/a8757ea0f343ee95.onnx"
+  },
+  {
+    "signature_id": "0f665cebec7e5105",
+    "kernel_type": "Conv_Add_Relu",
+    "onnx_path": "/cyq/hase/kernel_model/kernel_onnx/nsys_stage1/resnet18_bs64_224x224/0f665cebec7e5105.onnx"
+  },
+  {
+    "signature_id": "c4cd06dcbe55a64b",
+    "kernel_type": "Conv_Relu",
+    "onnx_path": "/cyq/hase/kernel_model/kernel_onnx/nsys_stage1/resnet18_bs64_224x224/c4cd06dcbe55a64b.onnx"
+  },
+  {
+    "signature_id": "a6078fb1b4dc4005",
+    "kernel_type": "Conv_Add_Relu",
+    "onnx_path": "/cyq/hase/kernel_model/kernel_onnx/nsys_stage1/resnet18_bs64_224x224/a6078fb1b4dc4005.onnx"
+  },
+  {
+    "signature_id": "fde7fbc89b5a01f4",
+    "kernel_type": "GlobalAveragePool",
+    "onnx_path": "/cyq/hase/kernel_model/kernel_onnx/nsys_stage1/resnet18_bs64_224x224/fde7fbc89b5a01f4.onnx"
+  },
+  {
+    "signature_id": "c4d0378851bc57e6",
+    "kernel_type": "Flatten",
+    "onnx_path": "/cyq/hase/kernel_model/kernel_onnx/nsys_stage1/resnet18_bs64_224x224/c4d0378851bc57e6.onnx"
+  },
+  {
+    "signature_id": "0bf98b3dfa6444fe",
+    "kernel_type": "Gemm",
+    "onnx_path": "/cyq/hase/kernel_model/kernel_onnx/nsys_stage1/resnet18_bs64_224x224/0bf98b3dfa6444fe.onnx"
+  }
+]

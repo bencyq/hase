@@ -1,5 +1,23 @@
 # Hase Implementation Plan
 
+## 当前 Stage 1 / Stage 2 状态（2026-03-30）
+
+### Stage 1: NSYS 独立 Signature 闭环（代码已落地，实验结论未通过验收）
+- **当前代码**：`nsys_stage1/pipeline.py`、`nsys_stage1/run_with_nvtx.py`、`nsys_stage1/nsys_sqlite_parser.py` 已落地；静态分析和 kernel 构建继续复用 `ort_analysis/ort_graph_parser.py`、`ort_analysis/fusion_detector.py`、`kernel_model/kernel_builder.py`。
+- **当前产物**：`benchmark/results/nsys_stage1/resnet18_bs64_224x224/`、`benchmark/results/nsys_stage1/vgg11_bs16_224x224/` 已生成完整结果；对应的独立 kernel ONNX 已生成到 `kernel_model/kernel_onnx/nsys_stage1/<model>/`，其中 `resnet18_bs64_224x224` 生成了 22 个 signature ONNX，`vgg11_bs16_224x224` 生成了 18 个 signature ONNX。
+- **当前实验结果（ResNet18）**：`aggregated_model_gpu_ms = 27.6770 ms`，`full_model_gpu_ms = 60.7764 ms`，`diff_ratio = 0.5446`，超过 `0.15` 阈值，`validation.json` 判定为 `passed = false`。
+- **当前实验结果（VGG11）**：`aggregated_model_gpu_ms = 25.5514 ms`，`full_model_gpu_ms = 46.4564 ms`，`diff_ratio = 0.4500`，超过 `0.15` 阈值，`validation.json` 判定为 `passed = false`。
+- **当前结论**：Stage 1 的“实例表 -> 签名表 -> 独立 kernel ONNX -> nsys pure_gpu_ms -> 回填聚合”闭环已经可以稳定跑通，但“独立 signature 小模型时间约等于完整模型内同类实例时间”这一假设已被当前实验否定，因此 Stage 1 更适合作为失败基线/对照方案，不再适合作为主归因路线。
+
+### Stage 2: ORT 完整模型原位插桩主方案（当前主线，已完成 Stage A 基线）
+- **说明**：仓库当前没有统一命名为 `stage2` 的目录，现阶段主线工作实际落在 `docs/ort_instrumented_fullmodel_experiment.md` 和 `benchmark/results/ort_stageA/`，这里统一将其记为 Stage 2。
+- **当前代码**：`benchmark/ort_fullmodel_experiment.py` 已实现优化图 metadata 导出、完整模型 warmup + loops 执行、ORT raw profile 导出、`fence_before/_kernel_time/fence_after` 事件链解析、`kernel_type/signature_id` join、聚合摘要与 validation 输出。
+- **当前产物**：`benchmark/results/ort_stageA/resnet18_bs64_224x224/`、`benchmark/results/ort_stageA/vgg11_bs16_224x224/` 已生成 `experiment_metadata.json`、`optimized_node_metadata.json`、`raw_profile.json`、`node_exec_baseline.json`、`iteration_summary.json`、`join_report.json`、`kernel_type_summary.json`、`signature_summary.json`、`validation.json`。
+- **当前实验结果（ResNet18, Stage A）**：`join_success_ratio = 1.0`，`observed_exec_matches_expected = true`，`avg_kernel_time_ms = 1.6785 ms`，`avg_node_span_ms = 1.8284 ms`，`model_e2e_ms = 9.0515 ms`，`node_span_vs_model_diff_ratio = 0.7980`；`profile_overview` 显示 `has_device_kernel_events = false`、`has_gpu_copy_events = false`，主要缺口来自 `avg_run_boundary_overhead_ms = 7.3049 ms`。
+- **当前实验结果（VGG11, Stage A）**：`join_success_ratio = 1.0`，`observed_exec_matches_expected = true`，`avg_kernel_time_ms = 0.9416 ms`，`avg_node_span_ms = 1.0509 ms`，`model_e2e_ms = 5.6340 ms`，`node_span_vs_model_diff_ratio = 0.8135`；`profile_overview` 同样显示 `has_device_kernel_events = false`、`has_gpu_copy_events = false`，主要缺口来自 `avg_run_boundary_overhead_ms = 4.1960 ms`。
+- **当前结论**：Stage 2 已证明“完整模型原位 profile + metadata join”这条路线在节点级事件链重建和 `kernel_type/signature_id` 对齐上是可行的，但 released ORT profile 还没有给出 device `Kernel` / `Memcpy` / `Memset` 事件，因此还不能完成真实 GPU 时间归因。后续需要继续推进文档中定义的 Stage B/C/D/E：构建带 CUDA profiling 的 ORT、补最小 join key 插桩、用 NVTX + nsys 做交叉校验，并验证稳定性边界。
+
+
 ## Phase 0: Infrastructure & Skeleton
 *目标：建立项目基础结构，配置日志与通用工具。*
 

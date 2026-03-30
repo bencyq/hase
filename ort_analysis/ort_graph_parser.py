@@ -128,16 +128,14 @@ def _build_initial_shape_map(model):
 
     return shape_map
 
-
 def _infer_node_output_shape(node, shape_map):
     """
     根据算子类型和已知输入 shape，推导节点输出 shape 并写入 shape_map。
-    支持: Conv, FusedConv, MaxPool, GlobalAveragePool, Flatten, Gemm, Relu, Add, MatMul
+    支持: Conv, FusedConv, MaxPool, AveragePool, GlobalAveragePool, Flatten, Gemm, Relu, Add, MatMul
     """
     op = node.op_type
 
     if op in ("Conv", "FusedConv"):
-        # 输入: X, W, [B], [Z (residual for FusedConv)]
         x_shape = shape_map.get(node.input[0])
         w_shape = shape_map.get(node.input[1])
         if x_shape and w_shape and len(x_shape) == 4:
@@ -154,7 +152,7 @@ def _infer_node_output_shape(node, shape_map):
             for o in node.output:
                 shape_map[o] = out_shape
 
-    elif op == "MaxPool":
+    elif op in ("MaxPool", "AveragePool"):
         x_shape = shape_map.get(node.input[0])
         if x_shape and len(x_shape) == 4:
             n, c, h_in, w_in = x_shape
@@ -186,7 +184,6 @@ def _infer_node_output_shape(node, shape_map):
             shape_map[node.output[0]] = [left, right]
 
     elif op == "Gemm":
-        # Y = alpha * A * B + beta * C
         a_shape = shape_map.get(node.input[0])
         b_shape = shape_map.get(node.input[1])
         trans_a = _get_attr(node, "transA", 0)
@@ -205,10 +202,10 @@ def _infer_node_output_shape(node, shape_map):
     elif op == "Add":
         a_shape = shape_map.get(node.input[0])
         b_shape = shape_map.get(node.input[1])
-        # element-wise add 输出与较长的输入 shape 相同
         if a_shape:
             shape_map[node.output[0]] = list(a_shape)
         elif b_shape:
+            shape_map[node.output[0]] = list(b_shape)
             shape_map[node.output[0]] = list(b_shape)
 
     elif op == "MatMul":

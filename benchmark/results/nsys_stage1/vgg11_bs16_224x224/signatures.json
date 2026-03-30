@@ -1,0 +1,712 @@
+[
+  {
+    "kernel_type": "Conv_Relu",
+    "attributes": {
+      "kernel_shape": [
+        3,
+        3
+      ],
+      "strides": [
+        1,
+        1
+      ],
+      "pads": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "dilations": [
+        1,
+        1
+      ],
+      "group": 1,
+      "activation": "Relu"
+    },
+    "activation_input_shape": [
+      16,
+      3,
+      224,
+      224
+    ],
+    "weight_shape": [
+      64,
+      3,
+      3,
+      3
+    ],
+    "bias_shape": [
+      64
+    ],
+    "residual_shape": null,
+    "output_shape": [
+      16,
+      64,
+      224,
+      224
+    ],
+    "signature_id": "35ae5d62f3fbb654",
+    "instance_node_names": [
+      "/features/features.0/Conv"
+    ]
+  },
+  {
+    "kernel_type": "MaxPool",
+    "attributes": {
+      "kernel_shape": [
+        2,
+        2
+      ],
+      "strides": [
+        2,
+        2
+      ],
+      "pads": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "ceil_mode": 0
+    },
+    "activation_input_shape": [
+      16,
+      64,
+      224,
+      224
+    ],
+    "weight_shape": null,
+    "bias_shape": null,
+    "residual_shape": null,
+    "output_shape": [
+      16,
+      64,
+      112,
+      112
+    ],
+    "signature_id": "6cea253e82ac84e7",
+    "instance_node_names": [
+      "/features/features.2/MaxPool"
+    ]
+  },
+  {
+    "kernel_type": "Conv_Relu",
+    "attributes": {
+      "kernel_shape": [
+        3,
+        3
+      ],
+      "strides": [
+        1,
+        1
+      ],
+      "pads": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "dilations": [
+        1,
+        1
+      ],
+      "group": 1,
+      "activation": "Relu"
+    },
+    "activation_input_shape": [
+      16,
+      64,
+      112,
+      112
+    ],
+    "weight_shape": [
+      128,
+      64,
+      3,
+      3
+    ],
+    "bias_shape": [
+      128
+    ],
+    "residual_shape": null,
+    "output_shape": [
+      16,
+      128,
+      112,
+      112
+    ],
+    "signature_id": "1eebca7ae0b97a06",
+    "instance_node_names": [
+      "/features/features.3/Conv"
+    ]
+  },
+  {
+    "kernel_type": "MaxPool",
+    "attributes": {
+      "kernel_shape": [
+        2,
+        2
+      ],
+      "strides": [
+        2,
+        2
+      ],
+      "pads": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "ceil_mode": 0
+    },
+    "activation_input_shape": [
+      16,
+      128,
+      112,
+      112
+    ],
+    "weight_shape": null,
+    "bias_shape": null,
+    "residual_shape": null,
+    "output_shape": [
+      16,
+      128,
+      56,
+      56
+    ],
+    "signature_id": "e74fd3ca10f89f49",
+    "instance_node_names": [
+      "/features/features.5/MaxPool"
+    ]
+  },
+  {
+    "kernel_type": "Conv_Relu",
+    "attributes": {
+      "kernel_shape": [
+        3,
+        3
+      ],
+      "strides": [
+        1,
+        1
+      ],
+      "pads": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "dilations": [
+        1,
+        1
+      ],
+      "group": 1,
+      "activation": "Relu"
+    },
+    "activation_input_shape": [
+      16,
+      128,
+      56,
+      56
+    ],
+    "weight_shape": [
+      256,
+      128,
+      3,
+      3
+    ],
+    "bias_shape": [
+      256
+    ],
+    "residual_shape": null,
+    "output_shape": [
+      16,
+      256,
+      56,
+      56
+    ],
+    "signature_id": "455ebf974f26fda9",
+    "instance_node_names": [
+      "/features/features.6/Conv"
+    ]
+  },
+  {
+    "kernel_type": "Conv_Relu",
+    "attributes": {
+      "kernel_shape": [
+        3,
+        3
+      ],
+      "strides": [
+        1,
+        1
+      ],
+      "pads": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "dilations": [
+        1,
+        1
+      ],
+      "group": 1,
+      "activation": "Relu"
+    },
+    "activation_input_shape": [
+      16,
+      256,
+      56,
+      56
+    ],
+    "weight_shape": [
+      256,
+      256,
+      3,
+      3
+    ],
+    "bias_shape": [
+      256
+    ],
+    "residual_shape": null,
+    "output_shape": [
+      16,
+      256,
+      56,
+      56
+    ],
+    "signature_id": "18f0cde3150ac269",
+    "instance_node_names": [
+      "/features/features.8/Conv"
+    ]
+  },
+  {
+    "kernel_type": "MaxPool",
+    "attributes": {
+      "kernel_shape": [
+        2,
+        2
+      ],
+      "strides": [
+        2,
+        2
+      ],
+      "pads": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "ceil_mode": 0
+    },
+    "activation_input_shape": [
+      16,
+      256,
+      56,
+      56
+    ],
+    "weight_shape": null,
+    "bias_shape": null,
+    "residual_shape": null,
+    "output_shape": [
+      16,
+      256,
+      28,
+      28
+    ],
+    "signature_id": "91f604e4a30523ca",
+    "instance_node_names": [
+      "/features/features.10/MaxPool"
+    ]
+  },
+  {
+    "kernel_type": "Conv_Relu",
+    "attributes": {
+      "kernel_shape": [
+        3,
+        3
+      ],
+      "strides": [
+        1,
+        1
+      ],
+      "pads": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "dilations": [
+        1,
+        1
+      ],
+      "group": 1,
+      "activation": "Relu"
+    },
+    "activation_input_shape": [
+      16,
+      256,
+      28,
+      28
+    ],
+    "weight_shape": [
+      512,
+      256,
+      3,
+      3
+    ],
+    "bias_shape": [
+      512
+    ],
+    "residual_shape": null,
+    "output_shape": [
+      16,
+      512,
+      28,
+      28
+    ],
+    "signature_id": "136b79ca73f9e89d",
+    "instance_node_names": [
+      "/features/features.11/Conv"
+    ]
+  },
+  {
+    "kernel_type": "Conv_Relu",
+    "attributes": {
+      "kernel_shape": [
+        3,
+        3
+      ],
+      "strides": [
+        1,
+        1
+      ],
+      "pads": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "dilations": [
+        1,
+        1
+      ],
+      "group": 1,
+      "activation": "Relu"
+    },
+    "activation_input_shape": [
+      16,
+      512,
+      28,
+      28
+    ],
+    "weight_shape": [
+      512,
+      512,
+      3,
+      3
+    ],
+    "bias_shape": [
+      512
+    ],
+    "residual_shape": null,
+    "output_shape": [
+      16,
+      512,
+      28,
+      28
+    ],
+    "signature_id": "2d8060359826253c",
+    "instance_node_names": [
+      "/features/features.13/Conv"
+    ]
+  },
+  {
+    "kernel_type": "MaxPool",
+    "attributes": {
+      "kernel_shape": [
+        2,
+        2
+      ],
+      "strides": [
+        2,
+        2
+      ],
+      "pads": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "ceil_mode": 0
+    },
+    "activation_input_shape": [
+      16,
+      512,
+      28,
+      28
+    ],
+    "weight_shape": null,
+    "bias_shape": null,
+    "residual_shape": null,
+    "output_shape": [
+      16,
+      512,
+      14,
+      14
+    ],
+    "signature_id": "2b8f70e6609508a9",
+    "instance_node_names": [
+      "/features/features.15/MaxPool"
+    ]
+  },
+  {
+    "kernel_type": "Conv_Relu",
+    "attributes": {
+      "kernel_shape": [
+        3,
+        3
+      ],
+      "strides": [
+        1,
+        1
+      ],
+      "pads": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "dilations": [
+        1,
+        1
+      ],
+      "group": 1,
+      "activation": "Relu"
+    },
+    "activation_input_shape": [
+      16,
+      512,
+      14,
+      14
+    ],
+    "weight_shape": [
+      512,
+      512,
+      3,
+      3
+    ],
+    "bias_shape": [
+      512
+    ],
+    "residual_shape": null,
+    "output_shape": [
+      16,
+      512,
+      14,
+      14
+    ],
+    "signature_id": "54f6514b23db6d12",
+    "instance_node_names": [
+      "/features/features.16/Conv",
+      "/features/features.18/Conv"
+    ]
+  },
+  {
+    "kernel_type": "MaxPool",
+    "attributes": {
+      "kernel_shape": [
+        2,
+        2
+      ],
+      "strides": [
+        2,
+        2
+      ],
+      "pads": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "ceil_mode": 0
+    },
+    "activation_input_shape": [
+      16,
+      512,
+      14,
+      14
+    ],
+    "weight_shape": null,
+    "bias_shape": null,
+    "residual_shape": null,
+    "output_shape": [
+      16,
+      512,
+      7,
+      7
+    ],
+    "signature_id": "45919e1a405dbeea",
+    "instance_node_names": [
+      "/features/features.20/MaxPool"
+    ]
+  },
+  {
+    "kernel_type": "AveragePool",
+    "attributes": {
+      "kernel_shape": [
+        1,
+        1
+      ],
+      "strides": [
+        1,
+        1
+      ],
+      "ceil_mode": 0
+    },
+    "activation_input_shape": [
+      16,
+      512,
+      7,
+      7
+    ],
+    "weight_shape": null,
+    "bias_shape": null,
+    "residual_shape": null,
+    "output_shape": [
+      16,
+      512,
+      7,
+      7
+    ],
+    "signature_id": "1899229fc5e77600",
+    "instance_node_names": [
+      "/avgpool/AveragePool"
+    ]
+  },
+  {
+    "kernel_type": "Flatten",
+    "attributes": {
+      "axis": 1
+    },
+    "activation_input_shape": [
+      16,
+      512,
+      7,
+      7
+    ],
+    "weight_shape": null,
+    "bias_shape": null,
+    "residual_shape": null,
+    "output_shape": [
+      16,
+      25088
+    ],
+    "signature_id": "5af617c9ac9eae00",
+    "instance_node_names": [
+      "/Flatten"
+    ]
+  },
+  {
+    "kernel_type": "Gemm",
+    "attributes": {
+      "transA": 0,
+      "transB": 1
+    },
+    "activation_input_shape": [
+      16,
+      25088
+    ],
+    "weight_shape": [
+      4096,
+      25088
+    ],
+    "bias_shape": [
+      4096
+    ],
+    "residual_shape": null,
+    "output_shape": [
+      16,
+      4096
+    ],
+    "signature_id": "c8b25fe80a3c266d",
+    "instance_node_names": [
+      "/classifier/classifier.0/Gemm"
+    ]
+  },
+  {
+    "kernel_type": "Relu",
+    "attributes": {},
+    "activation_input_shape": [
+      16,
+      4096
+    ],
+    "weight_shape": null,
+    "bias_shape": null,
+    "residual_shape": null,
+    "output_shape": [
+      16,
+      4096
+    ],
+    "signature_id": "5a3ed2b2d0ad2fcd",
+    "instance_node_names": [
+      "/classifier/classifier.1/Relu",
+      "/classifier/classifier.4/Relu"
+    ]
+  },
+  {
+    "kernel_type": "Gemm",
+    "attributes": {
+      "transA": 0,
+      "transB": 1
+    },
+    "activation_input_shape": [
+      16,
+      4096
+    ],
+    "weight_shape": [
+      4096,
+      4096
+    ],
+    "bias_shape": [
+      4096
+    ],
+    "residual_shape": null,
+    "output_shape": [
+      16,
+      4096
+    ],
+    "signature_id": "cd9fba9d4bfc568a",
+    "instance_node_names": [
+      "/classifier/classifier.3/Gemm"
+    ]
+  },
+  {
+    "kernel_type": "Gemm",
+    "attributes": {
+      "transA": 0,
+      "transB": 1
+    },
+    "activation_input_shape": [
+      16,
+      4096
+    ],
+    "weight_shape": [
+      1000,
+      4096
+    ],
+    "bias_shape": [
+      1000
+    ],
+    "residual_shape": null,
+    "output_shape": [
+      16,
+      1000
+    ],
+    "signature_id": "ae6ba9fda7aa64a2",
+    "instance_node_names": [
+      "/classifier/classifier.6/Gemm"
+    ]
+  }
+]

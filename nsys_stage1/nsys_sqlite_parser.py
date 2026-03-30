@@ -47,22 +47,25 @@ def profile_with_nsys(
         "--range-name",
         range_name,
     ]
-    _run_command(cmd)
-    return output_prefix + ".nsys-rep"
+    report_path = output_prefix + ".nsys-rep"
+    result = subprocess.run(cmd)
+    if result.returncode != 0 and not (result.returncode == 143 and os.path.isfile(report_path)):
+        raise subprocess.CalledProcessError(result.returncode, cmd)
+    return report_path
 
 
 def export_sqlite(report_path, output_prefix, nsys_bin=DEFAULT_NSYS_BIN):
+    sqlite_path = output_prefix + ".sqlite"
     cmd = [
         nsys_bin,
         "export",
         "--type",
         "sqlite",
         "--output",
-        output_prefix,
+        sqlite_path,
         report_path,
     ]
     _run_command(cmd)
-    sqlite_path = output_prefix + ".sqlite"
     if not os.path.isfile(sqlite_path):
         raise FileNotFoundError("nsys sqlite 导出失败: {}".format(sqlite_path))
     return sqlite_path
@@ -99,21 +102,39 @@ def _fetch_nvtx_range(conn, range_name):
         raise RuntimeError("当前 nsys sqlite 不包含 NVTX_EVENTS 表，无法继续解析")
 
     columns = _table_columns(conn, table_name)
-    text_col = _pick_column(columns, ["text", "message"])
     start_col = _pick_column(columns, ["start", "startNs"])
     end_col = _pick_column(columns, ["end", "endNs"])
     event_type_col = "eventType" if "eventType" in columns else None
+    text_col = "text" if "text" in columns else None
+    text_id_col = "textId" if "textId" in columns else None
 
-    sql = "SELECT {start}, {end} FROM {table} WHERE {text} = ?".format(
-        start=start_col,
-        end=end_col,
-        table=table_name,
-        text=text_col,
-    )
+    if text_col is not None and text_id_col is not None:
+        sql = """
+            SELECT e.{start}, e.{end}
+            FROM {table} e
+            LEFT JOIN StringIds s ON e.{text_id} = s.id
+            WHERE COALESCE(e.{text}, s.value) = ?
+        """.format(
+            start=start_col,
+            end=end_col,
+            table=table_name,
+            text=text_col,
+            text_id=text_id_col,
+        )
+    elif text_col is not None:
+        sql = "SELECT {start}, {end} FROM {table} WHERE {text} = ?".format(
+            start=start_col,
+            end=end_col,
+            table=table_name,
+            text=text_col,
+        )
+    else:
+        raise RuntimeError("NVTX_EVENTS 缺少可用文本字段: {}".format(columns))
+
     params = [range_name]
     if event_type_col is not None:
-        sql += " AND {} = 59".format(event_type_col)
-    sql += " ORDER BY {} ASC LIMIT 1".format(start_col)
+        sql += " AND e.{} = 59".format(event_type_col) if " e." in sql else " AND {} = 59".format(event_type_col)
+    sql += " ORDER BY {} ASC LIMIT 1".format(start_col if " e." not in sql else "e." + start_col)
 
     row = conn.execute(sql, params).fetchone()
     if row is None:
@@ -156,11 +177,33 @@ def _read_gpu_name(conn):
     return row[0] if row else None
 
 
+def _sum_all_kernel_time_ns(conn):
+    table_names = _table_names(conn)
+    table_name = _pick_table(
+        table_names,
+        ["CUPTI_ACTIVITY_KIND_KERNEL", "CUDA_GPU_KERNEL_EVENTS"],
+    )
+    columns = _table_columns(conn, table_name)
+    start_col = _pick_column(columns, ["start", "startNs"])
+    end_col = _pick_column(columns, ["end", "endNs"])
+    row = conn.execute(
+        "SELECT COALESCE(SUM({} - {}), 0) FROM {}".format(end_col, start_col, table_name)
+    ).fetchone()
+    return int(row[0] or 0)
+
+
 def parse_pure_gpu_time(sqlite_path, range_name, loops):
     conn = sqlite3.connect(sqlite_path)
     try:
-        start_ns, end_ns = _fetch_nvtx_range(conn, range_name)
-        kernel_sum_ns = _sum_kernel_time_ns(conn, start_ns, end_ns)
+        try:
+            start_ns, end_ns = _fetch_nvtx_range(conn, range_name)
+            kernel_sum_ns = _sum_kernel_time_ns(conn, start_ns, end_ns)
+            capture_range_name = range_name
+        except RuntimeError as exc:
+            if "NVTX_EVENTS" not in str(exc):
+                raise
+            kernel_sum_ns = _sum_all_kernel_time_ns(conn)
+            capture_range_name = range_name + " (capture-range fallback)"
         gpu_name = _read_gpu_name(conn)
     finally:
         conn.close()
@@ -169,7 +212,7 @@ def parse_pure_gpu_time(sqlite_path, range_name, loops):
     return {
         "gpu_kernel_time_sum_ns": kernel_sum_ns,
         "pure_gpu_ms": pure_gpu_ms,
-        "capture_range_name": range_name,
+        "capture_range_name": capture_range_name,
         "gpu_name": gpu_name,
     }
 

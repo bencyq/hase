@@ -32,14 +32,17 @@ SUPPORTED_KERNEL_TYPES = {
     "Conv_Relu",
     "Conv_Add_Relu",
     "MaxPool",
+    "AveragePool",
     "GlobalAveragePool",
     "Flatten",
+    "Relu",
     "Gemm",
 }
 ATTR_KEYS = {
     "Conv": ["kernel_shape", "strides", "pads", "dilations", "group"],
     "FusedConv": ["kernel_shape", "strides", "pads", "dilations", "group", "activation"],
     "MaxPool": ["kernel_shape", "strides", "pads", "ceil_mode"],
+    "AveragePool": ["kernel_shape", "strides", "pads", "ceil_mode"],
     "Gemm": ["transA", "transB"],
     "Flatten": ["axis"],
 }
@@ -215,27 +218,41 @@ def collect_signature_times(
     records = []
     for item in signature_models:
         prefix = os.path.join(raw_dir, item["signature_id"])
-        report_path = profile_with_nsys(
-            python_bin=python_bin,
-            runner_path=runner_path,
-            model_path=item["onnx_path"],
-            output_prefix=prefix,
-            range_name=range_name,
-            warmup=warmup,
-            loops=loops,
-            nsys_bin=nsys_bin,
-        )
-        sqlite_path = export_sqlite(report_path, prefix, nsys_bin=nsys_bin)
-        parsed = parse_pure_gpu_time(sqlite_path, range_name, loops)
-        record = {
-            "signature_id": item["signature_id"],
-            "kernel_type": item["kernel_type"],
-            "loops": loops,
-            "nsys_rep_path": report_path,
-            "sqlite_path": sqlite_path,
-        }
-        record.update(parsed)
-        records.append(record)
+        last_error = None
+        for attempt in range(1, 4):
+            for suffix in [".nsys-rep", ".sqlite", ".qdstrm"]:
+                path = prefix + suffix
+                if os.path.exists(path):
+                    os.remove(path)
+            try:
+                report_path = profile_with_nsys(
+                    python_bin=python_bin,
+                    runner_path=runner_path,
+                    model_path=item["onnx_path"],
+                    output_prefix=prefix,
+                    range_name=range_name,
+                    warmup=warmup,
+                    loops=loops,
+                    nsys_bin=nsys_bin,
+                )
+                sqlite_path = export_sqlite(report_path, prefix, nsys_bin=nsys_bin)
+                parsed = parse_pure_gpu_time(sqlite_path, range_name, loops)
+                record = {
+                    "signature_id": item["signature_id"],
+                    "kernel_type": item["kernel_type"],
+                    "loops": loops,
+                    "nsys_rep_path": report_path,
+                    "sqlite_path": sqlite_path,
+                }
+                record.update(parsed)
+                records.append(record)
+                last_error = None
+                break
+            except Exception as exc:
+                last_error = exc
+                logger.warning("signature %s 第 %d 次采集失败: %s", item["signature_id"], attempt, exc)
+        if last_error is not None:
+            raise last_error
     return records
 
 

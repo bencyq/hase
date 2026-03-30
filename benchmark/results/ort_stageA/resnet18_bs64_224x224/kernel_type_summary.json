@@ -1,0 +1,188 @@
+[
+  {
+    "model_name": "resnet18_bs64_224x224",
+    "kernel_type": "Conv_Relu",
+    "exec_count": 450,
+    "unique_node_count": 9,
+    "total_kernel_time_ms": 36.79800000000002,
+    "avg_kernel_time_ms": 0.08177333333333338,
+    "total_gpu_kernel_ms": 36.79800000000002,
+    "avg_gpu_kernel_ms": 0.08177333333333338,
+    "total_gpu_copy_ms": 0.0,
+    "avg_gpu_copy_ms": 0.0,
+    "total_node_span_ms": 39.65200000000003,
+    "avg_node_span_ms": 0.08811555555555563,
+    "total_dispatch_gap_ms": 0.9040000000000007,
+    "avg_dispatch_gap_ms": 0.0020088888888888904,
+    "node_names": [
+      "/conv1/Conv",
+      "/layer1/layer1.0/conv1/Conv",
+      "/layer1/layer1.1/conv1/Conv",
+      "/layer2/layer2.0/conv1/Conv",
+      "/layer2/layer2.1/conv1/Conv",
+      "/layer3/layer3.0/conv1/Conv",
+      "/layer3/layer3.1/conv1/Conv",
+      "/layer4/layer4.0/conv1/Conv",
+      "/layer4/layer4.1/conv1/Conv"
+    ],
+    "signature_ids": [
+      "31ab3d73ed5e01f5",
+      "73d78ffdf6cd6111",
+      "938d4b52c2d20bd8",
+      "9e887fce89a1a2de",
+      "c0393682cfe0d425",
+      "c4cd06dcbe55a64b",
+      "d551c9a0f88f08c5",
+      "fec098797bed9de4"
+    ]
+  },
+  {
+    "model_name": "resnet18_bs64_224x224",
+    "kernel_type": "Conv_Add_Relu",
+    "exec_count": 400,
+    "unique_node_count": 8,
+    "total_kernel_time_ms": 29.143000000000004,
+    "avg_kernel_time_ms": 0.0728575,
+    "total_gpu_kernel_ms": 29.143000000000004,
+    "avg_gpu_kernel_ms": 0.0728575,
+    "total_gpu_copy_ms": 0.0,
+    "avg_gpu_copy_ms": 0.0,
+    "total_node_span_ms": 31.938000000000017,
+    "avg_node_span_ms": 0.07984500000000004,
+    "total_dispatch_gap_ms": 0.8010000000000006,
+    "avg_dispatch_gap_ms": 0.0020025000000000017,
+    "node_names": [
+      "/layer1/layer1.0/conv2/Conv",
+      "/layer1/layer1.1/conv2/Conv",
+      "/layer2/layer2.0/downsample/downsample.0/Conv",
+      "/layer2/layer2.1/conv2/Conv",
+      "/layer3/layer3.0/downsample/downsample.0/Conv",
+      "/layer3/layer3.1/conv2/Conv",
+      "/layer4/layer4.0/downsample/downsample.0/Conv",
+      "/layer4/layer4.1/conv2/Conv"
+    ],
+    "signature_ids": [
+      "0d8ecc0210016c9a",
+      "0f665cebec7e5105",
+      "34b11f8f29b68706",
+      "8d7ce11509b54dfe",
+      "a6078fb1b4dc4005",
+      "ceb8ff327ffeb3e0",
+      "f8d36a19ff5bc96e"
+    ]
+  },
+  {
+    "model_name": "resnet18_bs64_224x224",
+    "kernel_type": "Conv",
+    "exec_count": 150,
+    "unique_node_count": 3,
+    "total_kernel_time_ms": 10.925,
+    "avg_kernel_time_ms": 0.07283333333333333,
+    "total_gpu_kernel_ms": 10.925,
+    "avg_gpu_kernel_ms": 0.07283333333333333,
+    "total_gpu_copy_ms": 0.0,
+    "avg_gpu_copy_ms": 0.0,
+    "total_node_span_ms": 11.753999999999996,
+    "avg_node_span_ms": 0.07835999999999997,
+    "total_dispatch_gap_ms": 0.3030000000000002,
+    "avg_dispatch_gap_ms": 0.0020200000000000014,
+    "node_names": [
+      "/layer2/layer2.0/conv2/Conv",
+      "/layer3/layer3.0/conv2/Conv",
+      "/layer4/layer4.0/conv2/Conv"
+    ],
+    "signature_ids": [
+      "62b72cff53fd36e8",
+      "9a96779632670574",
+      "a8757ea0f343ee95"
+    ]
+  },
+  {
+    "model_name": "resnet18_bs64_224x224",
+    "kernel_type": "Gemm",
+    "exec_count": 50,
+    "unique_node_count": 1,
+    "total_kernel_time_ms": 3.031999999999999,
+    "avg_kernel_time_ms": 0.060639999999999986,
+    "total_gpu_kernel_ms": 3.031999999999999,
+    "avg_gpu_kernel_ms": 0.060639999999999986,
+    "total_gpu_copy_ms": 0.0,
+    "avg_gpu_copy_ms": 0.0,
+    "total_node_span_ms": 3.283000000000001,
+    "avg_node_span_ms": 0.06566000000000001,
+    "total_dispatch_gap_ms": 0.09000000000000007,
+    "avg_dispatch_gap_ms": 0.0018000000000000013,
+    "node_names": [
+      "/fc/Gemm"
+    ],
+    "signature_ids": [
+      "0bf98b3dfa6444fe"
+    ]
+  },
+  {
+    "model_name": "resnet18_bs64_224x224",
+    "kernel_type": "MaxPool",
+    "exec_count": 50,
+    "unique_node_count": 1,
+    "total_kernel_time_ms": 1.6089999999999998,
+    "avg_kernel_time_ms": 0.03217999999999999,
+    "total_gpu_kernel_ms": 1.6089999999999998,
+    "avg_gpu_kernel_ms": 0.03217999999999999,
+    "total_gpu_copy_ms": 0.0,
+    "avg_gpu_copy_ms": 0.0,
+    "total_node_span_ms": 1.878,
+    "avg_node_span_ms": 0.037559999999999996,
+    "total_dispatch_gap_ms": 0.12100000000000008,
+    "avg_dispatch_gap_ms": 0.0024200000000000016,
+    "node_names": [
+      "/maxpool/MaxPool"
+    ],
+    "signature_ids": [
+      "97cb638555ad771b"
+    ]
+  },
+  {
+    "model_name": "resnet18_bs64_224x224",
+    "kernel_type": "GlobalAveragePool",
+    "exec_count": 50,
+    "unique_node_count": 1,
+    "total_kernel_time_ms": 1.3880000000000001,
+    "avg_kernel_time_ms": 0.027760000000000003,
+    "total_gpu_kernel_ms": 1.3880000000000001,
+    "avg_gpu_kernel_ms": 0.027760000000000003,
+    "total_gpu_copy_ms": 0.0,
+    "avg_gpu_copy_ms": 0.0,
+    "total_node_span_ms": 1.6420000000000001,
+    "avg_node_span_ms": 0.03284,
+    "total_dispatch_gap_ms": 0.10700000000000007,
+    "avg_dispatch_gap_ms": 0.0021400000000000013,
+    "node_names": [
+      "/avgpool/GlobalAveragePool"
+    ],
+    "signature_ids": [
+      "fde7fbc89b5a01f4"
+    ]
+  },
+  {
+    "model_name": "resnet18_bs64_224x224",
+    "kernel_type": "Flatten",
+    "exec_count": 50,
+    "unique_node_count": 1,
+    "total_kernel_time_ms": 1.0320000000000005,
+    "avg_kernel_time_ms": 0.02064000000000001,
+    "total_gpu_kernel_ms": 1.0320000000000005,
+    "avg_gpu_kernel_ms": 0.02064000000000001,
+    "total_gpu_copy_ms": 0.0,
+    "avg_gpu_copy_ms": 0.0,
+    "total_node_span_ms": 1.2730000000000004,
+    "avg_node_span_ms": 0.025460000000000007,
+    "total_dispatch_gap_ms": 0.09800000000000007,
+    "avg_dispatch_gap_ms": 0.0019600000000000017,
+    "node_names": [
+      "/Flatten"
+    ],
+    "signature_ids": [
+      "c4d0378851bc57e6"
+    ]
+  }
+]

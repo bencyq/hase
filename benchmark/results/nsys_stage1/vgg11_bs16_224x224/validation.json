@@ -1,0 +1,7 @@
+{
+  "aggregated_model_gpu_ms": 25.551393639999997,
+  "full_model_gpu_ms": 46.45644412,
+  "diff_ratio": 0.44999247953633525,
+  "threshold": 0.15,
+  "passed": false
+}

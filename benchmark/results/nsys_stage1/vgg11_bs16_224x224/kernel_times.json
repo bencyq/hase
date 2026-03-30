@@ -1,0 +1,200 @@
+[
+  {
+    "signature_id": "35ae5d62f3fbb654",
+    "kernel_type": "Conv_Relu",
+    "loops": 50,
+    "nsys_rep_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/35ae5d62f3fbb654.nsys-rep",
+    "sqlite_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/35ae5d62f3fbb654.sqlite",
+    "gpu_kernel_time_sum_ns": 70566988,
+    "pure_gpu_ms": 1.41133976,
+    "capture_range_name": "measure",
+    "gpu_name": "NVIDIA A100-SXM4-40GB"
+  },
+  {
+    "signature_id": "6cea253e82ac84e7",
+    "kernel_type": "MaxPool",
+    "loops": 50,
+    "nsys_rep_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/6cea253e82ac84e7.nsys-rep",
+    "sqlite_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/6cea253e82ac84e7.sqlite",
+    "gpu_kernel_time_sum_ns": 39318164,
+    "pure_gpu_ms": 0.78636328,
+    "capture_range_name": "measure",
+    "gpu_name": "NVIDIA A100-SXM4-40GB"
+  },
+  {
+    "signature_id": "1eebca7ae0b97a06",
+    "kernel_type": "Conv_Relu",
+    "loops": 50,
+    "nsys_rep_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/1eebca7ae0b97a06.nsys-rep",
+    "sqlite_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/1eebca7ae0b97a06.sqlite",
+    "gpu_kernel_time_sum_ns": 90958950,
+    "pure_gpu_ms": 1.819179,
+    "capture_range_name": "measure",
+    "gpu_name": "NVIDIA A100-SXM4-40GB"
+  },
+  {
+    "signature_id": "e74fd3ca10f89f49",
+    "kernel_type": "MaxPool",
+    "loops": 50,
+    "nsys_rep_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/e74fd3ca10f89f49.nsys-rep",
+    "sqlite_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/e74fd3ca10f89f49.sqlite",
+    "gpu_kernel_time_sum_ns": 20497927,
+    "pure_gpu_ms": 0.40995854,
+    "capture_range_name": "measure",
+    "gpu_name": "NVIDIA A100-SXM4-40GB"
+  },
+  {
+    "signature_id": "455ebf974f26fda9",
+    "kernel_type": "Conv_Relu",
+    "loops": 50,
+    "nsys_rep_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/455ebf974f26fda9.nsys-rep",
+    "sqlite_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/455ebf974f26fda9.sqlite",
+    "gpu_kernel_time_sum_ns": 82891512,
+    "pure_gpu_ms": 1.65783024,
+    "capture_range_name": "measure",
+    "gpu_name": "NVIDIA A100-SXM4-40GB"
+  },
+  {
+    "signature_id": "18f0cde3150ac269",
+    "kernel_type": "Conv_Relu",
+    "loops": 50,
+    "nsys_rep_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/18f0cde3150ac269.nsys-rep",
+    "sqlite_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/18f0cde3150ac269.sqlite",
+    "gpu_kernel_time_sum_ns": 347731707,
+    "pure_gpu_ms": 6.95463414,
+    "capture_range_name": "measure",
+    "gpu_name": "NVIDIA A100-SXM4-40GB"
+  },
+  {
+    "signature_id": "91f604e4a30523ca",
+    "kernel_type": "MaxPool",
+    "loops": 50,
+    "nsys_rep_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/91f604e4a30523ca.nsys-rep",
+    "sqlite_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/91f604e4a30523ca.sqlite",
+    "gpu_kernel_time_sum_ns": 10986659,
+    "pure_gpu_ms": 0.21973318,
+    "capture_range_name": "measure",
+    "gpu_name": "NVIDIA A100-SXM4-40GB"
+  },
+  {
+    "signature_id": "136b79ca73f9e89d",
+    "kernel_type": "Conv_Relu",
+    "loops": 50,
+    "nsys_rep_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/136b79ca73f9e89d.nsys-rep",
+    "sqlite_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/136b79ca73f9e89d.sqlite",
+    "gpu_kernel_time_sum_ns": 78878225,
+    "pure_gpu_ms": 1.5775645,
+    "capture_range_name": "measure",
+    "gpu_name": "NVIDIA A100-SXM4-40GB"
+  },
+  {
+    "signature_id": "2d8060359826253c",
+    "kernel_type": "Conv_Relu",
+    "loops": 50,
+    "nsys_rep_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/2d8060359826253c.nsys-rep",
+    "sqlite_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/2d8060359826253c.sqlite",
+    "gpu_kernel_time_sum_ns": 345107971,
+    "pure_gpu_ms": 6.90215942,
+    "capture_range_name": "measure",
+    "gpu_name": "NVIDIA A100-SXM4-40GB"
+  },
+  {
+    "signature_id": "2b8f70e6609508a9",
+    "kernel_type": "MaxPool",
+    "loops": 50,
+    "nsys_rep_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/2b8f70e6609508a9.nsys-rep",
+    "sqlite_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/2b8f70e6609508a9.sqlite",
+    "gpu_kernel_time_sum_ns": 6654396,
+    "pure_gpu_ms": 0.13308792000000003,
+    "capture_range_name": "measure",
+    "gpu_name": "NVIDIA A100-SXM4-40GB"
+  },
+  {
+    "signature_id": "54f6514b23db6d12",
+    "kernel_type": "Conv_Relu",
+    "loops": 50,
+    "nsys_rep_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/54f6514b23db6d12.nsys-rep",
+    "sqlite_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/54f6514b23db6d12.sqlite",
+    "gpu_kernel_time_sum_ns": 46523547,
+    "pure_gpu_ms": 0.93047094,
+    "capture_range_name": "measure",
+    "gpu_name": "NVIDIA A100-SXM4-40GB"
+  },
+  {
+    "signature_id": "45919e1a405dbeea",
+    "kernel_type": "MaxPool",
+    "loops": 50,
+    "nsys_rep_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/45919e1a405dbeea.nsys-rep",
+    "sqlite_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/45919e1a405dbeea.sqlite",
+    "gpu_kernel_time_sum_ns": 2223155,
+    "pure_gpu_ms": 0.0444631,
+    "capture_range_name": "measure",
+    "gpu_name": "NVIDIA A100-SXM4-40GB"
+  },
+  {
+    "signature_id": "1899229fc5e77600",
+    "kernel_type": "AveragePool",
+    "loops": 50,
+    "nsys_rep_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/1899229fc5e77600.nsys-rep",
+    "sqlite_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/1899229fc5e77600.sqlite",
+    "gpu_kernel_time_sum_ns": 1304349,
+    "pure_gpu_ms": 0.02608698,
+    "capture_range_name": "measure",
+    "gpu_name": "NVIDIA A100-SXM4-40GB"
+  },
+  {
+    "signature_id": "5af617c9ac9eae00",
+    "kernel_type": "Flatten",
+    "loops": 50,
+    "nsys_rep_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/5af617c9ac9eae00.nsys-rep",
+    "sqlite_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/5af617c9ac9eae00.sqlite",
+    "gpu_kernel_time_sum_ns": 0,
+    "pure_gpu_ms": 0.0,
+    "capture_range_name": "measure (no kernel table)",
+    "gpu_name": null
+  },
+  {
+    "signature_id": "c8b25fe80a3c266d",
+    "kernel_type": "Gemm",
+    "loops": 50,
+    "nsys_rep_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/c8b25fe80a3c266d.nsys-rep",
+    "sqlite_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/c8b25fe80a3c266d.sqlite",
+    "gpu_kernel_time_sum_ns": 42482740,
+    "pure_gpu_ms": 0.8496548,
+    "capture_range_name": "measure",
+    "gpu_name": "NVIDIA A100-SXM4-40GB"
+  },
+  {
+    "signature_id": "5a3ed2b2d0ad2fcd",
+    "kernel_type": "Relu",
+    "loops": 50,
+    "nsys_rep_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/5a3ed2b2d0ad2fcd.nsys-rep",
+    "sqlite_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/5a3ed2b2d0ad2fcd.sqlite",
+    "gpu_kernel_time_sum_ns": 579930,
+    "pure_gpu_ms": 0.0115986,
+    "capture_range_name": "measure",
+    "gpu_name": "NVIDIA A100-SXM4-40GB"
+  },
+  {
+    "signature_id": "cd9fba9d4bfc568a",
+    "kernel_type": "Gemm",
+    "loops": 50,
+    "nsys_rep_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/cd9fba9d4bfc568a.nsys-rep",
+    "sqlite_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/cd9fba9d4bfc568a.sqlite",
+    "gpu_kernel_time_sum_ns": 38407275,
+    "pure_gpu_ms": 0.7681455,
+    "capture_range_name": "measure",
+    "gpu_name": "NVIDIA A100-SXM4-40GB"
+  },
+  {
+    "signature_id": "ae6ba9fda7aa64a2",
+    "kernel_type": "Gemm",
+    "loops": 50,
+    "nsys_rep_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/ae6ba9fda7aa64a2.nsys-rep",
+    "sqlite_path": "/cyq/hase/benchmark/results/nsys_stage1/vgg11_bs16_224x224/nsys_raw/ae6ba9fda7aa64a2.sqlite",
+    "gpu_kernel_time_sum_ns": 5352710,
+    "pure_gpu_ms": 0.1070542,
+    "capture_range_name": "measure",
+    "gpu_name": "NVIDIA A100-SXM4-40GB"
+  }
+]
