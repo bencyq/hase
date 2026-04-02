@@ -381,7 +381,7 @@ def main():
     regressor_path = _resolve_path(PROJECT_ROOT, args.regressor)
     preprocess_meta_path = _resolve_path(PROJECT_ROOT, args.preprocess_meta)
     perf_json_path = _resolve_path(PROJECT_ROOT, args.perf_json)
-
+    alpha =0.5
     if not os.path.isfile(model_path):
         raise ValueError("模型文件不存在: {}".format(model_path))
     if not os.path.isfile(config_path):
@@ -406,7 +406,7 @@ def main():
         perf_json_path=perf_json_path,
         sequential_stream0=not args.non_sequential,
     )
-    print("Predicted_Total_Latency_ms: {:.6f}".format(total_ms))
+    print("Predicted_Total_Latency_ms: {:.6f}".format(total_ms*alpha))
 
 
 if __name__ == "__main__":
