@@ -2,8 +2,8 @@
   "target_column": "Latency_ms",
   "feature_count": 17,
   "mape": {
-    "RandomForest": 16.871788085466704,
-    "XGBoost": 18.752260736912817,
-    "LightGBM": 21.807711892290328
+    "RandomForest": 10.035425620253346,
+    "XGBoost": 12.817521322152132,
+    "LightGBM": 16.273388208307946
   }
 }

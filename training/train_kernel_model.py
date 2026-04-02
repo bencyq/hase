@@ -457,8 +457,8 @@ def main():
         default="training/dataset",
         help="输出目录（merged/train/test）",
     )
-    parser.add_argument("--test-size", type=float, default=0.2, help="测试集比例")
-    parser.add_argument("--seed", type=int, default=42, help="随机种子")
+    parser.add_argument("--test-size", type=float, default=0.1, help="测试集比例")
+    parser.add_argument("--seed", type=int, default=12, help="随机种子")
     parser.add_argument(
         "--mode",
         type=str,
